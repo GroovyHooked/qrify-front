@@ -1,5 +1,4 @@
 import React from "react";
-
 import styles from "../styles/signup.module.css";
 import { useState } from "react";
 import Link from "next/link";
