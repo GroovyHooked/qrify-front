@@ -49,6 +49,7 @@
 .title {
   font-size: 30px;
   font-weight: bold;
+  color: #333e63;
 }
 .containerImgForm {
   display: flex;
@@ -57,12 +58,13 @@
 .containerForm {
   width: 99%;
   height: 60vh;
-  background-color: E6E7EA;
+  background-color: #e6e7ea;
   display: flex;
   flex-direction: column;
   justify-content: center;
   border-bottom-right-radius: 20px;
   align-items: center;
+  color: #333e63;
 }
 .error {
   color: red;
@@ -71,16 +73,19 @@
 }
 .registerSection {
   width: 80%;
-  height: 70%;
-
+  height: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
 }
+.label {
+  font-size: 12px;
+}
 .input {
-  width: 200px;
-  height: 30px;
+  color: #333e63;
+  width: 250px;
+  height: 35px;
   display: flex;
   justify-content: start;
   align-items: center;
