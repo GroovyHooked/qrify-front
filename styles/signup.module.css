@@ -1,10 +1,116 @@
 .container {
+  width: 100vw;
+  height: 100vh;
+  background-color: F4F4F9;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.navbar {
+  width: 100vw;
+  height: 10vh;
+  background-color: rgb(243, 229, 240);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.containerGlobal {
   width: 70vw;
-  height: 70 vh;
-  background-color: B5BECC;
+  background-color: rgb(243, 240, 235);
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  border-radius: 20px;
+  flex-direction: column;
+}
+
+.containerImage {
+  width: 50%;
+  background-image: url("/image/image1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: 50%;
+  border-bottom-left-radius: 20px;
+  display: none;
+}
+
+.containerTitle {
+  width: 70vw;
+  height: 80px;
+  background-color: #b5becc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
 }
 
 .title {
-  font-size: 24px;
+  font-size: 30px;
   font-weight: bold;
+}
+.containerImgForm {
+  display: flex;
+}
+
+.containerForm {
+  width: 99%;
+  height: 60vh;
+  background-color: E6E7EA;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom-right-radius: 20px;
+  align-items: center;
+}
+.error {
+  color: red;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.registerSection {
+  width: 80%;
+  height: 70%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.input {
+  width: 200px;
+  height: 30px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-radius: 5px;
+}
+.containerBottomText {
+  width: 200px;
+  height: 30px;
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+}
+.button {
+  width: 200px;
+  height: 30px;
+  color: white;
+  background-color: #333e63;
+  border-radius: 50px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  .containerImage {
+    display: block;
+  }
+  .containerForm {
+    width: 50%;
+  }
 }

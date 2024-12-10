@@ -1,11 +1,7 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/signup.module.css";
+import Signup from "../components/signup";
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <h4 className={styles.title}>Créer un compte</h4>
-    </div>
-  );
+function SignupPage() {
+  return <Signup />;
 }
+
+export default SignupPage;
