@@ -2,7 +2,8 @@ import React from "react";
 import styles from "../styles/navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQrcode } from "@fortawesome/free-solid-svg-icons";
-export default function Navbar() {
+
+export default function Navbar({ toto }) {
   return (
     <div className={styles.navbar}>
       <div className={styles.logo}>
@@ -15,7 +16,7 @@ export default function Navbar() {
         <div> QRify</div>
       </div>
       <div className={styles.btn}>
-        <button className={styles.btnLogin}>Inscription</button>
+        <button className={styles.btnLogin}>{toto}</button>
       </div>
     </div>
   );

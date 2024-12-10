@@ -13,7 +13,7 @@
   border-radius: 60px;
   height: 60px;
   width: 85%;
-  margin-top: 4%;
+  margin-top: 10%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -43,7 +43,9 @@
   background-color: #526cc5;
   border: 2px solid #333e63;
 }
-/* 
-@media (max-width: 768px) {
-    
-  } */
+
+@media screen and (min-width: 768px) {
+  .navbar {
+    margin-top: 4%;
+  }
+}

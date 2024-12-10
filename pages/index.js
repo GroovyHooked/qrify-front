@@ -5,7 +5,7 @@ import Navbar from "../components/navbar";
 function Index() {
   return (
     <div>
-      <Navbar />
+      <Navbar toto="Inscription" />
       <Signup />
       <Footer />
     </div>
