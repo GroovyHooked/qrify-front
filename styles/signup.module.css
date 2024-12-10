@@ -1,0 +1,10 @@
+.container {
+  width: 70vw;
+  height: 70 vh;
+  background-color: B5BECC;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
