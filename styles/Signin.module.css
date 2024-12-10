@@ -1,0 +1,70 @@
+.MMmain {
+  height: 100vh;
+  margin-inline: 9%;
+  padding-top: 16%;
+}
+
+.body {
+  background-color: beige;
+  height: 70%;
+}
+
+.bodyheader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15%;
+  width: 100%;
+  background-color: #9ba5b7;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.bodybody {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: grey;
+  width: 100%;
+  height: 100%;
+}
+
+.photo {
+  height: 100%;
+  width: 60%;
+  background-color: lightgrey;
+}
+
+.containerconnexion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  height: 100%;
+  width: 40%;
+}
+
+.containerinput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.inputglobal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: blue;
+}
+
+.input {
+  height: 5%;
+  width: 50%;
+}
+
+.connexion {
+}
