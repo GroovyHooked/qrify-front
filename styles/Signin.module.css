@@ -5,7 +5,7 @@
 }
 
 .body {
-  background-color: beige;
+  background-color: rgb(213, 213, 0);
   height: 70%;
 }
 
@@ -24,47 +24,55 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: grey;
   width: 100%;
   height: 100%;
+  /* border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px; */
+  border-radius: 20px;
 }
 
 .photo {
   height: 100%;
   width: 60%;
   background-color: lightgrey;
+  border-bottom-left-radius: 20px;
 }
 
 .containerconnexion {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: red;
   height: 100%;
   width: 40%;
+  border-bottom-right-radius: 20px;
 }
 
 .containerinput {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  height: 50%;
   width: 100%;
-}
-
-.inputglobal {
+  margin-top: 30%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 100%;
   background-color: blue;
 }
 
+.inputglobal {
+  background: #ffffff;
+  width: 100%;
+  height: 100%;
+  display: inline;
+}
+
 .input {
-  height: 5%;
-  width: 50%;
+  height: 30px;
+  width: 85%;
+  background-color: aliceblue;
+  border-radius: 7px;
+}
+
+.text {
+  font-size: 13px;
 }
 
 .connexion {
+  height: ;
 }

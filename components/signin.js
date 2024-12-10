@@ -12,12 +12,13 @@ function SignIn() {
           <div className={styles.containerconnexion}>
             <div className={styles.containerinput}>
               <div className={styles.inputglobal}>
-                <div>Adresse Email</div>
-                <button className={styles.input}></button>
-              </div>
-              <div className={styles.inputglobal}>
-                <div>Mot de passe</div>
-                <button className={styles.input}></button>
+                <div className={styles.text}>Adresse Email</div>
+                <div
+                  className={styles.input}
+                  placeholder="Thomascarriot@gmail.com"
+                ></div>
+                <div className={styles.text}>Mot de passe</div>
+                <div className={styles.input} placeholder=""></div>
               </div>
             </div>
             <div className={styles.connexion}>
