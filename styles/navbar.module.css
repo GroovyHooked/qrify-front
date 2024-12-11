@@ -1,6 +1,7 @@
 /* ../styles/navbaraccueil.module.css */
 
 .navbar {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -41,7 +42,27 @@
 
 .btn .btnLogin:hover {
   background-color: #526cc5;
-  border: 2px solid #333e63;
+  /* border: 2px solid #333e63; */
+}
+
+.avatar {
+  width: 40px;
+}
+
+.navbar_menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px;
+  top: 54px;
+  right: 26px;
+  width: 208px;
+  height: 230px;
+  border: 1px solid #333e63;
+  border-radius: 10px;
+  background-color: white;
+  color: #333e63;
 }
 
 @media screen and (min-width: 768px) {

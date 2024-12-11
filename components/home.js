@@ -8,7 +8,7 @@ import { faQrcode, faAddressCard, faGear, faUser } from '@fortawesome/free-solid
 export default function Home() {
     return (
         <>
-            <Navbar />
+            <Navbar status='avatar'/>
             <div className={styles.container} >
                 <h2 className={styles.title}>Gérez vos cartes cadeaux en quelques clics</h2>
                 <div className={styles.innerContainer} >
