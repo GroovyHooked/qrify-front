@@ -1,15 +1,7 @@
-import Signup from "../components/signup";
-import Footer from "../components/footer";
-import Navbar from "../components/navbar";
+import SignIn from "../components/signin";
 
 function Index() {
-  return (
-    <div>
-      <Navbar toto="Inscription" />
-      <Signup />
-      <Footer />
-    </div>
-  );
+  return <SignIn />;
 }
 
 export default Index;
