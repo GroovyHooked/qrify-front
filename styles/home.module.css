@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* height: 68vh; */
+    padding-top: 130px;
+}
+
+.title {
+    text-align: center;
+    color: #333E63;
+    font-weight: 400;
+    font-size: 26px;
+    padding: 0 20px;
+    width: 100vw;
+}
+
+.innerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        height: 68vh;
+    }
+}
