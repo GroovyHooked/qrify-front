@@ -1,97 +1,157 @@
 .container {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  background-color: F4F4F9;
+
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
-.containerGlobal {
-  width: 70vw;
-  background-color: rgb(243, 240, 235);
+.containerProgress {
+  position: relative;
   display: flex;
   justify-content: space-between;
-  margin-top: 50px;
-  border-radius: 20px;
-  flex-direction: column;
+  width: 300px;
+  height: 30px;
 }
 
-.containerImage {
-  width: 50%;
-  background-image: url("/image/image1.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position-x: 50%;
-  border-bottom-left-radius: 20px;
-  display: none;
-}
-
-.containerTitle {
-  width: 70vw;
-  height: 80px;
+.circle {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px;
-  border-bottom-color: #797979;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 1px solid;
+  z-index: 2;
+  background-color: white;
+}
+.bar {
+  position: absolute;
+  width: 300px;
+  height: 2px;
+  background-color: #797979;
+  top: 15px;
+  z-index: 0;
+}
+.containerProgressText {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 320px;
+  height: 20px;
+  margin: 10px;
+}
+.progressText {
+  font-size: 11px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  text-align: center;
 }
 
-.title {
-  font-size: 30px;
-  font-weight: bold;
-  color: #333e63;
-}
-
-.containerForm {
-  width: 99%;
+.containerGlobal {
+  width: 70vw;
   height: 60vh;
   background-color: #e6e7ea;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 20px;
+  margin-top: 10px;
+  border-radius: 20px;
+  flex-direction: column;
   align-items: center;
-  color: #333e63;
 }
-.error {
-  color: red;
-  font-size: 16px;
-  margin-bottom: 10px;
+
+.containerTitle {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.registerSection {
+.titleBar {
   width: 80%;
+  height: 90px;
+  border-bottom: 1px solid #797979;
+  /* border-bottom-color: #797979; */
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 25px;
+  font-weight: bold;
+  color: #333e63;
+  text-align: center;
+  width: 100%;
+}
+
+.registerSection {
+  width: 100%;
   height: 80%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+
+  justify-content: space-evenly;
 }
 .label {
   font-size: 12px;
   color: #333e63;
+}
+.name {
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.inputName {
+  all: unset;
+  border: 1px solid;
+  background-color: #ffffff;
+  color: #797979;
+  width: 250px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  padding-left: 5px;
+}
+
+.mailTel {
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 .input {
   all: unset;
   border: 1px solid;
   background-color: #ffffff;
   color: #797979;
-  width: 70vw;
+  width: 250px;
   height: 35px;
   display: flex;
-  justify-content: start;
   align-items: center;
   border-radius: 5px;
   padding-left: 5px;
 }
-.containerBottomText {
-  width: 200px;
-  height: 30px;
-  display: flex;
 
-  align-items: center;
-  justify-content: flex-end;
+.error {
+  color: red;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.containerButton {
+  height: 80px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 .button {
   width: 200px;
@@ -106,13 +166,50 @@
 }
 
 @media screen and (min-width: 768px) {
+  .titleBar {
+    width: 500px;
+    height: 90px;
+  }
+
+  .title {
+    text-align: left;
+  }
+
   .containerImage {
     display: block;
   }
   .containerForm {
     width: 50%;
   }
-  .containerForm {
-    border-bottom-left-radius: 0;
+
+  .name {
+    display: flex;
+    flex-direction: row;
+  }
+  .inputName {
+    width: 220px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .registerSection {
+    width: 500px;
+    display: flex;
+  }
+  .containerProgress {
+    width: 600px;
+  }
+
+  .bar {
+    width: 600px;
+  }
+  .containerProgressText {
+    width: 610px;
+  }
+  .input {
+    width: 500px;
+  }
+  .containerButton {
+    align-self: end;
+    margin-right: 26px;
   }
 }
