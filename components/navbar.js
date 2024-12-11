@@ -4,17 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQrcode, faAddressCard, faGear, faUser, faArrowRightFromBracket, faHouse } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { removeUserFromStore } from '../reducers/user'
 
 export default function Navbar({ status, href }) {
   return (
     <div className={styles.navbar}>
       <div className={styles.logo}>
-        <FontAwesomeIcon
-          icon={faQrcode}
-          width="30"
-          height="30"
-          color="#333e63"
-        />
+        <FontAwesomeIcon icon={faQrcode} width="30" height="30" color="#333e63" />
         <div> QRify</div>
       </div>
       {status === 'avatar' ? <Avatar /> : (
@@ -65,18 +62,19 @@ const Menu = ({ setIsMenuOpen }) => {
 }
 
 const MenuElement = ({ title, icon, href, setIsMenuOpen }) => {
+  const dispatch = useDispatch()
+
+  const handleClick = () => {
+    setIsMenuOpen(false)
+    if (title === 'Déconnexion') {
+      dispatch(removeUserFromStore())
+    }
+  }
+
   return (
     <div className={styles.navbar_item} >
-      <Link
-        href={href}
-        onClick={() => setIsMenuOpen(false)}
-      >
-        <FontAwesomeIcon
-          icon={icon}
-          width="30"
-          height="30"
-          color="#333e63"
-        />
+      <Link href={href} onClick={handleClick}>
+        <FontAwesomeIcon icon={icon} width="30" height="30" color="#333e63" />
         {title}
       </Link>
     </div>
