@@ -1,13 +1,12 @@
-import styles from '../styles/Home.module.css'
+import styles from '../styles/navigationCard.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faQrcode } from '@fortawesome/free-solid-svg-icons';
-// import { fas } from '@fortawesome/free-solid-svg-icons'
-// import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import Link from 'next/link';
 
 
-export default function NavigationCard({ src = "/images/3871744.jpg", description = 'Ceci est une description', icon = faQrcode }) {
+export default function NavigationCard({ src, description, icon, link }) {
 
     return (
+        <Link href={link} >
         <div className={styles.card_container}>
             <div className={styles.innerdiv}>
                 <div className={styles.overlay} ></div>
@@ -18,7 +17,8 @@ export default function NavigationCard({ src = "/images/3871744.jpg", descriptio
                 <p>{description}</p>
             </div>
 
-        </div>
+            </div>
+        </Link>
     )
 };
 
