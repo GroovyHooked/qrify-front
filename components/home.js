@@ -1,6 +1,7 @@
 import NavigationCard from './navigationCard'
 import Navbar from '../components/navbar'
 import styles from '../styles/home.module.css'
+import Footer from '../components/footer'
 
 import { faQrcode, faAddressCard, faGear, faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,6 +20,7 @@ export default function Home() {
                     <NavigationCard src="/images/gestion.jpg" icon={faGear} description="Gestion des cartes" link="" />
                 </div>
             </div>
+            <Footer />
         </>
     )
 };
