@@ -2,12 +2,35 @@ import React from "react";
 import styles from "../styles/navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQrcode, faAddressCard, faGear, faUser, faArrowRightFromBracket, faHouse } from '@fortawesome/free-solid-svg-icons';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function Navbar({ status, href }) {
+  const [show, setShow] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const controlNavbar = () => {
+    if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
+      setShow(false);
+    } else { // if scroll up show the navbar
+      setShow(true);
+    }
+
+    // remember current page location to use in the next move
+    setLastScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', controlNavbar);
+
+    // cleanup function
+    return () => {
+      window.removeEventListener('scroll', controlNavbar);
+    };
+  }, [lastScrollY]);
+
   return (
-    <div className={styles.navbar}>
+    <div className={`${styles.navbar} ${!show && styles.hidden}`}>
       <div className={styles.logo}>
         <FontAwesomeIcon
           icon={faQrcode}

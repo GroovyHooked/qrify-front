@@ -17,6 +17,8 @@
   margin-top: 10%;
   left: 50%;
   transform: translateX(-50%);
+  opacity: 1;
+  transition: opacity .3s;
 }
 
 .logo {
@@ -63,6 +65,10 @@
   border-radius: 10px;
   background-color: white;
   color: #333e63;
+}
+
+.hidden {
+  opacity: 0;
 }
 
 @media screen and (min-width: 768px) {
