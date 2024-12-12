@@ -3,8 +3,13 @@ import Link from "next/link";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addUserToStore } from '../reducers/user'
+import { useRouter } from 'next/router'
 
 function SignIn() {
+  const dispatch = useDispatch()
+  const router = useRouter();
   const [signInMail, setSignInMail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
 
@@ -22,8 +27,10 @@ function SignIn() {
       .then((data) => {
         console.log(data);
         if (data.result) {
+          dispatch(addUserToStore({ email: signInMail, token: data.token }))
           setSignInMail("");
           setSignInPassword("");
+          router.push('/home')
         }
       });
   };
