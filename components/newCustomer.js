@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "../styles/newCustomers.module.css";
 import { useState } from "react";
-import Navbar from '../components/navbar'
+import Footer from "../components/footer";
+import Navbar from "../components/navbar";
+import { useSelector } from "react-redux";
 
 function NewCustomer() {
   const [signUpFirstname, setSignUpFirstname] = useState("");
@@ -10,9 +12,12 @@ function NewCustomer() {
   const [signUpPhoneNumber, setSignUpPhoneNumber] = useState("");
   const [messageError, setMessageError] = useState("");
 
+  const merchantMail = useSelector((state) => state.user.value.email);
+
+  console.log({ merchantMail });
+
   const handleSignUp = () => {
-    fetch("http://localhost:3000/auth/", {
-      // rajouter le nom de la route pour ajouter un client
+    fetch("http://localhost:3000/customers/new", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -20,6 +25,7 @@ function NewCustomer() {
         lastname: signUpLastname,
         email: signUpMail,
         phoneNumber: signUpPhoneNumber,
+        merchantMail: merchantMail,
       }),
     })
       .then((response) => response.json())
@@ -39,9 +45,8 @@ function NewCustomer() {
 
   return (
     <>
-      <Navbar status='avatar' />
+      <Navbar status="Inscription" href="/" />
       <div className={styles.container}>
-
         <div className={styles.containerProgress}>
           <div className={styles.bar}></div>
           <div className={styles.circle}>1</div>
@@ -122,6 +127,7 @@ function NewCustomer() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
