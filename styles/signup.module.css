@@ -7,14 +7,7 @@
   flex-direction: column;
   align-items: center;
 }
-/* .navbar {
-  width: 100vw;
-  height: 10vh;
-  background-color: rgb(243, 229, 240);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
+
 .containerGlobal {
   width: 70vw;
   background-color: rgb(243, 240, 235);
