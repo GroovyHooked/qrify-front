@@ -12,8 +12,8 @@ export default function Home() {
             <div className={styles.container} >
                 <h2 className={styles.title}>Gérez vos cartes cadeaux en quelques clics</h2>
                 <div className={styles.innerContainer} >
-                    <NavigationCard src="/images/client.jpg" icon={faUser} description="Ajouter un client" link="" />
-                    <NavigationCard src="/images/merchant2.jpg" icon={faAddressCard} description="Créez une carte" link="" />
+                    <NavigationCard src="/images/client.jpg" icon={faUser} description="Ajouter un client" link="newcustomer" />
+                    <NavigationCard src="/images/merchant2.jpg" icon={faAddressCard} description="Créez une carte" link="newcard" />
                 </div>
                 <div className={styles.innerContainer} >
                     <NavigationCard src="/images/scan.jpg" icon={faQrcode} description="Scanner une carte" link="" />

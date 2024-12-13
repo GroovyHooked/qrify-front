@@ -3,15 +3,26 @@ import Footer from '../components/footer'
 import styles from '../styles/newcard.module.css'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { addCardToStore } from '../reducers/data'
 
 export default function NewCard() {
+    const dispatch = useDispatch()
     const router = useRouter();
+    // données du client sauvegradées dans l'étape d'ajout de client afin d'afficher nom et prenom dans le composant et
+    // Envoyer l'id du client au backend  afin de lier le client et la carte entre eux lors de la sauvegarde de la carte
+    const dataFromStore = useSelector((state) => state.data.value)
+
+    // Email du commerçant
+    const merchantMail = useSelector((state) => state.user.value.email);
 
     const [recipientName, setRecipientName] = useState('')
     const [message, setMessage] = useState('')
     const [cardValue, setCardValue] = useState(0)
     const [error, setError] = useState('')
 
+    // Envoi d'une requête en base de données afin de générer un code qr et de sauvegarder toutes les données liées à ce code qr en base de données
     const createCard = async () => {
         const res = await fetch('http://localhost:3000/card/newcard', {
             method: 'POST',
@@ -19,13 +30,18 @@ export default function NewCard() {
             body: JSON.stringify({
                 recipient: recipientName,
                 message,
-                totalValue: cardValue
+                totalValue: cardValue,
+                customerId: dataFromStore.customer._id,
+                merchantMail
             })
         })
         const data = await res.json()
 
         if (data.result) {
-            // router.push('/')
+            // Enregistrement dans le store des données de la carte qui vient d'être créée 
+            dispatch(addCardToStore(data.card))
+            // Redirection vers la page d'affichage et de partage de la carte
+            router.push('/sendcard')
         } else {
             setError(data.error)
         }
@@ -53,7 +69,7 @@ export default function NewCard() {
 
                 <div className={styles.innerContainer}>
                     <div className={styles.header}>
-                        <h2 className={styles.title} >Carte cadeau de John Doe</h2>
+                        <h2 className={styles.title} >Carte cadeau de {dataFromStore.firstname} {dataFromStore.lastname}</h2>
                     </div>
                     <div style={{ color: 'red', margin: '10px' }}>{error && error}</div>
                     <div className={styles.formContainer}>

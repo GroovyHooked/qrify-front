@@ -9,6 +9,8 @@ import {
   faPrint,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
+
+
 function SendCard() {
   const [print, setPrint] = useState("");
   const [sendMessage, setSendMessage] = useState("");
@@ -20,7 +22,7 @@ function SendCard() {
 
   return (
     <>
-      <Navbar status="Inscription" href="/" />
+      <Navbar status="avatar" />
       <div className={styles.container}>
         <div className={styles.containerProgress}>
           <div className={styles.bar}></div>

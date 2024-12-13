@@ -27,14 +27,20 @@
   z-index: 2;
   background-color: white;
 }
+
+.circle:nth-child(3), .circle:nth-child(4){
+  color: rgb(173, 173, 173);;
+}
+
 .bar {
   position: absolute;
   width: 300px;
   height: 2px;
-  background-color: #797979;
+  background-color: rgb(173, 173, 173);
   top: 15px;
   z-index: 0;
 }
+
 .containerProgressText {
   display: flex;
   justify-content: space-between;
@@ -43,6 +49,7 @@
   height: 20px;
   margin: 10px;
 }
+
 .progressText {
   font-size: 11px;
   display: flex;
@@ -51,6 +58,11 @@
   width: 50px;
   text-align: center;
 }
+
+.progressText:nth-child(2), .progressText:nth-child(3) {
+    color: rgb(173, 173, 173);
+}
+
 
 .containerGlobal {
   width: 350px;

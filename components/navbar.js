@@ -69,8 +69,8 @@ const Menu = ({ setIsMenuOpen }) => {
   const menuData = [
     { title: 'Menu', icon: faHouse, href: '/home' },
     { title: 'Profile', icon: faGear, href: '/' },
-    { title: 'Ajout client', icon: faUser, href: '/' },
-    { title: 'Carte', icon: faAddressCard, href: '/' },
+    { title: 'Ajout client', icon: faUser, href: '/newcustomer' },
+    { title: 'Carte', icon: faAddressCard, href: '/newcard' },
     { title: 'Scan', icon: faQrcode, href: '/' },
     { title: 'Déconnexion', icon: faArrowRightFromBracket, href: '/' }
   ]
