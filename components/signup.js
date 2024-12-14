@@ -3,6 +3,7 @@ import Navbar from "../components/navbar";
 import styles from "../styles/signup.module.css";
 import { useState } from "react";
 import Link from "next/link";
+import { BASE_URL } from '../components/global'
 
 function Signup() {
   const [signUpFirstname, setSignUpFirstname] = useState("");
@@ -13,7 +14,7 @@ function Signup() {
   const [messageError, setMessageError] = useState("");
 
   const handleSignUp = () => {
-    fetch("http://localhost:3000/auth/signup", {
+    fetch(`${BASE_URL}/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

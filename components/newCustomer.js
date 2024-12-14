@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useRouter } from 'next/router'
 import { addCustomerToStore, removeCustomerFromStore } from '../reducers/data'
+import { BASE_URL } from '../components/global'
 
 function NewCustomer() {
   const dispatch = useDispatch()
@@ -23,7 +24,7 @@ function NewCustomer() {
   const merchantMail = useSelector((state) => state.user.value.email);
 
   const handleSignUp = () => {
-    fetch("http://localhost:3000/customers/new", {
+    fetch(`${BASE_URL}/customers/new`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -41,7 +42,7 @@ function NewCustomer() {
         if (data.result) {
           // Sauvegrade des données du client dans le store redux afin d'afficher nom et prenom sur la page de création de carte
           // et envoyer d'id du client au backend pour lier la carte et le client entre eux lors de la sauvegarde de la carte
-          dispatch(addCustomerToStore(data.savedCustomer))
+          dispatch(addCustomerToStore(data.customer))
           setSignUpFirstname("");
           setSignUpLastname("");
           setSignUpMail("");
