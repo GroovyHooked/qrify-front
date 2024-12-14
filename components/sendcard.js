@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import styles from "../styles/sendCard.module.css";
 import { useState } from "react";
 import Footer from "../components/footer";
@@ -9,16 +9,53 @@ import {
   faPrint,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
-
+import { useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
+import { BASE_URL } from '../components/global'
+import Image from 'next/image'
 
 function SendCard() {
+  const [imageSrc, setImageSrc] = useState('')
+  const [imageInfo, setImageInfo] = useState('')
+  const data = useSelector((state) => state.data.value)
+
+  const totRef = useRef()
+
   const [print, setPrint] = useState("");
   const [sendMessage, setSendMessage] = useState("");
   const [sendEmail, setSendEmail] = useState("");
 
-  const handlePrint = () => {};
-  const handleSendMessage = () => {};
-  const handleSendEmail = () => {};
+
+  const downloadFile = async () => {
+    const response = await fetch(`${BASE_URL}/card/download/${data.card.cardId}`);
+    const response2 = await fetch(`${BASE_URL}/card/datacard/${data.card.cardId}`);
+    const blob = await response.blob();
+    const cardInfo = await response2.json()
+    console.log({ cardInfo });
+
+    setImageInfo(cardInfo.cardData.totalValue)
+    const url = URL.createObjectURL(blob);
+    setImageSrc(url)
+  };
+
+  useEffect(() => {
+    (async () => {
+      await downloadFile()
+    })()
+  }, [])
+
+  const handlePrint = () => {
+    const printContent = totRef.current.innerHTML;
+    const originalContent = document.body.innerHTML;
+
+    document.body.innerHTML = printContent;
+
+    window.print();
+
+    document.body.innerHTML = originalContent;
+  };
+  const handleSendMessage = () => { };
+  const handleSendEmail = () => { };
 
   return (
     <>
@@ -43,9 +80,16 @@ function SendCard() {
             </div>
           </div>
           <div className={styles.containerCard}>
-            <div className={styles.card}>
-              <div className={styles.qrcode}></div>
-              <div className={styles.value}></div>
+            <div className={styles.card} ref={totRef} >
+              <div className={styles.qrcode}>
+                {imageSrc && <Image
+                  width='100'
+                  height='100'
+                  src={imageSrc} />}
+              </div>
+              <div className={styles.value}>
+                <p style={{ textAlign: 'center' }}>{imageInfo && `${imageInfo}€`}</p>
+              </div>
             </div>
           </div>
           <div className={styles.containerButton}>
