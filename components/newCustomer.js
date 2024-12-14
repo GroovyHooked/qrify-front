@@ -1,17 +1,15 @@
-import React, { useEffect } from "react";
-import styles from "../styles/newCustomers.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from 'next/router'
-import { addCustomerToStore, removeCustomerFromStore } from '../reducers/data'
+import { addCustomerToStore } from '../reducers/data'
+import styles from "../styles/newCustomers.module.css";
+import { redirectUserIfNotConnected } from '../utils/utils'
 
 function NewCustomer() {
   const dispatch = useDispatch()
   const router = useRouter();
-
 
   const [signUpFirstname, setSignUpFirstname] = useState("");
   const [signUpLastname, setSignUpLastname] = useState("");
@@ -19,8 +17,12 @@ function NewCustomer() {
   const [signUpPhoneNumber, setSignUpPhoneNumber] = useState("");
   const [messageError, setMessageError] = useState("");
 
-  // Récupération du mail du commerçant
-  const merchantMail = useSelector((state) => state.user.value.email);
+  const user = useSelector((state) => state.user.value);
+
+  // Redirection vers la page de connexion si l'utilisateur n'est pas connecté
+  useEffect(() => {
+    redirectUserIfNotConnected(user, router)
+  }, [])
 
   const handleSignUp = () => {
     fetch("http://localhost:3000/customers/new", {
@@ -32,16 +34,16 @@ function NewCustomer() {
         email: signUpMail,
         phoneNumber: signUpPhoneNumber,
         // Envoi du mail du commerçant afin de son objectId en base de données
-        merchantMail: merchantMail,
+        merchantMail: user.email,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log({ data });
         if (data.result) {
           // Sauvegrade des données du client dans le store redux afin d'afficher nom et prenom sur la page de création de carte
           // et envoyer d'id du client au backend pour lier la carte et le client entre eux lors de la sauvegarde de la carte
-          dispatch(addCustomerToStore(data.savedCustomer))
+          dispatch(addCustomerToStore(data.customer))
           setSignUpFirstname("");
           setSignUpLastname("");
           setSignUpMail("");

@@ -87,7 +87,7 @@ const Menu = ({ setIsMenuOpen }) => {
 const MenuElement = ({ title, icon, href, setIsMenuOpen }) => {
   const dispatch = useDispatch()
 
-  const handleClick = () => {
+  const modalCloseAndLogout = () => {
     setIsMenuOpen(false)
     if (title === 'Déconnexion') {
       dispatch(removeUserFromStore())
@@ -96,7 +96,7 @@ const MenuElement = ({ title, icon, href, setIsMenuOpen }) => {
 
   return (
     <div className={styles.navbar_item} >
-      <Link href={href} onClick={handleClick}>
+      <Link href={href} onClick={modalCloseAndLogout}>
         <FontAwesomeIcon icon={icon} width="30" height="30" color="#333e63" />
         {title}
       </Link>

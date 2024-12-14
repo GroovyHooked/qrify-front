@@ -2,13 +2,25 @@ import NavigationCard from './navigationCard'
 import Navbar from '../components/navbar'
 import styles from '../styles/home.module.css'
 import Footer from '../components/footer'
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router';
+import { useEffect } from 'react'
+import { redirectUserIfNotConnected } from '../utils/utils'
 
 import { faQrcode, faAddressCard, faGear, faUser } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home() {
+    const router = useRouter();
+    const user = useSelector((state) => state.user.value)
+
+    // Redirection vers la page de connexion si l'utilisateur n'est pas connecté
+    useEffect(() => {
+        redirectUserIfNotConnected(user, router)
+    }, [])
+
     return (
         <>
-            <Navbar status='avatar'/>
+            <Navbar status='avatar' />
             <div className={styles.container} >
                 <h2 className={styles.title}>Gérez vos cartes cadeaux en quelques clics</h2>
                 <div className={styles.innerContainer} >

@@ -3,8 +3,12 @@ import Navbar from "../components/navbar";
 import styles from "../styles/signup.module.css";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from 'next/router';
+
 
 function Signup() {
+  const router = useRouter();
+
   const [signUpFirstname, setSignUpFirstname] = useState("");
   const [signUpLastname, setSignUpLastname] = useState("");
   const [signUpMail, setSignUpMail] = useState("");
@@ -28,6 +32,10 @@ function Signup() {
       .then((data) => {
         console.log(data);
         if (data.result) {
+          router.push({
+            pathname: '/',
+            query: { userCrendentials: JSON.stringify({ email: signUpMail, password: signUpPassword }) }
+          })
           setSignUpFirstname("");
           setSignUpLastname("");
           setSignUpMail("");

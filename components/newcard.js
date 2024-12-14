@@ -1,11 +1,12 @@
 import Navbar from '../components/navbar'
 import Footer from '../components/footer'
 import styles from '../styles/newcard.module.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { addCardToStore } from '../reducers/data'
+import { redirectUserIfNotConnected } from '../utils/utils'
+
 
 export default function NewCard() {
     const dispatch = useDispatch()
@@ -14,13 +15,17 @@ export default function NewCard() {
     // Envoyer l'id du client au backend  afin de lier le client et la carte entre eux lors de la sauvegarde de la carte
     const dataFromStore = useSelector((state) => state.data.value)
 
-    // Email du commerçant
-    const merchantMail = useSelector((state) => state.user.value.email);
+    const user = useSelector((state) => state.user.value);
 
     const [recipientName, setRecipientName] = useState('')
     const [message, setMessage] = useState('')
     const [cardValue, setCardValue] = useState(0)
     const [error, setError] = useState('')
+
+    // Redirection vers la page de connexion si l'utilisateur n'est pas connecté
+    useEffect(() => {
+        redirectUserIfNotConnected(user, router)
+    }, [])
 
     // Envoi d'une requête en base de données afin de générer un code qr et de sauvegarder toutes les données liées à ce code qr en base de données
     const createCard = async () => {
@@ -32,7 +37,7 @@ export default function NewCard() {
                 message,
                 totalValue: cardValue,
                 customerId: dataFromStore.customer._id,
-                merchantMail
+                merchantMail: user.email
             })
         })
         const data = await res.json()

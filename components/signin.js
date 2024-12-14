@@ -10,8 +10,12 @@ import { useRouter } from 'next/router'
 function SignIn() {
   const dispatch = useDispatch()
   const router = useRouter();
-  const [signInMail, setSignInMail] = useState("");
-  const [signInPassword, setSignInPassword] = useState("");
+
+  const { userCrendentials } = router.query;
+  const userCrendentialsObj = userCrendentials ? JSON.parse(userCrendentials) : null;
+
+  const [signInMail, setSignInMail] = useState(userCrendentialsObj ? userCrendentialsObj.email : '');
+  const [signInPassword, setSignInPassword] = useState(userCrendentialsObj ? userCrendentialsObj.email : '');
 
   const handleSignIn = () => {
     console.log({ signInMail, signInPassword });

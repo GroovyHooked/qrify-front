@@ -1,6 +1,7 @@
-import React from "react";
 import styles from "../styles/sendCard.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router';
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,12 +10,21 @@ import {
   faPrint,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
+import { redirectUserIfNotConnected } from '../utils/utils'
 
 
 function SendCard() {
+  const router = useRouter();
+  const user = useSelector((state) => state.user.value)
+
   const [print, setPrint] = useState("");
   const [sendMessage, setSendMessage] = useState("");
   const [sendEmail, setSendEmail] = useState("");
+  
+  // Redirection vers la page de connexion si l'utilisateur n'est pas connecté
+  useEffect(() => {
+    redirectUserIfNotConnected(user, router)
+  }, [])
 
   const handlePrint = () => {};
   const handleSendMessage = () => {};
