@@ -6,26 +6,27 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { removeUserFromStore } from '../reducers/user'
+import Image from "next/image";
 
 export default function Navbar({ status, href }) {
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const controlNavbar = () => {
-    if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
+    // En cas de scroll vers le bas cacher la navbar
+    if (window.scrollY > 40) {
       setShow(false);
-    } else { // if scroll up show the navbar
+      // En cas de scroll vers le haut afficher la navbar
+    } else {
       setShow(true);
     }
-
-    // remember current page location to use in the next move
+    // Mémoriser la position actuel pour l'utiliser dans le prochain scroll
     setLastScrollY(window.scrollY);
   };
 
   useEffect(() => {
     window.addEventListener('scroll', controlNavbar);
-
-    // cleanup function
+    // Supprime l'écouteur d'événement
     return () => {
       window.removeEventListener('scroll', controlNavbar);
     };
@@ -33,10 +34,12 @@ export default function Navbar({ status, href }) {
 
   return (
     <div className={`${styles.navbar} ${!show && styles.hidden}`}>
+      <Link href='/home'>
       <div className={styles.logo}>
         <FontAwesomeIcon icon={faQrcode} width="30" height="30" color="#333e63" />
         <div> QRify</div>
-      </div>
+        </div>
+      </Link>
       {status === 'avatar' ? <Avatar /> : (
         <Link href={href} >
           <div className={styles.btn}>
@@ -55,8 +58,11 @@ const Avatar = () => {
 
   return (
     <>
-      <img
-        src="image/avatar.png"
+      <Image
+        alt="avatar"
+        width={40}
+        height={40}
+        src="/image/avatar2.svg"
         className={styles.avatar}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       />

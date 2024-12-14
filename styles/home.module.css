@@ -1,11 +1,15 @@
 .container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     flex-direction: column;
-    flex-wrap: wrap;
-    /* height: 68vh; */
+
     padding-top: 130px;
+    min-height: calc(200px + 70vh);
+}
+
+.contentWrapper {
+    width: 100%;
+    /* border: 1px solid; */
 }
 
 .title {
@@ -14,10 +18,11 @@
     font-weight: 400;
     font-size: 26px;
     padding: 0 20px;
+    display: inline-block;
     width: 100vw;
 }
 
-.innerContainer {
+.cardContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,8 +31,16 @@
 }
 
 @media screen and (min-width: 768px) {
-    .container {
-        flex-direction: row;
-        height: 68vh;
+    .contentWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        height: 400px;
     }
+
+    .cardContainer {
+        flex-direction: row;
+    }
+
 }
