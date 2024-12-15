@@ -13,7 +13,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { redirectUserIfNotConnected } from '../utils/utils'
 
-import { useSelector } from "react-redux";
 import { BASE_URL } from '../components/global'
 import Image from 'next/image'
 
@@ -31,10 +30,6 @@ function SendCard() {
   useEffect(() => {
     redirectUserIfNotConnected(user, router)
   }, [])
-
-  const handlePrint = () => {};
-  const handleSendMessage = () => {};
-  const handleSendEmail = () => {};
   
   // Référence à la div contenant le code QR
   const qrCodeDivRef = useRef()

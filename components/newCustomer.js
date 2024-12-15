@@ -3,7 +3,6 @@ import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from 'next/router'
-import { addCustomerToStore, removeCustomerFromStore } from '../reducers/data'
 import { BASE_URL } from '../components/global'
 import { addCustomerToStore } from '../reducers/data'
 import styles from "../styles/newCustomers.module.css";
@@ -45,7 +44,6 @@ function NewCustomer() {
         if (data.result) {
           // Sauvegrade des données du client dans le store redux afin d'afficher nom et prenom sur la page de création de carte
           // et envoyer d'id du client au backend pour lier la carte et le client entre eux lors de la sauvegarde de la carte
-          dispatch(addCustomerToStore(data.customer))
           dispatch(addCustomerToStore(data.customer))
           setSignUpFirstname("");
           setSignUpLastname("");

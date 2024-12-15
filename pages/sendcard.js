@@ -1,7 +1,7 @@
 import SendCard from "../components/sendcard";
 
-function sendCardPage() {
+function SendCardPage() {
   return <SendCard />;
 }
 
-export default sendCardPage;
+export default SendCardPage;
