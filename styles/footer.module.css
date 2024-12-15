@@ -5,10 +5,7 @@
   align-items: flex-end;
   width: 100%;
   z-index: 1000;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: 7%;
+  height: 80px;
 }
 
 .container {
