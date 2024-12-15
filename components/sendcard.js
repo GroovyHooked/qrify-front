@@ -8,17 +8,50 @@ import {
   faMessage,
   faPrint,
   faEnvelope,
+  faXmark
 } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
 
 function SendCard() {
   const [print, setPrint] = useState("");
   const [sendMessage, setSendMessage] = useState("");
-  const [sendEmail, setSendEmail] = useState("");
+  const [recipientMail, setRecipientMail] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const handlePrint = () => {};
-  const handleSendMessage = () => {};
-  const handleSendEmail = () => {};
+  const cardData = useSelector((state) => state.data.value)
+
+  const handlePrint = () => { };
+  const handleSendMessage = () => { };
+  
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen)
+  }
+
+  const handleSendEmail = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to: recipientMail,
+          subject: `Carte cadeau ${cardData.customer.lastname}`,
+          text: cardData.card.message
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Email envoyé avec succès !");
+      } else {
+        console.log("Erreur lors de l'envoi de l'email.");
+      }
+    } catch (error) {
+      console.error("Erreur :", error);
+      console.log("Erreur lors de l'envoi de l'email.");
+    }
+  };
 
   return (
     <>
@@ -37,6 +70,27 @@ function SendCard() {
         </div>
 
         <div className={styles.containerGlobal}>
+
+          {isModalOpen &&
+            <div className={styles.modal_container}>
+              <FontAwesomeIcon
+                onClick={handleModal}
+                icon={faXmark}
+                className={styles.modal_icon} />
+              <p className={styles.modal_title}>Entrez l'adresse mail du destinataire</p>
+              <div className={styles.modal_content}>
+                <input
+                  value={recipientMail}
+                  onChange={(e) => setRecipientMail(e.target.value)}
+                  type="email"
+                  className={styles.email_input} />
+                <button
+                  onClick={handleSendEmail}
+                  type="submit"
+                  className={styles.modal_button}>Envoyer</button>
+              </div>
+            </div>}
+          
           <div className={styles.containerTitle}>
             <div className={styles.titleBar}>
               <h4 className={styles.title}>Partager la carte</h4>
@@ -77,7 +131,7 @@ function SendCard() {
               <button
                 className={styles.button}
                 id="addCustomers"
-                onClick={() => handleSendEmail()}
+                onClick={handleModal}
               >
                 <div className={styles.spaceInButton}>
                   <FontAwesomeIcon icon={faEnvelope} size="2xl" color="#ffff" />
