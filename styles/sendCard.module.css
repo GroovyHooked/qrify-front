@@ -57,6 +57,8 @@
 
 .containerGlobal {
   border: 1px solid #333e63;
+  position: relative;
+  /* margin-top: 200px; */
   width: 350px;
   height: 550px;
   background-color: #e6e7ea;
@@ -149,6 +151,51 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
+}
+
+.modal_container {
+  position: absolute;
+  width: 350px;
+  height: 200px;
+  border: 1px solid;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  top: 20%;
+}
+
+.modal_icon {
+  align-self: flex-end;
+}
+
+.modal_title {
+  text-align: center;
+}
+
+.modal_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 50%;
+  width: 100%;
+  align-items: center;
+}
+
+.email_input {
+  width: 80%;
+  height: 30px;
+}
+
+.modal_button {
+  width: 80px;
+  height: 30px;
+  color: white;
+  background-color: #333e63;
+  border-radius: 15px;
 }
 
 @media screen and (min-width: 768px) {
