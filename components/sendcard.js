@@ -18,13 +18,9 @@ import Image from 'next/image'
 
 function SendCard() {
   const router = useRouter();
-  const user = useSelector((state) => state.user.value)
-
   // Référence à la div contenant le code QR
   const qrCodeDivRef = useRef()
-
-  const cardData = useSelector((state) => state.data.value)
-
+  
   const [print, setPrint] = useState("");
   const [imageSrc, setImageSrc] = useState('')
   const [imageInfo, setImageInfo] = useState('')
@@ -32,23 +28,30 @@ function SendCard() {
   const [recipientMail, setRecipientMail] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  // Sélection des données utilisateur et de la carte depuis le store Redux
+  const user = useSelector((state) => state.user.value)
+  const cardData = useSelector((state) => state.data.value)
+
   const handleSendMessage = () => { };
 
+  // Fonction pour gérer l'ouverture/fermeture de la modal
   const handleModal = () => {
     setIsModalOpen(!isModalOpen)
   }
 
+  // Fonction asynchrone pour envoyer un email depuis le backend
   const handleSendEmail = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("/api/send-email", {
+      const response = await fetch("http://localhost:3000/email/sendmail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           to: recipientMail,
           subject: `Carte cadeau ${cardData.customer.lastname}`,
-          text: cardData.card.message
+          text: cardData.card.message,
+          cardId: cardData.card.cardId
         }),
       });
 
@@ -70,21 +73,28 @@ function SendCard() {
 
   // Fonction asynchrone pour récupérer le code QR et les informations de la carte depuis le backend
   const retrieveQrCodeFromBackend = async () => {
-    const qrcodeSrc = await fetch(`${BASE_URL}/card/download/${cardData.card.cardId}`);
-    const cardData = await fetch(`${BASE_URL}/card/datacard/${cardData.card.cardId}`);
-    const blob = await qrcodeSrc.blob();
-    const cardInfo = await cardData.json()
-    setImageInfo(cardInfo.cardData.totalValue)
-    const url = URL.createObjectURL(blob);
-    setImageSrc(url)
+    try {
+      if (cardData && cardData.card && cardData.card.cardId) {
+        const qrcodeSrc = await fetch(`${BASE_URL}/card/download/${cardData.card.cardId}`);
+        const cardDataResponse = await fetch(`${BASE_URL}/card/datacard/${cardData.card.cardId}`);
+        const blob = await qrcodeSrc.blob();
+        const cardInfo = await cardDataResponse.json();
+        setImageInfo(cardInfo.cardData.totalValue);
+        const url = URL.createObjectURL(blob);
+        setImageSrc(url);
+      } else {
+        console.error("Invalid cardData structure or missing cardId");
+      }
+    } catch (error) {
+      console.error("Error fetching QR code or card data:", error);
+    }
   };
 
-  // Effet pour récupérer le code QR et les infos au chargement du composant
   useEffect(() => {
     (async () => {
-      await retrieveQrCodeFromBackend()
-    })()
-  }, [])
+      await retrieveQrCodeFromBackend();
+    })();
+  }, []);
 
   // Fonction pour imprimer le contenu de la div contenant le code QR
   const handlePrint = () => {
