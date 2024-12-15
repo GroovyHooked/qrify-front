@@ -5,6 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/router';
 
+import { BASE_URL } from '../components/global'
 
 function Signup() {
   const router = useRouter();
@@ -17,7 +18,7 @@ function Signup() {
   const [messageError, setMessageError] = useState("");
 
   const handleSignUp = () => {
-    fetch("http://localhost:3000/auth/signup", {
+    fetch(`${BASE_URL}/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

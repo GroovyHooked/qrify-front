@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addCardToStore } from '../reducers/data'
 import { redirectUserIfNotConnected } from '../utils/utils'
 
+import { BASE_URL } from '../components/global'
 
 export default function NewCard() {
     const dispatch = useDispatch()
@@ -29,7 +30,7 @@ export default function NewCard() {
 
     // Envoi d'une requête en base de données afin de générer un code qr et de sauvegarder toutes les données liées à ce code qr en base de données
     const createCard = async () => {
-        const res = await fetch('http://localhost:3000/card/newcard', {
+        const res = await fetch(`${BASE_URL}/card/newcard`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

@@ -56,7 +56,7 @@ const Avatar = () => {
   return (
     <>
       <img
-        src="image/avatar.png"
+        src="/image/avatar.png"
         className={styles.avatar}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       />
