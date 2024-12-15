@@ -77,7 +77,8 @@ const Menu = ({ setIsMenuOpen }) => {
     { title: 'Profile', icon: faGear, href: '/' },
     { title: 'Ajout client', icon: faUser, href: '/newcustomer' },
     { title: 'Carte', icon: faAddressCard, href: '/newcard' },
-    { title: 'Scan', icon: faQrcode, href: '/' },
+    { title: 'Scan', icon: faQrcode, href: '/scan' },
+    { title: 'Send', icon: faQrcode, href: '/sendcard' },
     { title: 'Déconnexion', icon: faArrowRightFromBracket, href: '/' }
   ]
 

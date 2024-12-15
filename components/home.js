@@ -29,7 +29,7 @@ export default function Home() {
                         <NavigationCard src="/images/merchant2.jpg" icon={faAddressCard} title="Créez une carte" description="Créez une carte à partir d'un client enregistré" link="newcard" />
                     </div>
                     <div className={styles.cardContainer} >
-                        <NavigationCard src="/images/scan.jpg" icon={faQrcode} title="Scanner une carte" description="Scannez une carte avec votre appareil photo" link="" />
+                        <NavigationCard src="/images/scan.jpg" icon={faQrcode} title="Scanner une carte" description="Scannez une carte avec votre appareil photo" link="scan" />
                         <NavigationCard src="/images/gestion.jpg" icon={faGear} title="Gestion des cartes" description="Historique et montants générés de vos cartes" link="" />
                     </div>
                 </div>

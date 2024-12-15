@@ -26,7 +26,7 @@ const DisplayCard = () => {
         if (cardId) {
             (async () => {
                 await retrieveQrCodeFromBackend()
-                const res = await fetch(`${BASE_URL}/card/displaycard/${cardId}`)
+                const res = await fetch(`${BASE_URL}/card/datacard/${cardId}`)
                 const cardData = await res.json()
                 console.log({ cardData: cardData.cardData.totalValue });
                 setCardData(cardData)
