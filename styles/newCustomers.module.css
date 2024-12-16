@@ -69,7 +69,6 @@
   color: rgb(173, 173, 173);
 }
 
-
 .containerGlobal {
   border: 1px solid #333e63;
   width: 360px;
@@ -192,7 +191,6 @@
 }
 
 @media screen and (min-width: 768px) {
-
   .containerGlobal {
     width: 730px;
     height: 550px;
