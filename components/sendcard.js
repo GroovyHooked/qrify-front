@@ -13,24 +13,29 @@ import {
   faXmark
 } from "@fortawesome/free-solid-svg-icons";
 import { redirectUserIfNotConnected } from '../utils/utils'
-import { BASE_URL } from '../components/global'
+import { BASE_URL } from '../utils/utils';
 import Image from 'next/image'
 
 function SendCard() {
   const router = useRouter();
   // Référence à la div contenant le code QR
   const qrCodeDivRef = useRef()
-  
-  const [print, setPrint] = useState("");
+
+  // source du code utilisé pour l'afficher 
   const [imageSrc, setImageSrc] = useState('')
-  const [imageInfo, setImageInfo] = useState('')
-  const [sendMessage, setSendMessage] = useState("");
-  const [recipientMail, setRecipientMail] = useState("");
+
+  const [cardInfo, setCardInfo] = useState('')
+  const [recipientMail, setRecipientMail] = useState("")
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [emailServiceResponse, setEmailServiceResponse] = useState({
+    isSucces: true,
+    message: "Service Email"
+  })
+  // const [emailServiceResponse, setEmailServiceResponse] = useState("")
 
   // Sélection des données utilisateur et de la carte depuis le store Redux
   const user = useSelector((state) => state.user.value)
-  const cardData = useSelector((state) => state.data.value)
+  const dataFromStore = useSelector((state) => state.data.value)
 
   const handleSendMessage = () => { };
 
@@ -49,20 +54,25 @@ function SendCard() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           to: recipientMail,
-          subject: `Carte cadeau ${cardData.customer.lastname}`,
-          text: cardData.card.message,
-          cardId: cardData.card.cardId
+          subject: `Carte cadeau ${dataFromStore.customer.lastname}`,
+          text: dataFromStore.card.message,
+          cardId: dataFromStore.card.cardId
         }),
       });
 
       if (response.ok) {
         console.log("Email envoyé avec succès !");
+        setEmailServiceResponse((current) => ({ ...current, isSucces: true, message: "Email envoyé avec succès !" }))
       } else {
-        console.log("Erreur lors de l'envoi de l'email.");
+        console.log("Erreur lors de l'envoi de l'email");
+        setEmailServiceResponse((current) => ({ ...current, isSucces: false, message: "Erreur lors de l'envoi de l'email." }))
+
+
       }
     } catch (error) {
       console.error("Erreur :", error);
-      console.log("Erreur lors de l'envoi de l'email.");
+      setEmailServiceResponse((current) => ({ ...current, isSucces: false, message: "Erreur lors de l'envoi de l'email." }))
+
     }
   };
 
@@ -74,16 +84,21 @@ function SendCard() {
   // Fonction asynchrone pour récupérer le code QR et les informations de la carte depuis le backend
   const retrieveQrCodeFromBackend = async () => {
     try {
-      if (cardData && cardData.card && cardData.card.cardId) {
-        const qrcodeSrc = await fetch(`${BASE_URL}/card/download/${cardData.card.cardId}`);
-        const cardDataResponse = await fetch(`${BASE_URL}/card/datacard/${cardData.card.cardId}`);
+      if (dataFromStore && dataFromStore.card && dataFromStore.card.cardId) {
+
+        const qrcodeSrc = await fetch(`${BASE_URL}/card/download/${dataFromStore.card.cardId}`);
+        const cardDataResponse = await fetch(`${BASE_URL}/card/datacard/${dataFromStore.card.cardId}`);
         const blob = await qrcodeSrc.blob();
-        const cardInfo = await cardDataResponse.json();
-        setImageInfo(cardInfo.cardData.totalValue);
+        const dataFromBack = await cardDataResponse.json();
+        console.log({ qrcodeSrc, cardDataResponse, blob, dataFromBack });
+
+        setCardInfo(dataFromBack.cardData.totalValue);
+
         const url = URL.createObjectURL(blob);
         setImageSrc(url);
+
       } else {
-        console.error("Invalid cardData structure or missing cardId");
+        console.error("Invalid cardInfo structure or missing cardId");
       }
     } catch (error) {
       console.error("Error fetching QR code or card data:", error);
@@ -130,6 +145,11 @@ function SendCard() {
                 onClick={handleModal}
                 icon={faXmark}
                 className={styles.modal_icon} />
+              <div
+                style={!emailServiceResponse.isSucces ? { color: 'red' } : { fontWeight: 'bold', textDecoration: 'underline' }}
+                className={styles.fetch_response}>
+                {emailServiceResponse.message && emailServiceResponse.message}
+              </div>
               <p className={styles.modal_title}>Entrez l'adresse mail du destinataire</p>
               <div className={styles.modal_content}>
                 <input
@@ -155,12 +175,12 @@ function SendCard() {
                 {imageSrc &&
                   <Image
                     alt="qrcode"
-                    width='100'
-                    height='100'
+                    width='150'
+                    height='150'
                     src={imageSrc} />}
               </div>
               <div className={styles.value}>
-                <p style={{ textAlign: 'center' }}>{imageInfo && `${imageInfo}€`}</p>
+                <p style={{ textAlign: 'center' }}>{cardInfo && `${cardInfo}€`}</p>
               </div>
             </div>
           </div>
