@@ -62,11 +62,21 @@
   top: 54px;
   right: 26px;
   width: 208px;
-  height: 260px;
+  height: 300px;
   border: 1px solid #333e63;
   border-radius: 10px;
   background-color: white;
   color: #333e63;
+}
+
+.navbar_item:nth-child(1) {
+  text-align: center;
+}
+
+.navbar_item:nth-child(1) > p {
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
 }
 
 .hidden {

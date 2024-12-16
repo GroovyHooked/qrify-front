@@ -11,6 +11,7 @@ import { faPlay, faStop, faRotate } from '@fortawesome/free-solid-svg-icons';
 export default function Scan() {
     const [camOrientation, setCamOrientation] = useState('environment');
     const router = useRouter();
+    
     const videoNodeRef = useRef();
     const qrScannerRef = useRef(null);
 
@@ -18,7 +19,6 @@ export default function Scan() {
         stopScanner()
         setCamOrientation(current => (current === 'user' ? 'environment' : 'user'));
         startScanner()
-       
     };
 
     const startScanner = async () => {
@@ -60,10 +60,12 @@ export default function Scan() {
             <div className={styles.container}>
                 <div className={styles.contentWrapper}>
                     <h2 className={styles.heading}>Scannez votre carte</h2>
+
                     <video
                         className={styles.videoNode}
                         ref={videoNodeRef}
                     ></video>
+
                     <div className={styles.actions}>
                         <button className={styles.button} onClick={changeCamOrientation} type='button'>
                             <FontAwesomeIcon icon={faRotate} size="2x" color="#ffffff" />

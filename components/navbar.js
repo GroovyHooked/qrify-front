@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { removeUserFromStore } from '../reducers/user'
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
 export default function Navbar({ status, href }) {
   const [show, setShow] = useState(true);
@@ -35,9 +36,9 @@ export default function Navbar({ status, href }) {
   return (
     <div className={`${styles.navbar} ${!show && styles.hidden}`}>
       <Link href='/home'>
-      <div className={styles.logo}>
-        <FontAwesomeIcon icon={faQrcode} width="30" height="30" color="#333e63" />
-        <div> QRify</div>
+        <div className={styles.logo}>
+          <FontAwesomeIcon icon={faQrcode} width="30" height="30" color="#333e63" />
+          <div> QRify</div>
         </div>
       </Link>
       {status === 'avatar' ? <Avatar /> : (
@@ -72,6 +73,8 @@ const Avatar = () => {
 }
 
 const Menu = ({ setIsMenuOpen }) => {
+  const user = useSelector((state) => state.user.value)
+
   const menuData = [
     { title: 'Menu', icon: faHouse, href: '/home' },
     { title: 'Profile', icon: faGear, href: '/' },
@@ -84,6 +87,9 @@ const Menu = ({ setIsMenuOpen }) => {
 
   return (
     <div className={styles.navbar_menu} >
+      <div className={styles.navbar_item} >
+        <p>Bonjour {user.firstname}</p>
+      </div>
       {menuData.map((el, i) => {
         return <MenuElement key={i} title={el.title} icon={el.icon} href={el.href} setIsMenuOpen={setIsMenuOpen} />
       })}

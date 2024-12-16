@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     value: {
         email: '',
-        token: ''
+        token: '',
+        firstname: ''
     },
 };
 
@@ -14,10 +15,12 @@ export const userSlice = createSlice({
         addUserToStore: (state, action) => {
             state.value.email = action.payload.email;
             state.value.token = action.payload.token;
+            state.value.firstname = action.payload.firstname;
         },
         removeUserFromStore: (state) => {
             state.value.email = '';
             state.value.token = '';
+            state.value.firstname = '';
         }
     },
 });

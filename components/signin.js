@@ -16,10 +16,9 @@ function SignIn() {
   const userCrendentialsObj = userCrendentials ? JSON.parse(userCrendentials) : null;
 
   const [signInMail, setSignInMail] = useState(userCrendentialsObj ? userCrendentialsObj.email : '');
-  const [signInPassword, setSignInPassword] = useState(userCrendentialsObj ? userCrendentialsObj.email : '');
+  const [signInPassword, setSignInPassword] = useState(userCrendentialsObj ? userCrendentialsObj.password : '');
 
   const handleSignIn = () => {
-    console.log({ signInMail, signInPassword });
     fetch(`${BASE_URL}/auth/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -28,11 +27,11 @@ function SignIn() {
         password: signInPassword,
       }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
+    .then((response) => response.json())
+    .then((data) => {
+      console.log({data});
         if (data.result) {
-          dispatch(addUserToStore({ email: signInMail, token: data.token }))
+          dispatch(addUserToStore({ email: data.email, token: data.token, firstname: data.firstname }))
           setSignInMail("");
           setSignInPassword("");
           router.push('/home')
