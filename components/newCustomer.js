@@ -1,23 +1,32 @@
-import React from "react";
-import styles from "../styles/newCustomers.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from 'next/router'
+import { BASE_URL } from '../utils/utils';
+import { addCustomerToStore } from '../reducers/data'
+import styles from "../styles/newCustomers.module.css";
+import { redirectUserIfNotConnected } from '../utils/utils'
 
 function NewCustomer() {
+  const dispatch = useDispatch()
+  const router = useRouter();
+
   const [signUpFirstname, setSignUpFirstname] = useState("");
   const [signUpLastname, setSignUpLastname] = useState("");
   const [signUpMail, setSignUpMail] = useState("");
   const [signUpPhoneNumber, setSignUpPhoneNumber] = useState("");
   const [messageError, setMessageError] = useState("");
 
-  const merchantMail = useSelector((state) => state.user.value.email);
+  const user = useSelector((state) => state.user.value);
 
-  console.log({ merchantMail });
+  // Redirection vers la page de connexion si l'utilisateur n'est pas connecté
+  useEffect(() => {
+    redirectUserIfNotConnected(user, router)
+  }, [])
 
   const handleSignUp = () => {
-    fetch("http://localhost:3000/customers/new", {
+    fetch(`${BASE_URL}/customers/new`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -25,18 +34,23 @@ function NewCustomer() {
         lastname: signUpLastname,
         email: signUpMail,
         phoneNumber: signUpPhoneNumber,
-        merchantMail: merchantMail,
+        // Envoi du mail du commerçant afin de son objectId en base de données
+        merchantMail: user.email,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log({ data });
         if (data.result) {
+          // Sauvegrade des données du client dans le store redux afin d'afficher nom et prenom sur la page de création de carte
+          // et envoyer d'id du client au backend pour lier la carte et le client entre eux lors de la sauvegarde de la carte
+          dispatch(addCustomerToStore(data.customer))
           setSignUpFirstname("");
           setSignUpLastname("");
           setSignUpMail("");
           setSignUpPhoneNumber("");
           setMessageError("");
+          router.push('/newcard')
         } else {
           setMessageError(data.error);
         }
@@ -45,7 +59,7 @@ function NewCustomer() {
 
   return (
     <>
-      <Navbar status="Inscription" href="/" />
+      <Navbar status="avatar" href="/" />
       <div className={styles.container}>
         <div className={styles.containerProgress}>
           <div className={styles.bar}></div>

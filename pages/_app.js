@@ -6,10 +6,11 @@ import { persistStore, persistReducer } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import storage from 'redux-persist/lib/storage';
 import user from '../reducers/user'
+import data from '../reducers/data'
 
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-const reducers = combineReducers({ user });
+const reducers = combineReducers({ user, data });
 
 const persistConfig = { key: 'qrify', storage };
 

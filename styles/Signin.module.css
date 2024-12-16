@@ -9,7 +9,7 @@
 }
 
 .containerglobal {
-  width: 70vw;
+  width: 350px;
   background-color: rgb(243, 240, 235);
   display: flex;
   justify-content: space-between;
@@ -19,7 +19,7 @@
 }
 
 .containertitle {
-  width: 70vw;
+  width: 350px;
   height: 80px;
   background-color: #b5becc;
   display: flex;
@@ -41,7 +41,7 @@
 
 .containerImage {
   width: 50%;
-  background-image: url("/image/image1.png");
+  background-image: url("/images/codeqr.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position-x: 50%;
@@ -93,7 +93,7 @@
   width: 250px;
   height: 35px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   border-radius: 5px;
   background-color: #ffffff;
@@ -132,9 +132,18 @@
 }
 
 @media screen and (min-width: 768px) {
+
+  .containerglobal {
+    width: 730px;
+  }
+  .containertitle {
+    width: 730px;
+  }
+
   .containerImage {
     display: block;
   }
+
   .containerForm {
     width: 50%;
   }

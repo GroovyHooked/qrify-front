@@ -6,16 +6,21 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUserToStore } from '../reducers/user'
 import { useRouter } from 'next/router'
+import { BASE_URL } from '../utils/utils';
 
 function SignIn() {
   const dispatch = useDispatch()
   const router = useRouter();
-  const [signInMail, setSignInMail] = useState("");
-  const [signInPassword, setSignInPassword] = useState("");
+
+  const { userCrendentials } = router.query;
+  const userCrendentialsObj = userCrendentials ? JSON.parse(userCrendentials) : null;
+
+  const [signInMail, setSignInMail] = useState(userCrendentialsObj ? userCrendentialsObj.email : '');
+  const [signInPassword, setSignInPassword] = useState(userCrendentialsObj ? userCrendentialsObj.email : '');
 
   const handleSignIn = () => {
     console.log({ signInMail, signInPassword });
-    fetch("http://localhost:3000/auth/signin", {
+    fetch(`${BASE_URL}/auth/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
