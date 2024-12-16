@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUserToStore } from '../reducers/user'
 import { useRouter } from 'next/router'
-import { BASE_URL } from '../components/global'
+import { BASE_URL } from '../utils/utils';
 
 function SignIn() {
   const dispatch = useDispatch()

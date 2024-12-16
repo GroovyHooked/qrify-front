@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../styles/navbar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faQrcode, faAddressCard, faGear, faUser, faArrowRightFromBracket, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faQrcode, faAddressCard, faGear, faUser, faArrowRightFromBracket, faHouse, faShareFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
@@ -78,7 +78,7 @@ const Menu = ({ setIsMenuOpen }) => {
     { title: 'Ajout client', icon: faUser, href: '/newcustomer' },
     { title: 'Carte', icon: faAddressCard, href: '/newcard' },
     { title: 'Scan', icon: faQrcode, href: '/scan' },
-    { title: 'Send', icon: faQrcode, href: '/sendcard' },
+    { title: 'Partager', icon: faShareFromSquare, href: '/sendcard' },
     { title: 'Déconnexion', icon: faArrowRightFromBracket, href: '/' }
   ]
 

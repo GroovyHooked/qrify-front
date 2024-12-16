@@ -14,8 +14,11 @@ export default function Scan() {
     const videoNodeRef = useRef();
     const qrScannerRef = useRef(null);
 
-    const changeCamOrientation = () => {
+    const changeCamOrientation = async () => {
+        stopScanner()
         setCamOrientation(current => (current === 'user' ? 'environment' : 'user'));
+        startScanner()
+       
     };
 
     const startScanner = async () => {
@@ -28,15 +31,15 @@ export default function Scan() {
 
         try {
             await qrScannerRef.current.start();
-            console.log('Scanner started successfully.');
+            console.log('Scanner started successfully.', qrScannerRef.current);
         } catch (error) {
             console.error('Error starting scanner:', error);
         }
     };
 
-    const stopScanner = () => {
+    const stopScanner = async () => {
         if (qrScannerRef.current) {
-            qrScannerRef.current.stop();
+            await qrScannerRef.current.stop();
             console.log('Scanner stopped successfully.');
         }
     };

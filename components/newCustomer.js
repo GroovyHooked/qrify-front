@@ -3,7 +3,7 @@ import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from 'next/router'
-import { BASE_URL } from '../components/global'
+import { BASE_URL } from '../utils/utils';
 import { addCustomerToStore } from '../reducers/data'
 import styles from "../styles/newCustomers.module.css";
 import { redirectUserIfNotConnected } from '../utils/utils'

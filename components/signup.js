@@ -4,8 +4,7 @@ import styles from "../styles/signup.module.css";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/router';
-
-import { BASE_URL } from '../components/global'
+import { BASE_URL } from '../utils/utils';
 
 function Signup() {
   const router = useRouter();

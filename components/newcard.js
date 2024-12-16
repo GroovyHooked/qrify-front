@@ -6,8 +6,7 @@ import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
 import { addCardToStore } from '../reducers/data'
 import { redirectUserIfNotConnected } from '../utils/utils'
-
-import { BASE_URL } from '../components/global'
+import { BASE_URL } from '../utils/utils';
 
 export default function NewCard() {
     const dispatch = useDispatch()

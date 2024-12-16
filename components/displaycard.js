@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { BASE_URL } from './global';
+import { BASE_URL } from '../utils/utils';
 import Navbar from './navbar';
 import Footer from './footer';
 import styles from '../styles/displaycard.module.css'
@@ -28,7 +28,7 @@ const DisplayCard = () => {
                 await retrieveQrCodeFromBackend()
                 const res = await fetch(`${BASE_URL}/card/datacard/${cardId}`)
                 const cardData = await res.json()
-                console.log({ cardData: cardData.cardData.totalValue });
+                // console.log({ cardData: cardData.cardData.totalValue });
                 setCardData(cardData)
             })()
         }
@@ -54,7 +54,7 @@ const DisplayCard = () => {
                     <div className={styles.card_data}>
                         {cardData.cardData && <p>Carte de {cardData.cardData.recipient}</p>}
                         {cardData.cardData && <p>D'une valeur de {cardData.cardData.totalValue}€</p>}
-                        {cardData.customer && <p>Offerte pas {cardData.customer.lastname} {cardData.customer.firstname}</p>}
+                        {cardData.customer && <p>Offerte par {cardData.customer.lastname} {cardData.customer.firstname}</p>}
                     </div>
                     <button className={styles.button} type='submit'>Valider</button>
                 </div>
