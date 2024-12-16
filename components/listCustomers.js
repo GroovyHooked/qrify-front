@@ -5,13 +5,17 @@ import Navbar from "../components/navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function ListCustomers() {
+  const router = useRouter();
+
   const [searchName, setSearchName] = useState("");
   const [listCustomers, setListCustomers] = useState([]);
+  const [messageError, setMessageError] = useState("");
 
   const handleSearch = () => {
-    console.log("test", searchName);
+    // console.log("test", searchName);
 
     fetch("http://localhost:3000/customers/onecustomer", {
       method: "POST",
@@ -22,33 +26,35 @@ export default function ListCustomers() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log({ data });
+        // console.log({ data });
 
         if (data.result) {
-          setSearchName(data);
+          // console.log({ data });
+          setListCustomers([data.customers]);
+          // setSearchName(data);
         } else {
-          setMessageError(data.error);
+          setMessageError(data.message);
         }
       });
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/customers/list")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log({ data });
+    if (!searchName) {
+      fetch("http://localhost:3000/customers/list")
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log({ data });
 
-        if (data.result) {
-          setListCustomers(data.customers);
-        } else {
-          setMessageError(data.error);
-        }
-      });
-  }, []);
-  console.log("listcustomers is", listCustomers);
+          if (data.result) {
+            setListCustomers(data.customers);
+          }
+        });
+    }
+  }, [searchName]);
+  // console.log("listcustomers is", listCustomers);
 
   const customers = listCustomers.map((data, i) => {
-    console.log("map is", data);
+    // console.log("map is", data);
     return (
       <div key={i} className={styles.ligne}>
         <div className={styles.text}>{data.firstname}</div>
@@ -60,7 +66,7 @@ export default function ListCustomers() {
               icon={faPlus}
               size={"30"}
               color="#333e63"
-              onClick={() => handleSearch()}
+              onClick={() => router.push("/newcustomer")}
             />
           </button>
         </div>
@@ -68,9 +74,14 @@ export default function ListCustomers() {
     );
   });
 
+  const handleInput = (e) => {
+    setMessageError("");
+    setSearchName(e.target.value);
+  };
+
   return (
     <>
-      <Navbar status="Inscription" href="/" />
+      <Navbar status="avatar" href="/" />
       <div className={styles.container}>
         <div className={styles.containerglobal}>
           <div className={styles.containerDescription}>
@@ -87,7 +98,7 @@ export default function ListCustomers() {
               <button
                 className={styles.button}
                 id="addCustomers"
-                onClick={() => handleSignUp()}
+                onClick={() => router.push("/newcustomer")}
               >
                 Ajouter un client
               </button>
@@ -100,7 +111,7 @@ export default function ListCustomers() {
                 type="text"
                 placeholder="Nom"
                 id="searchName"
-                onChange={(e) => setSearchName(e.target.value)}
+                onChange={(e) => handleInput(e)}
                 value={searchName}
               />
               <FontAwesomeIcon
@@ -111,6 +122,7 @@ export default function ListCustomers() {
               />
             </div>
           </div>
+          <div className={styles.error}>{messageError && messageError}</div>
           <div className={styles.containertitle}>
             <div className={styles.contain}>
               <div className={styles.title}>Name</div>
