@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import { useSelector, useDispatch } from "react-redux";
-import { useRouter } from 'next/router'
-import { BASE_URL } from '../utils/utils';
-import { addCustomerToStore } from '../reducers/data'
+import { useRouter } from "next/router";
+import { BASE_URL } from "../utils/utils";
+import { addCustomerToStore } from "../reducers/data";
 import styles from "../styles/newCustomers.module.css";
-import { redirectUserIfNotConnected } from '../utils/utils'
+import { redirectUserIfNotConnected } from "../utils/utils";
 
 function NewCustomer() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const [signUpFirstname, setSignUpFirstname] = useState("");
@@ -22,8 +22,8 @@ function NewCustomer() {
 
   // Redirection vers la page de connexion si l'utilisateur n'est pas connecté
   useEffect(() => {
-    redirectUserIfNotConnected(user, router)
-  }, [])
+    redirectUserIfNotConnected(user, router);
+  }, []);
 
   const handleSignUp = () => {
     fetch(`${BASE_URL}/customers/new`, {
@@ -44,13 +44,13 @@ function NewCustomer() {
         if (data.result) {
           // Sauvegrade des données du client dans le store redux afin d'afficher nom et prenom sur la page de création de carte
           // et envoyer d'id du client au backend pour lier la carte et le client entre eux lors de la sauvegarde de la carte
-          dispatch(addCustomerToStore(data.customer))
+          dispatch(addCustomerToStore(data.customer));
           setSignUpFirstname("");
           setSignUpLastname("");
           setSignUpMail("");
           setSignUpPhoneNumber("");
           setMessageError("");
-          router.push('/newcard')
+          router.push("/newcard");
         } else {
           setMessageError(data.error);
         }

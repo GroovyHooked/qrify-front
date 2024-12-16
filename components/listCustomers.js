@@ -43,7 +43,7 @@ export default function ListCustomers() {
       fetch("http://localhost:3000/customers/list")
         .then((response) => response.json())
         .then((data) => {
-          // console.log({ data });
+          console.log({ data });
 
           if (data.result) {
             setListCustomers(data.customers);
@@ -66,7 +66,7 @@ export default function ListCustomers() {
               icon={faPlus}
               size={"30"}
               color="#333e63"
-              onClick={() => router.push("/newcustomer")}
+              onClick={() => router.push("/newcard")}
             />
           </button>
         </div>
@@ -83,6 +83,17 @@ export default function ListCustomers() {
     <>
       <Navbar status="avatar" href="/" />
       <div className={styles.container}>
+        <div className={styles.containerProgress}>
+          <div className={styles.bar}></div>
+          <div className={styles.circle}>1</div>
+          <div className={styles.circle}>2</div>
+          <div className={styles.circle}>3</div>
+        </div>
+        <div className={styles.containerProgressText}>
+          <div className={styles.progressText}>Rechercher un client</div>
+          <div className={styles.progressText}>Générer une carte</div>
+          <div className={styles.progressText}>Partager la carte</div>
+        </div>
         <div className={styles.containerglobal}>
           <div className={styles.containerDescription}>
             <div className={styles.containerClientDesc}>
