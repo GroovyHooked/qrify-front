@@ -1,12 +1,13 @@
 .container {
   width: 100vw;
-  min-height: 100vh;
+  min-height: 950px;
   background-color: #f1f4fd;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 .containerProgress {
   position: relative;
   display: flex;
@@ -93,6 +94,7 @@
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
+
 .containerClientDesc {
   display: flex;
   flex-direction: column;
@@ -103,16 +105,19 @@
   font-size: 30px;
   color: #333e63;
 }
+
 .textTitle {
   font-size: 13px;
   color: #333e63;
 }
+
 .containerButton {
   display: flex;
   flex-direction: column;
   gap: 18px;
   padding: 10px;
 }
+
 .button {
   width: 100px;
   height: 40px;
@@ -124,6 +129,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .containerSearch {
   width: 100%;
   height: 50px;
@@ -211,6 +217,7 @@
   border: 1px solid #333e63;
   background-color: transparent;
 }
+
 .containerInput {
   background-color: #ffff;
   border-radius: 5px;
@@ -229,6 +236,7 @@
   border: none;
   padding-left: 10px;
 }
+
 .error {
   width: 100%;
   height: 50px;
@@ -255,26 +263,33 @@
     width: 730px;
     height: 550px;
   }
+
   .containerSearch {
     display: flex;
     justify-content: flex-start;
   }
+
   .containerProgress {
     width: 700px;
   }
+
   .bar {
     width: 700px;
   }
+
   .containerProgressText {
     width: 700px;
   }
+
   .button {
     width: 100px;
   }
+
   .span {
     display: inline;
     padding: 4px;
   }
+
   .error {
     display: flex;
     justify-content: flex-start;

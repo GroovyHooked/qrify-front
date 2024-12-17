@@ -6,13 +6,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { addCustomerToStore } from '../reducers/data'
+import { useDispatch } from "react-redux";
 
 export default function ListCustomers() {
+  const dispatch = useDispatch()
   const router = useRouter();
 
   const [searchName, setSearchName] = useState("");
   const [listCustomers, setListCustomers] = useState([]);
   const [messageError, setMessageError] = useState("");
+
 
   const handleSearch = () => {
     // console.log("test", searchName);
@@ -21,17 +25,13 @@ export default function ListCustomers() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        firstname: searchName,
+        lastname: searchName,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log({ data });
-
         if (data.result) {
-          // console.log({ data });
           setListCustomers([data.customers]);
-          // setSearchName(data);
         } else {
           setMessageError(data.message);
         }
@@ -51,10 +51,8 @@ export default function ListCustomers() {
         });
     }
   }, [searchName]);
-  // console.log("listcustomers is", listCustomers);
 
   const customers = listCustomers.map((data, i) => {
-    // console.log("map is", data);
     return (
       <div key={i} className={styles.ligne}>
         <div className={styles.text}>{data.firstname}</div>
@@ -66,7 +64,18 @@ export default function ListCustomers() {
               icon={faPlus}
               size={"30"}
               color="#333e63"
-              onClick={() => router.push("/newcard")}
+              onClick={async () => {
+                const res = await fetch('http://localhost:3000/customers/onecustomer', {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    lastname: data.lastname,
+                  })
+                })
+                const dataFromBack = await res.json()
+                dispatch(addCustomerToStore(dataFromBack.customers))
+                router.push("/newcard")
+              }}
             />
           </button>
         </div>
