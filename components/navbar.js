@@ -72,7 +72,7 @@ export const Avatar = () => {
         alt="avatar"
         width={40}
         height={40}
-        src={user.avatar}
+        src={user?.avatar || '/avatars/avatar1.png'}
         className={styles.avatar}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       />
