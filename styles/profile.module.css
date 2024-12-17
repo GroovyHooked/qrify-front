@@ -7,8 +7,11 @@
     min-height: 95vh;
 }
 
-.profile_page > h1 {
+.profile_page>h1 {
     color: #333e63;
+    font-weight: 500;
+    font-size: 26px;
+    padding: 0 20px;
 }
 
 .profile_info {
@@ -30,7 +33,7 @@
     color: #333e63;
 }
 
-.profile_info > p {
+.profile_info>p {
     /* font-size: 24px;
     font-weight: 400; */
     color: #333e63;
@@ -85,7 +88,7 @@
     text-align: center;
 }
 
-.modal_title > p {
+.modal_title>p {
     margin: 0;
     padding: 0;
 }

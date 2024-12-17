@@ -26,23 +26,10 @@ export function Profile() {
             <Navbar status="avatar" />
             <div className={styles.profile_page}>
                 {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
-                <h1>Page de profile</h1>
+                <h1>Profile</h1>
                 <div className={styles.profile_info}>
                     <Avatar />
                     <h2>{user.firstname} {user.lastname}</h2>
-                    <p>{user.email}</p>
-                    <button
-                        onClick={() => setIsModalOpen(!isModalOpen)}
-                        type='submit'
-                        className={styles.button}>Changer d'avatar</button>
-                </div>
-            </div>
-            <div className={styles.profile_page}>
-                {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
-                <h1>Page de profile</h1>
-                <div className={styles.profile_info}>
-                    <Avatar />
-                    <h2>{user.lastname} {user.firstname}</h2>
                     <p>{user.email}</p>
                     <button
                         onClick={() => setIsModalOpen(!isModalOpen)}
