@@ -1,0 +1,90 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f1f4fd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f4fd;
+}
+
+.cardContainer {
+  background-color: #e6e7ea;
+  border-radius: 8px;
+  width: 80vw;
+  height: 70vh;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: red; */
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.cardTitle {
+  color: #545f71;
+  width: 100%;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #545f71;
+  padding-bottom: 10px;
+  text-align: left;
+  background-color: transparent;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.containercenter {
+  /* background-color: yellow; */
+  width: 250px;
+  height: 320px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.cardDetails {
+  font-size: 16px;
+  color: #545f71;
+  width: 90%;
+  flex-direction: column;
+  /* background-color: orange; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.validateButton {
+  color: #ffffff;
+  width: 90%;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: green; */
+  margin-bottom: -2%;
+}
+
+.button {
+  width: 220px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #545f71;
+  border-radius: 20px;
+  font-size: 13px;
+}
