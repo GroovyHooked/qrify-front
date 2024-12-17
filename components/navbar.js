@@ -62,8 +62,9 @@ export default function Navbar({ status, href }) {
   );
 }
 
-const Avatar = () => {
+export const Avatar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const user = useSelector((state) => state.user.value)
 
   return (
     <>
@@ -71,7 +72,7 @@ const Avatar = () => {
         alt="avatar"
         width={40}
         height={40}
-        src="/image/avatar2.svg"
+        src={user.avatar}
         className={styles.avatar}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       />
@@ -85,7 +86,7 @@ const Menu = ({ setIsMenuOpen }) => {
 
   const menuData = [
     { title: "Menu", icon: faHouse, href: "/home" },
-    { title: "Profile", icon: faGear, href: "/" },
+    { title: "Profile", icon: faGear, href: "/profile" },
     { title: "Ajout client", icon: faUser, href: "/newcustomer" },
     { title: "Clients", icon: faAddressCard, href: "/listCustomers" },
     { title: "Scan", icon: faQrcode, href: "/scan" },

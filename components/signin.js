@@ -27,11 +27,18 @@ function SignIn() {
         password: signInPassword,
       }),
     })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log({data});
+      .then((response) => response.json())
+      .then(async (data) => {
+        console.log({ data });
+
         if (data.result) {
-          dispatch(addUserToStore({ email: data.email, token: data.token, firstname: data.firstname }))
+          dispatch(addUserToStore({
+            email: data.email,
+            token: data.token,
+            firstname: data.firstname,
+            avatar: data.avatarPath ? data.avatarPath : '/avatars/avatar1.svg',
+            lastname: data.lastname
+          }))
           setSignInMail("");
           setSignInPassword("");
           router.push('/home')
