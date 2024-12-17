@@ -6,7 +6,8 @@ const initialState = {
         token: '',
         firstname: '',
         lastname: '',
-        avatar: ''
+        avatar: '',
+        progressString: 'Ajouter un client'
     },
 };
 
@@ -29,12 +30,13 @@ export const userSlice = createSlice({
             state.value.lastname = '';
         },
         changeAvatarPath: (state, action) => {
-            console.log({ action });
-
             state.value.avatar = action.payload;
+        },
+        updateProgress: (state, action) => {
+            state.value.progressString = action.payload
         }
     },
 });
 
-export const { addUserToStore, removeUserFromStore, changeAvatarPath } = userSlice.actions;
+export const { addUserToStore, removeUserFromStore, changeAvatarPath, updateProgress } = userSlice.actions;
 export default userSlice.reducer;

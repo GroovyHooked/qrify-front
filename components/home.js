@@ -25,8 +25,8 @@ export default function Home() {
                 <div className={styles.contentWrapper}>
                     <h2 className={styles.title}>Gérez vos cartes cadeaux en quelques clics</h2>
                     <div className={styles.cardContainer} >
-                        <NavigationCard src="/images/client.jpg" icon={faUser} title="Ajouter un client" description="Ajoutez un clien afin de générer une carte" link="newcustomer" />
-                        <NavigationCard src="/images/merchant2.jpg" icon={faAddressCard} title="Créez une carte" description="Créez une carte à partir d'un client enregistré" link="newcard" />
+                        <NavigationCard src="/images/client.jpg" icon={faUser} title="Ajouter un client" description="Ajoutez un clien afin de générer une carte" link="newcustomer" progressStatus="Ajouter un client" />
+                        <NavigationCard src="/images/merchant2.jpg" icon={faAddressCard} title="Créez une carte" description="Créez une carte à partir d'un client enregistré" link="newcard" progressStatus="Sélectionner un client" />
                     </div>
                     <div className={styles.cardContainer} >
                         <NavigationCard src="/images/scan.jpg" icon={faQrcode} title="Scanner une carte" description="Scannez une carte avec votre appareil photo" link="scan" />

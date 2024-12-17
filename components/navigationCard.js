@@ -2,12 +2,19 @@ import styles from '../styles/navigationCard.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link';
 import Image from 'next/image';
+import { useDispatch } from "react-redux";
+import { updateProgress } from "../reducers/user";
 
 
-export default function NavigationCard({ src, title, description, icon, link }) {
+export default function NavigationCard({ src, title, description, icon, link, progressStatus }) {
+    const dispatch = useDispatch();
+
+    const updateProgressStatus = () => {
+        progressStatus && dispatch(updateProgress(progressStatus))
+    }
 
     return (
-        <Link href={link} >
+        <Link href={link} onClick={updateProgressStatus}>
         <div className={styles.card_container}>
             <div className={styles.innerdiv}>
                 <div className={styles.overlay} ></div>

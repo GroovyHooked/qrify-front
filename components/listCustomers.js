@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { addCustomerToStore } from '../reducers/data'
 import { useDispatch } from "react-redux";
+import UserProgress from '../components/userProgress'
+import { updateProgress } from "../reducers/user";
 
 export default function ListCustomers() {
   const dispatch = useDispatch()
@@ -92,17 +94,7 @@ export default function ListCustomers() {
     <>
       <Navbar status="avatar" href="/" />
       <div className={styles.container}>
-        <div className={styles.containerProgress}>
-          <div className={styles.bar}></div>
-          <div className={styles.circle}>1</div>
-          <div className={styles.circle}>2</div>
-          <div className={styles.circle}>3</div>
-        </div>
-        <div className={styles.containerProgressText}>
-          <div className={styles.progressText}>Rechercher un client</div>
-          <div className={styles.progressText}>Générer une carte</div>
-          <div className={styles.progressText}>Partager la carte</div>
-        </div>
+        <UserProgress progress="1" />
         <div className={styles.containerglobal}>
           <div className={styles.containerDescription}>
             <div className={styles.containerClientDesc}>
@@ -118,7 +110,10 @@ export default function ListCustomers() {
               <button
                 className={styles.button}
                 id="addCustomers"
-                onClick={() => router.push("/newcustomer")}
+                onClick={() => {
+                  dispatch(updateProgress('Ajouter un client'))
+                  router.push("/newcustomer")
+                }}
               >
                 Ajouter un client
               </button>

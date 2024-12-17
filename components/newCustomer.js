@@ -7,6 +7,7 @@ import { BASE_URL } from "../utils/utils";
 import { addCustomerToStore } from "../reducers/data";
 import styles from "../styles/newCustomers.module.css";
 import { redirectUserIfNotConnected } from "../utils/utils";
+import UserProgress from '../components/userProgress'
 
 function NewCustomer() {
   const dispatch = useDispatch();
@@ -61,18 +62,7 @@ function NewCustomer() {
     <>
       <Navbar status="avatar" href="/" />
       <div className={styles.container}>
-        <div className={styles.containerProgress}>
-          <div className={styles.bar}></div>
-          <div className={styles.circle}>1</div>
-          <div className={styles.circle}>2</div>
-          <div className={styles.circle}>3</div>
-        </div>
-        <div className={styles.containerProgressText}>
-          <div className={styles.progressText}>Ajouter un client</div>
-          <div className={styles.progressText}>Générer une carte</div>
-          <div className={styles.progressText}>Partager la carte</div>
-        </div>
-
+        <UserProgress progress="1" />
         <div className={styles.containerGlobal}>
           <div className={styles.containerTitle}>
             <div className={styles.titleBar}>

@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addCardToStore } from '../reducers/data'
 import { redirectUserIfNotConnected } from '../utils/utils'
 import { BASE_URL } from '../utils/utils';
+import UserProgress from '../components/userProgress'
 
 export default function NewCard() {
     const dispatch = useDispatch()
@@ -57,21 +58,7 @@ export default function NewCard() {
         <>
             <Navbar status='avatar' />
             <div className={styles.container}>
-                <div className={styles.progressContainer}>
-                    <div className={styles.progressbar}>
-                        <div className={styles.bar1}></div>
-                        <div className={styles.bar2}></div>
-                        <div className={styles.circle}>1</div>
-                        <div className={styles.circle}>2</div>
-                        <div className={styles.circle}>3</div>
-                    </div>
-                    <div className={styles.progressionText}>
-                        <div className={styles.text}>Ajouter un client</div>
-                        <div className={styles.text}>Générer une carte</div>
-                        <div className={styles.text}>Partager la carte</div>
-                    </div>
-                </div>
-
+                <UserProgress progress="2" />
                 <div className={styles.innerContainer}>
                     <div className={styles.header}>
                         <h2 className={styles.title} >Carte cadeau de {dataFromStore.firstname} {dataFromStore.lastname}</h2>

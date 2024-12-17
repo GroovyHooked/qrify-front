@@ -15,6 +15,8 @@ import {
 import { redirectUserIfNotConnected } from '../utils/utils'
 import { BASE_URL } from '../utils/utils';
 import Image from 'next/image'
+import UserProgress from '../components/userProgress'
+
 
 function SendCard() {
   const router = useRouter();
@@ -125,18 +127,7 @@ function SendCard() {
     <>
       <Navbar status="avatar" />
       <div className={styles.container}>
-        <div className={styles.containerProgress}>
-          <div className={styles.bar}></div>
-          <div className={styles.circle}>1</div>
-          <div className={styles.circle}>2</div>
-          <div className={styles.circle}>3</div>
-        </div>
-        <div className={styles.containerProgressText}>
-          <div className={styles.progressText}>Ajouter un client</div>
-          <div className={styles.progressText}>Générer une carte</div>
-          <div className={styles.progressText}>Partager la carte</div>
-        </div>
-
+        <UserProgress progress="3" />
         <div className={styles.containerGlobal}>
 
           {isModalOpen &&

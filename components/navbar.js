@@ -13,7 +13,7 @@ import {
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { removeUserFromStore } from "../reducers/user";
+import { removeUserFromStore, updateProgress } from "../reducers/user";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 
@@ -87,8 +87,8 @@ const Menu = ({ setIsMenuOpen }) => {
   const menuData = [
     { title: "Menu", icon: faHouse, href: "/home" },
     { title: "Profile", icon: faGear, href: "/profile" },
-    { title: "Ajout client", icon: faUser, href: "/newcustomer" },
-    { title: "Clients", icon: faAddressCard, href: "/listCustomers" },
+    { title: "Ajout client", icon: faUser, href: "/newcustomer", progressStatus: "Ajouter un client" },
+    { title: "Clients", icon: faAddressCard, href: "/listCustomers", progressStatus: "Sélectionner un client" },
     { title: "Scan", icon: faQrcode, href: "/scan" },
     { title: "Partager", icon: faShareFromSquare, href: "/sendcard" },
     { title: "Déconnexion", icon: faArrowRightFromBracket, href: "/" },
@@ -107,6 +107,7 @@ const Menu = ({ setIsMenuOpen }) => {
             icon={el.icon}
             href={el.href}
             setIsMenuOpen={setIsMenuOpen}
+            progressStatus={el?.progressStatus}
           />
         );
       })}
@@ -114,10 +115,11 @@ const Menu = ({ setIsMenuOpen }) => {
   );
 };
 
-const MenuElement = ({ title, icon, href, setIsMenuOpen }) => {
+const MenuElement = ({ title, icon, href, setIsMenuOpen, progressStatus }) => {
   const dispatch = useDispatch();
 
   const modalCloseAndLogout = () => {
+    progressStatus && dispatch(updateProgress(progressStatus))
     setIsMenuOpen(false);
     if (title === "Déconnexion") {
       dispatch(removeUserFromStore());
