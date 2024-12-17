@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "../styles/gestion.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSort, faCircle, faEye } from "@fortawesome/free-solid-svg-icons";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import NavBar from "../components/navbar";
 import Footer from "../components/footer";
 
@@ -67,23 +67,9 @@ export default function CardGestion() {
 
   const router = useRouter();
 
-  // const ascendingDates = [...infos].sort(
-  //   (a, b) => new Date(a.date) - new Date(b.date)
-  // );
-  // console.log(ascendingDates);
-
-  // const descendingDates = [...infos].sort(
-  //   (a, b) => new Date(b.date) - new Date(a.date)
-  // );
-  // console.log(descendingDates);
-
-  // useEffect(() => {
-
-  // });
-
   return (
     <>
-      <NavBar statut="avatar" />
+      <NavBar status="avatar" />
 
       <div className={styles.container}>
         <div className={styles.containerglobal}>
