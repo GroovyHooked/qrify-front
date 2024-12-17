@@ -1,62 +1,10 @@
 .container {
   width: 100%;
   min-height: 950px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
-.containerProgress {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  width: 350px;
-  height: 30px;
-}
-
-.circle {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  border: 1px solid;
-  z-index: 2;
-  background-color: white;
-}
-
-.bar {
-  position: absolute;
-  width: 350px;
-  height: 2px;
-  background-color: #797979;
-  top: 15px;
-  z-index: 0;
-}
-
-.containerProgressText {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 370px;
-  height: 20px;
-  margin: 10px 10px 40px;
-}
-
-.progressText {
-  font-size: 11px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  text-align: center;
+  padding-top: 135px;
 }
 
 .containerGlobal {
-  border: 1px solid #333e63;
   position: relative;
   /* margin-top: 200px; */
   width: 350px;
@@ -64,7 +12,7 @@
   background-color: #e6e7ea;
   display: flex;
 
-  margin-top: 30px;
+  margin: 60px auto;
   border-radius: 20px;
   flex-direction: column;
   align-items: center;
@@ -91,9 +39,11 @@
 }
 
 .title {
-  font-size: 25px;
   font-weight: bold;
   color: #333e63;
+  font-weight: 500;
+  font-size: 26px;
+  padding: 0 20px;
   text-align: center;
   width: 100%;
 }

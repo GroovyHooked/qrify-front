@@ -1,76 +1,10 @@
 .container {
   width: 100%;
   min-height: 950px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
-.containerProgress {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  width: 350px;
-  height: 30px;
-}
-
-.circle {
-  color: #333e63;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  border: 1px solid #333e63;
-  z-index: 2;
-  background-color: white;
-}
-
-.circle:nth-child(3),
-.circle:nth-child(4) {
-  color: rgb(173, 173, 173);
-  border: 1px solid rgb(173, 173, 173);
-}
-
-.bar {
-  position: absolute;
-  width: 350px;
-  height: 2px;
-  background-color: rgb(173, 173, 173);
-  top: 15px;
-  z-index: 0;
-}
-
-.containerProgressText {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 360px;
-  height: 30px;
-  margin: 10px 10px 40px;
-}
-
-.progressText {
-  font-size: 11px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  text-align: center;
-  color: #333e63;
-  z-index: 2;
-}
-
-.progressText:nth-child(2),
-.progressText:nth-child(3) {
-  color: rgb(173, 173, 173);
+  padding-top: 135px;
 }
 
 .containerGlobal {
-  border: 1px solid #333e63;
   width: 360px;
   height: 550px;
   background-color: #e6e7ea;
@@ -80,6 +14,7 @@
   border-radius: 20px;
   flex-direction: column;
   align-items: center;
+  margin: 60px auto;
 }
 
 .containerTitle {
@@ -102,7 +37,7 @@
 
 .title {
   font-size: 25px;
-  font-weight: bold;
+  font-weight: 500;
   color: #333e63;
   text-align: center;
   width: 100%;
@@ -227,18 +162,6 @@
   .registerSection {
     width: 500px;
     display: flex;
-  }
-
-  .containerProgress {
-    width: 600px;
-  }
-
-  .bar {
-    width: 600px;
-  }
-
-  .containerProgressText {
-    width: 610px;
   }
 
   .input {
