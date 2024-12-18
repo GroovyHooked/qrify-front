@@ -41,7 +41,7 @@ const ValidationCard = () => {
 
   return (
     <>
-      <NavBar statut="avatar" />
+      <NavBar status="avatar" />
       <div className={styles.container}>
         <div className={styles.cardContainer}>
           <div className={styles.cardTitle}>Validation carte</div>
