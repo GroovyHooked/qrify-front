@@ -25,24 +25,53 @@ function SendCard() {
   // source du code utilisé pour l'afficher
   const [imageSrc, setImageSrc] = useState("");
 
-  const [cardInfo, setCardInfo] = useState("");
+  const [cardValue, setCardValue] = useState("");
   const [recipientMail, setRecipientMail] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [emailServiceResponse, setEmailServiceResponse] = useState({
     isSucces: true,
     message: "Service Email",
   });
-  // const [emailServiceResponse, setEmailServiceResponse] = useState("")
+  const [isModalMessageOpen, setIsModalMessageOpen] = useState(false);
+  const [phoneCustomer, setPhoneCustomer] = useState("");
 
   // Sélection des données utilisateur et de la carte depuis le store Redux
   const user = useSelector((state) => state.user.value);
   const dataFromStore = useSelector((state) => state.data.value);
 
-  useEffect(() => {
-    console.log({ dataFromStore });
-  }, [dataFromStore]);
+  // Fonction pour gérer l'ouverture/fermeture de la modal
+  const handleModalMessage = () => {
+    setIsModalMessageOpen(!isModalMessageOpen);
+  };
 
-  const handleSendMessage = () => {};
+  const handleSendMessage = async (cardValue) => {
+    // setPhoneCustomer((current) => current.slice(1));
+    let temp = phoneCustomer;
+    temp = temp.slice(1);
+
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    console.log("test", phoneCustomer);
+
+    const message = `Voici votre carte cadeau d'une valeur de: ${cardValue} €`;
+    const API_KEY_callmebot = "4749115";
+
+    console.log(
+      `https://api.callmebot.com/whatsapp.php?phone=+33${temp}&text=${message}&apikey=${API_KEY_callmebot}`
+    );
+
+    const response = fetch(
+      `https://api.callmebot.com/whatsapp.php?phone=+33${temp}&text=${message}&apikey=${API_KEY_callmebot}`,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+    console.log("result");
+    setPhoneCustomer("");
+  };
 
   // Fonction pour gérer l'ouverture/fermeture de la modal
   const handleModal = () => {
@@ -108,10 +137,10 @@ function SendCard() {
         const cardData = await res.json();
         const dataFromBack = await cardDataResponse.json();
 
-        setCardInfo(dataFromBack.cardData.totalValue);
+        setCardValue(dataFromBack.cardData.totalValue);
         setImageSrc(cardData.cardPath);
       } else {
-        console.error("Invalid cardInfo structure or missing cardId");
+        console.error("Invalid cardValue structure or missing cardId");
       }
     } catch (error) {
       console.error("Error fetching QR code or card data:", error);
@@ -132,23 +161,45 @@ function SendCard() {
     window.print();
     document.body.innerHTML = originalContent;
   };
-
-  console.log("les infos du texte", dataFromStore.card.message);
-
-  // const TruncatedText = ({ text, limit }) => {
-  //   // Tronque le texte si nécessaire
-  //   const truncatedText =
-  //     text.length > limit ? text.substring(0, limit) + "..." : text;
-
-  //   return <div className={styles.textinfosText}>{truncatedText}</div>;
-  // };
-
+  console.log(cardValue);
   return (
     <>
       <Navbar status="avatar" />
       <div className={styles.container}>
         <UserProgress progress="3" />
         <div className={styles.containerGlobal}>
+          {isModalMessageOpen && (
+            <div className={styles.modal_container}>
+              <FontAwesomeIcon
+                icon={faXmark}
+                className={styles.modal_icon}
+                onClick={handleModalMessage}
+              />
+              <p className={styles.modal_title}>
+                Entrez le téléphone portable du destinataire
+              </p>
+              <div className={styles.modal_content}>
+                <input
+                  placeholder="Entrez le numéro de téléphone"
+                  type="tel"
+                  id="phone"
+                  className={styles.email_input}
+                  onChange={(e) => setPhoneCustomer(e.target.value)}
+                  value={phoneCustomer}
+                />
+                <button
+                  onClick={() => {
+                    handleSendMessage(cardValue);
+                  }}
+                  type="submit"
+                  className={styles.modal_button}
+                >
+                  Envoyer
+                </button>
+              </div>
+            </div>
+          )}
+
           {isModalOpen && (
             <div className={styles.modal_container}>
               <FontAwesomeIcon
@@ -217,6 +268,9 @@ function SendCard() {
                 <p className={styles.textinfosText}>
                   {dataFromStore.card.message}
                 </p>
+                <p style={{ textAlign: "center" }}>
+                  {cardValue && `${cardValue}€`}
+                </p>
               </div>
             </div>
           </div>
@@ -237,7 +291,7 @@ function SendCard() {
               <button
                 className={styles.button}
                 id="addCustomers"
-                onClick={() => handleSendMessage()}
+                onClick={handleModalMessage}
               >
                 <div className={styles.spaceInButton}>
                   <FontAwesomeIcon icon={faMessage} size="2xl" color="#ffff" />
