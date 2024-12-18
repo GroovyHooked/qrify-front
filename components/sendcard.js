@@ -88,16 +88,13 @@ function SendCard() {
     try {
       if (dataFromStore && dataFromStore.card && dataFromStore.card.cardId) {
 
-        const qrcodeSrc = await fetch(`${BASE_URL}/card/download/${dataFromStore.card.cardId}`);
+        const res = await fetch(`${BASE_URL}/card/download/${dataFromStore.card.cardId}`);
         const cardDataResponse = await fetch(`${BASE_URL}/card/datacard/${dataFromStore.card.cardId}`);
-        const blob = await qrcodeSrc.blob();
+        const cardData = await res.json();
         const dataFromBack = await cardDataResponse.json();
-        console.log({ qrcodeSrc, cardDataResponse, blob, dataFromBack });
 
         setCardInfo(dataFromBack.cardData.totalValue);
-
-        const url = URL.createObjectURL(blob);
-        setImageSrc(url);
+        setImageSrc(cardData.cardPath);
 
       } else {
         console.error("Invalid cardInfo structure or missing cardId");

@@ -19,9 +19,8 @@ const DisplayCard = () => {
   // Fonction asynchrone pour récupérer le QR code depuis le backend
   const retrieveQrCodeFromBackend = async () => {
     const response = await fetch(`${BASE_URL}/card/download/${cardId}`);
-    const blob = await response.blob();
-    const url = URL.createObjectURL(blob);
-    setImageSrc(url);
+    const cardData = await response.json();
+    setImageSrc(cardData.cardPath);
   };
 
   // Effet pour charger les données de la carte lorsqu'un cardId est présent
