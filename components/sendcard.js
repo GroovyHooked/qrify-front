@@ -38,6 +38,10 @@ function SendCard() {
   const user = useSelector((state) => state.user.value);
   const dataFromStore = useSelector((state) => state.data.value);
 
+  useEffect(() => {
+    console.log({ dataFromStore });
+  }, [dataFromStore]);
+
   const handleSendMessage = () => {};
 
   // Fonction pour gérer l'ouverture/fermeture de la modal
@@ -197,17 +201,18 @@ function SendCard() {
               </div>
               <div className={styles.value}>
                 <p className={styles.textinfos}>
-                  Carte de: {cardInfo && `${cardInfo.customer.firstname}`}{" "}
-                  {cardInfo && `${cardInfo.customer.lastname}`}
+                  Carte de:{" "}
+                  {dataFromStore && `${dataFromStore.customer.firstname}`}{" "}
+                  {dataFromStore && `${dataFromStore.customer.lastname}`}
                 </p>
                 <p className={styles.textinfos}>
-                  {cardInfo && `${cardInfo.customer.email}`}
+                  {dataFromStore && `${dataFromStore.customer.email}`}
                 </p>
                 <p className={styles.textinfos}>
-                  Pour: {cardInfo && `${cardInfo.cardData.recipient}`}
+                  Pour: {dataFromStore && `${dataFromStore.card.recipient}`}
                 </p>
                 <p className={styles.textinfos}>
-                  {cardInfo && `${cardInfo.cardData.totalValue}€`}
+                  {dataFromStore && `${dataFromStore.card.totalValue}€`}
                 </p>
                 <p className={styles.textinfosText}>
                   {dataFromStore.card.message}
