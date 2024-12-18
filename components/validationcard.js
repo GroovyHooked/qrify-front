@@ -5,19 +5,10 @@ import { faQrcode } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
 import NavBar from "../components/navbar";
 import Footer from "../components/footer";
+import Image from "next/image";
 
 const ValidationCard = () => {
   const [cardInfo, setCardInfo] = useState({});
-
-  //   useEffect(() => {
-  //     fetch("http://localhost:3000/auth")
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         console.log("Données recues : ", data);
-  //         setCardInfo(data);
-  //       })
-  //       .catch((error) => console.error("Erreur lors du fetch : ", error));
-  //   });
 
   const router = useRouter();
 
@@ -44,7 +35,7 @@ const ValidationCard = () => {
       <NavBar status="avatar" />
       <div className={styles.container}>
         <div className={styles.cardContainer}>
-          <div className={styles.cardTitle}>Validation carte</div>
+          <div className={styles.cardTitle}>Informations de la carte</div>
           <div className={styles.containercenter}>
             <div className={styles.cardDetails}>
               <div>
@@ -65,15 +56,20 @@ const ValidationCard = () => {
               <div>{cardInfo?.dataCard?.recipient}</div>
             </div>
 
-            <div>{cardInfo?.dataCard?.path}</div>
+            <Image
+              alt="qrcode"
+              width={100}
+              height={100}
+              src={cardInfo?.dataCard?.path} />
 
             <div className={styles.cardDetails}>
-              <div>{cardInfo?.dataCard?.totalValue} €</div>
+              <div>Valeur carte: {cardInfo?.dataCard?.totalValue} €</div>
+              <div>Valeur restante: {cardInfo?.dataCard?.remainingValue} €</div>
             </div>
           </div>
           <div className={styles.validateButton}>
-            <div className={styles.button} onClick={() => router.push("/home")}>
-              Retour à l'accueil
+            <div className={styles.button} onClick={() => router.push("/cardgestion")}>
+              Retour à vers gestion
             </div>
           </div>
         </div>

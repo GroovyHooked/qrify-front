@@ -31,8 +31,10 @@ export default function CardGestion() {
   }, []);
 
   useEffect(() => {
+    console.log('test', { filteredData });
+
     const totalValue = filteredData.reduce(
-      (acc, cur) => acc + cur.totalValue,
+      (acc, cur) => acc + cur.remainingValue,
       0
     );
     setCardTotalValue(totalValue);
@@ -49,7 +51,7 @@ export default function CardGestion() {
         } else if (!showUsed && showUsing) {
           data.cards = data.cards.filter((i) => i.totalValue === 0);
         }
-        console.log("debug2", { data });
+        // console.log("debug2", { debug2: data.cards });
 
         setFilteredData(data.cards);
       })
@@ -156,7 +158,7 @@ export default function CardGestion() {
                 <div className={styles.rightcontain}>
                   <FontAwesomeIcon
                     icon={faCircle}
-                    color={data.totalValue === 0 ? "red" : "green"}
+                    color={data.remainingValue === 0 ? "red" : "green"}
                   />
                   <div className={styles.buttonEye}>
                     <FontAwesomeIcon

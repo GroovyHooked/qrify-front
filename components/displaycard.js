@@ -30,9 +30,9 @@ const DisplayCard = () => {
         await retrieveQrCodeFromBackend();
         const res = await fetch(`${BASE_URL}/card/datacard/${cardId}`);
         const cardData = await res.json();
-        console.log({ cardData: typeof cardData.cardData.totalValue });
+        console.log({ cardData: typeof cardData.cardData.remainingValue });
         setCardData(cardData);
-        setCardUpdateValue(cardData.cardData.totalValue);
+        setCardUpdateValue(cardData.cardData.remainingValue);
       })();
     }
   }, [cardId]);
