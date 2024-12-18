@@ -8,7 +8,7 @@
 .containerglobal {
   display: flex;
   flex-direction: column;
-  width: 360px;
+  width: 350px;
   height: 550px;
   justify-content: center;
   margin-top: 10px;

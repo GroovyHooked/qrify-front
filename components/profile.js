@@ -26,15 +26,14 @@ export function Profile() {
             <Navbar status="avatar" />
             <div className={styles.profile_page}>
                 {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
-                <h1>Profile</h1>
                 <div className={styles.profile_info}>
-                    <Avatar />
+                    <Avatar width={100} height={100}/>
                     <h2>{user.firstname} {user.lastname}</h2>
                     <p>{user.email}</p>
                     <button
                         onClick={() => setIsModalOpen(!isModalOpen)}
                         type='submit'
-                        className={styles.button}>Changer d'avatar</button>
+                        className={styles.button}>Editer profil</button>
                 </div>
             </div>
             <Footer />
@@ -50,8 +49,17 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
                 icon={faXmark}
                 className={styles.modal_icon} />
             <p className={styles.modal_title}>Choisissez votre avatar</p>
-            <div className={styles.modal_content}>
+            <div className={styles.select_avatar}>
                 <AvatarSelection />
+            </div>
+            <div className={styles.update_email}>
+                <p>Modifiez votre addresse email</p>
+                <input
+                    type='test'
+                    placeholder='Modifiez votre email' />
+                <button
+                    className={styles.modal_button}
+                    type='submit'>Modifier</button>
             </div>
         </div>
     )

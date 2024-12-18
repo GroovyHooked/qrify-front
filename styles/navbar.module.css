@@ -48,7 +48,6 @@
 }
 
 .avatar {
-  width: 40px;
   border-radius: 50%;
   border: .7px solid #333e63;
 }
@@ -62,8 +61,8 @@
   top: 54px;
   right: 26px;
   width: 208px;
-  height: 300px;
-  border: 1px solid #333e63;
+  height: 330px;
+  border: 0.1px solid #333e63;
   border-radius: 10px;
   background-color: white;
   color: #333e63;
@@ -73,7 +72,7 @@
   text-align: center;
 }
 
-.navbar_item:nth-child(1) > p {
+.navbar_item:nth-child(1)>p {
   font-weight: bold;
   margin: 0;
   padding: 0;

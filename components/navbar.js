@@ -9,6 +9,7 @@ import {
   faArrowRightFromBracket,
   faHouse,
   faShareFromSquare,
+  faChartPie
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -62,7 +63,7 @@ export default function Navbar({ status, href }) {
   );
 }
 
-export const Avatar = () => {
+export const Avatar = ({ width = 40, height = 40 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const user = useSelector((state) => state.user.value)
 
@@ -70,8 +71,8 @@ export const Avatar = () => {
     <>
       <Image
         alt="avatar"
-        width={40}
-        height={40}
+        width={width}
+        height={height}
         src={user?.avatar || '/avatars/avatar1.png'}
         className={styles.avatar}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -86,11 +87,12 @@ const Menu = ({ setIsMenuOpen }) => {
 
   const menuData = [
     { title: "Menu", icon: faHouse, href: "/home" },
-    { title: "Profile", icon: faGear, href: "/profile" },
     { title: "Ajout client", icon: faUser, href: "/newcustomer", progressStatus: "Ajouter un client" },
     { title: "Clients", icon: faAddressCard, href: "/listCustomers", progressStatus: "Sélectionner un client" },
     { title: "Scan", icon: faQrcode, href: "/scan" },
     { title: "Partager", icon: faShareFromSquare, href: "/sendcard" },
+    { title: 'Gestion', icon: faChartPie , href: 'cardgestion'},
+    { title: "Profile", icon: faGear, href: "/profile" },
     { title: "Déconnexion", icon: faArrowRightFromBracket, href: "/" },
   ];
 

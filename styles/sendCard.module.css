@@ -163,7 +163,7 @@
   }
 
   .containerGlobal {
-    width: 700px;
+    width: 730px;
     height: 550px;
   }
 
@@ -219,5 +219,10 @@
   .card {
     width: 70%;
     height: 130px;
+  }
+
+  .containerButton {
+    justify-content: center;
+    gap: 30px;
   }
 }

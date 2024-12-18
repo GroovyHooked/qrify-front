@@ -1,7 +1,7 @@
 .container {
     width: 100vw;
     height: 100vh;
-    background-color: #f4f4f9;
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -11,13 +11,14 @@
 
 .contentWrapper {
     height: 650px;
+    width: 350px;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     background-color: #E6E7EA;
     border-radius: 20px;
-    padding: 10px;
+    padding: 30px 10px;
 }
 
 .heading {
@@ -30,7 +31,6 @@
 .videoNode {
     width: 300px;
     height: 450px;
-    border: 1px solid #333e63;
     border-radius: 20px;
 }
 
@@ -53,8 +53,20 @@
 }
 
 @media screen and (min-width: 768px) {
+    .container {
+        height: 110vh;
+    }
+
     .contentWrapper {
-        width: 700px;
+        width: 730px;
+    }
+
+    .heading {
+        width: 80%;
+        border-bottom: 1px solid #333e63;
+        ;
+        text-align: left;
+        padding-bottom: 16px;
     }
 
     .videoNode {
