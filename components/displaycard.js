@@ -12,6 +12,7 @@ const DisplayCard = () => {
   const [imageSrc, setImageSrc] = useState("");
   const [cardUpdateValue, setCardUpdateValue] = useState(0);
   const [messageError, setMessageError] = useState("");
+  const [messageValidated, setMessageValidated] = useState("");
   // Récupération des données de l'URL
   const { cardId } = router.query;
 
@@ -30,8 +31,9 @@ const DisplayCard = () => {
         await retrieveQrCodeFromBackend();
         const res = await fetch(`${BASE_URL}/card/datacard/${cardId}`);
         const cardData = await res.json();
-        // console.log({ cardData: cardData.cardData.totalValue });
+        console.log({ cardData: typeof cardData.cardData.totalValue });
         setCardData(cardData);
+        setCardUpdateValue(cardData.cardData.totalValue);
       })();
     }
   }, [cardId]);
@@ -52,11 +54,13 @@ const DisplayCard = () => {
         );
         console.log(response);
         const data = await response.json();
-        console.log(data);
+        console.log("debug", { data });
         if (data.result) {
-          setCardUpdateValue(data.totalValue);
+          setCardUpdateValue(0);
+          setMessageValidated("La carte a bien été débitée");
         } else {
           setMessageError(data.error);
+          setMessageValidated("");
         }
       }
     } catch (error) {
@@ -69,16 +73,19 @@ const DisplayCard = () => {
       <Navbar status="avatar" />
       <div className={styles.page_container}>
         <div className={styles.innercontainer}>
-          <div className={styles.error}>{messageError && messageError}</div>
+          <div>
+            <div className={styles.error}>{messageError && messageError}</div>
+            <div className={styles.validated}>
+              {messageValidated && messageValidated}
+            </div>
+          </div>
           <h2 className={styles.page_title}>Carte N°: {cardId}</h2>
           {imageSrc && (
             <Image alt="qrcode" width="100" height="100" src={imageSrc} />
           )}
           <div className={styles.card_data}>
             {cardData.cardData && <p>Carte de {cardData.cardData.recipient}</p>}
-            {cardData.cardData && (
-              <p>D'une valeur de {cardData.cardData.totalValue}€</p>
-            )}
+            {cardData.cardData && <p>D'une valeur de {cardUpdateValue}€</p>}
             {cardData.customer && (
               <p>
                 Offerte par {cardData.customer.lastname}{" "}
