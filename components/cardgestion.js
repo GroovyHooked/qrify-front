@@ -7,23 +7,36 @@ import NavBar from "../components/navbar";
 import Footer from "../components/footer";
 
 export default function CardGestion() {
-  const [infos, setInfos] = useState([]);
+  const router = useRouter();
+
   const [filteredData, setFilteredData] = useState([]);
   const [showUsed, setShowUsed] = useState(true);
   const [showUsing, setShowUsing] = useState(true);
   const [cardUser, setCardUser] = useState({});
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [cardTotalValue, setCardTotalValue] = useState(0);
 
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  // useEffect pour écouter les changements de taille d'écran
   useEffect(() => {
-    fetch("http://localhost:3000/card/allcards")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Données reçues :", data);
-        setInfos(data || []);
-      })
-      .catch((error) => console.error("Erreur lors du fetch :", error));
+    window.addEventListener("resize", handleResize);
+
+    // Nettoyage de l'événement lors du démontage
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-  // const totalValue = infos.reduce((total, item) => total + item.totalValue, 0);
+  useEffect(() => {
+    const totalValue = filteredData.reduce(
+      (acc, cur) => acc + cur.totalValue,
+      0
+    );
+    setCardTotalValue(totalValue);
+  }, [filteredData]);
 
   useEffect(() => {
     fetch("http://localhost:3000/card/allcards")
@@ -61,12 +74,6 @@ export default function CardGestion() {
     }
   };
 
-  useEffect(() => {
-    console.log("debug3", { infos, filteredData });
-  }, [infos, filteredData]);
-
-  const router = useRouter();
-
   return (
     <>
       <NavBar status="avatar" />
@@ -77,19 +84,17 @@ export default function CardGestion() {
             <div className={styles.contain}>
               <div className={styles.title}>
                 Name <br />
-                <FontAwesomeIcon icon={faSort} width="8" />
               </div>
-              <div className={styles.title}>
-                Email <br />
-                <FontAwesomeIcon icon={faSort} width="8" />
-              </div>
+              {windowWidth > 768 && (
+                <div className={styles.title}>
+                  Email <br />
+                </div>
+              )}
               <div className={styles.title}>
                 Date <br />
-                <FontAwesomeIcon icon={faSort} width="8" />
               </div>
               <div className={styles.title}>
                 Valeur <br />
-                <FontAwesomeIcon icon={faSort} width="8" />
               </div>
             </div>
             <div className={styles.filter}>
@@ -124,16 +129,28 @@ export default function CardGestion() {
               <div key={index} className={styles.ligne}>
                 <div className={styles.contain}>
                   <div className={styles.undercontain}>
-                    <div className={styles.text}>
-                      {data.customerId.firstname} <br />
-                      {data.customerId.lastname}
+                    <div className={styles.espacement}>
+                      <div className={styles.text}>
+                        {data.customerId.firstname} <br />
+                        {data.customerId.lastname}
+                      </div>
                     </div>
-                    <div className={styles.text}>{data.customerId.email}</div>
-                    <div className={styles.text}>
-                      {new Date(data.date).toLocaleDateString()} <br />
-                      {new Date(data.date).toLocaleTimeString()}
+                    <div>
+                      {windowWidth > 768 && (
+                        <div className={styles.text}>
+                          {data.customerId.email}
+                        </div>
+                      )}
                     </div>
-                    <div className={styles.text}>{data.totalValue} €</div>
+                    <div className={styles.espacement}>
+                      <div className={styles.text}>
+                        {new Date(data.date).toLocaleDateString()} <br />
+                        {new Date(data.date).toLocaleTimeString()}
+                      </div>
+                    </div>
+                    <div className={styles.espacement}>
+                      <div className={styles.text}>{data.totalValue} €</div>
+                    </div>
                   </div>
                 </div>
                 <div className={styles.rightcontain}>
@@ -148,12 +165,16 @@ export default function CardGestion() {
                         width: "25",
                         cursor: "pointer",
                       }}
-                      onClick={() =>
-                        router.push({
-                          pathname: "/validationcard",
-                          query: { cardId: data._id },
-                        })
-                      }
+                      onClick={() => {
+                        if (data._id) {
+                          router.push({
+                            pathname: "/validationcard",
+                            query: { cardId: data._id },
+                          });
+                        } else {
+                          console.error("cardId is undefined");
+                        }
+                      }}
                     />
                   </div>
                 </div>
@@ -162,7 +183,7 @@ export default function CardGestion() {
           </div>
 
           <div className={styles.containertotal}>
-            {/* Total cartes : {totalValue} € */}
+            Total cartes : {cardTotalValue} €
           </div>
         </div>
       </div>

@@ -1,11 +1,7 @@
-import Validationcard from "../components/validationcard";
+import ValidationCard from "../components/validationcard";
 
-function Validation() {
-  return (
-    <div>
-      <Validationcard />
-    </div>
-  );
+function ValidationPage() {
+  return <ValidationCard />;
 }
 
-export default Validation;
+export default ValidationPage;

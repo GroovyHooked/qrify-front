@@ -10,13 +10,14 @@
 .containerglobal {
   display: flex;
   flex-direction: column;
-  width: 80vw;
+  width: 85vw;
   height: 60vh;
 }
 
 .containertitle {
   width: 100%;
-  height: 50px;
+  height: 60px;
+  /* background-color: green; */
   background-color: #d9d9d9;
   display: flex;
   justify-content: space-between;
@@ -30,7 +31,7 @@
 
 .contain {
   height: 100%;
-  width: 75%;
+  width: 65%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,7 +43,6 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
   /* background-color: white; */
 }
 
@@ -51,7 +51,8 @@
   justify-content: space-between;
   align-items: center;
   /* background-color: blueviolet; */
-  width: 15%;
+  width: 20%;
+  gap: 10px;
 }
 
 .containercontent {
@@ -67,11 +68,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 5%;
+  padding-left: 3%;
   padding-right: 2%;
   text-align: center;
   border-bottom: 1px solid #333e63;
   /* background-color: orange; */
+}
+
+.espacement {
+  /* background-color: yellow; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
 }
 
 .containertotal {
@@ -109,7 +118,7 @@
   align-items: center;
   font-size: 13px;
   border: 1px solid #333e63;
-  background-color: transparent;
+  /* background-color: red; */
 }
 
 .buttonEye {
@@ -128,11 +137,11 @@
 
 .filter {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  /* background-color: red; */
-  margin-left: -40%;
-  width: 150px;
+  height: 80%;
+  width: 27%;
+  /* background-color: yellow; */
 }
 
 .buttonhead {
@@ -165,39 +174,166 @@
   gap: 5px;
 }*/
 
-@media screen and (max-width: 900px) {
-  .containerglobal {
+@media screen and (min-width: 768px) {
+  .container {
     width: 100vw;
+    height: 100vh;
+    background-color: #f1f4fd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  .containertitle {
-    height: 70px;
-  }
-  .filter {
+
+  .containerglobal {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 80%;
-    width: 25%;
-    /* background-color: grey; */
+    width: 85vw;
+    height: 60vh;
   }
-  .ligne {
-    padding-right: 2%;
-    padding-left: 2%;
+
+  .containertitle {
+    width: 100%;
+    height: 60px;
+    /* background-color: green; */
+    background-color: #d9d9d9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 0.5%;
+    text-align: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  .contain {
+    height: 100%;
+    width: 68%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     /* background-color: red; */
   }
+
+  .undercontain {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: white; */
+  }
+
   .rightcontain {
-    width: 55px;
-    /* background-color: blue; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: blueviolet; */
+    width: 15%;
+    gap: 10px;
   }
-  .buttonEye {
-    width: 30px;
+
+  .containercontent {
+    background-color: #e6e7ea;
+    width: 100%;
+    height: 90%;
+    overflow: auto;
   }
-  .containertitle {
-    padding-right: 0%;
+
+  .ligne {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 3%;
+    padding-right: 2%;
+    text-align: center;
+    border-bottom: 1px solid #333e63;
     /* background-color: orange; */
   }
+
+  .espacement {
+    /* background-color: yellow; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+  }
+
+  .containertotal {
+    background-color: #d9d9d9;
+    width: 100%;
+    height: 50px;
+    font-size: 16px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 10%;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    color: #333e63;
+  }
+
+  .title {
+    font-size: 15px;
+    color: #333e63;
+  }
+
+  .text {
+    font-size: 13px;
+    color: #797979;
+  }
+
   .button {
-    width: 70px;
+    width: 90px;
+    height: 23px;
+    color: #333e63;
+    border-radius: 50px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    border: 1px solid #333e63;
+    /* background-color: red; */
+  }
+
+  .buttonEye {
+    width: 50px;
+    height: 23px;
+    color: #333e63;
+    border-radius: 50px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    border: 1px solid #333e63;
+    background-color: transparent;
+  }
+
+  .filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 80%;
+    width: 27%;
+    /* background-color: yellow; */
+    margin-right: 2%;
+  }
+
+  .buttonhead {
+    width: 75px;
+    height: 23px;
+    color: white;
+    border-radius: 50px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    border: 1px solid #333e63;
+    background-color: #333e63;
   }
 }
