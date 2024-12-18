@@ -68,17 +68,40 @@ const DisplayCard = () => {
     }
   };
 
+  const handleReturn = () => {
+    router.push("/home");
+  };
+
+  let textstyle = {};
+  if (messageValidated) {
+    textstyle = { color: "rgb(38, 0, 255)" };
+  } else if (messageError) {
+    textstyle = { color: "rgb(255, 6, 6)" };
+  }
+
   return (
     <div>
       <Navbar status="avatar" />
       <div className={styles.page_container}>
         <div className={styles.innercontainer}>
-          <div>
-            <div className={styles.error}>{messageError && messageError}</div>
-            <div className={styles.validated}>
-              {messageValidated && messageValidated}
+          <div className={styles.messagebuttonreturn}>
+            <div>
+              <div style={textstyle}>
+                {messageError && messageError}
+                {messageValidated && messageValidated}
+              </div>
+            </div>
+            <div>
+              <button
+                className={styles.buttonreturn}
+                type="submit"
+                onClick={() => handleReturn()}
+              >
+                Retour Menu
+              </button>
             </div>
           </div>
+
           <h2 className={styles.page_title}>Carte N°: {cardId}</h2>
           {imageSrc && (
             <Image alt="qrcode" width="100" height="100" src={imageSrc} />
