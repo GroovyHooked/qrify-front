@@ -53,16 +53,18 @@
   height: 300px;
   display: flex;
   justify-content: center;
+  /* background-color: red; */
 }
 
 .card {
   width: 82%;
-  height: 260px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
   /* border: 2px solid #333e63; */
   border-radius: 12px;
+  /* background-color: blue; */
 }
 
 .qrcode {
@@ -157,6 +159,25 @@
   border-radius: 15px;
 }
 
+.value {
+  height: 100%;
+  /* background-color: green; */
+  width: 100%;
+  padding: 0px;
+}
+
+.textinfos {
+  /* background-color: yellow; */
+  text-align: center;
+  margin: 7px;
+}
+
+.textinfosText {
+  /* background-color: blue; */
+  text-align: justify;
+  margin: 7px;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     margin-bottom: 100px;
@@ -219,5 +240,10 @@
   .card {
     width: 70%;
     height: 130px;
+  }
+  .value {
+    /* background-color: orange; */
+    height: 100%;
+    width: 80%;
   }
 }
