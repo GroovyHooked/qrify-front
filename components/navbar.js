@@ -91,7 +91,7 @@ const Menu = ({ setIsMenuOpen }) => {
     { title: "Clients", icon: faAddressCard, href: "/listCustomers", progressStatus: "Sélectionner un client" },
     { title: "Scan", icon: faQrcode, href: "/scan" },
     { title: "Partager", icon: faShareFromSquare, href: "/sendcard" },
-    { title: 'Gestion', icon: faChartPie , href: 'cardgestion'},
+    { title: 'Gestion', icon: faChartPie, href: '/cardgestion' },
     { title: "Profile", icon: faGear, href: "/profile" },
     { title: "Déconnexion", icon: faArrowRightFromBracket, href: "/" },
   ];
