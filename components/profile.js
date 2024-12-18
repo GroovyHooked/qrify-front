@@ -10,6 +10,7 @@ import {
     faMessage,
     faPrint,
     faEnvelope,
+    faHouse,
     faXmark
 } from "@fortawesome/free-solid-svg-icons";
 import Image from 'next/image'
@@ -18,22 +19,37 @@ export function Profile() {
     const user = useSelector((state) => state.user.value)
     console.log({ user });
 
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isModalAvatarOpen, setIsModalAvatarOpen] = useState(false)
     const [userData, setUserData] = useState({});
 
     return (
         <>
             <Navbar status="avatar" />
-            <div className={styles.profile_page}>
-                {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
-                <div className={styles.profile_info}>
-                    <Avatar width={100} height={100}/>
-                    <h2>{user.firstname} {user.lastname}</h2>
-                    <p>{user.email}</p>
-                    <button
-                        onClick={() => setIsModalOpen(!isModalOpen)}
-                        type='submit'
-                        className={styles.button}>Editer profil</button>
+            <div className={styles.container}>
+                <div className={styles.profile_page}>
+                    {isModalAvatarOpen && <Modal isModalAvatarOpen={isModalAvatarOpen} setIsModalAvatarOpen={setIsModalAvatarOpen} />}
+                    <div className={styles.profile_info}>
+                        <Avatar width={100} height={100} />
+                        <h2>{user.firstname} {user.lastname}</h2>
+                        <p>{user.email}</p>
+                        <button
+                            onClick={() => setIsModalAvatarOpen(!isModalAvatarOpen)}
+                            type='submit'
+                            className={styles.button}>Editer profil</button>
+                    </div>
+                </div>
+                <div className={styles.profile_page}>
+                    {/* {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />} */}
+                    <div className={styles.logo_info}>
+                        <FontAwesomeIcon
+                            size='xl'
+                            icon={faHouse}
+                           />
+                        <button
+                            onClick={() => setIsModalAvatarOpen(!isModalAvatarOpen)}
+                            type='submit'
+                            className={styles.button}>Charger logo</button>
+                    </div>
                 </div>
             </div>
             <Footer />
@@ -41,11 +57,11 @@ export function Profile() {
     );
 };
 
-const Modal = ({ isModalOpen, setIsModalOpen }) => {
+const Modal = ({ isModalAvatarOpen, setIsModalAvatarOpen }) => {
     return (
         <div className={styles.modal_container}>
             <FontAwesomeIcon
-                onClick={() => setIsModalOpen(!isModalOpen)}
+                onClick={() => setIsModalAvatarOpen(!isModalAvatarOpen)}
                 icon={faXmark}
                 className={styles.modal_icon} />
             <p className={styles.modal_title}>Choisissez votre avatar</p>
@@ -61,6 +77,7 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
                     className={styles.modal_button}
                     type='submit'>Modifier</button>
             </div>
+            <ImageUploader />
         </div>
     )
 }
@@ -108,6 +125,42 @@ const AvatarSelection = () => {
         </div>
     );
 }
+
+
+const ImageUploader = () => {
+    const [image, setImage] = useState(null);
+    const [preview, setPreview] = useState(null);
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            setImage(file);
+            setPreview(URL.createObjectURL(file)); // Permet d'afficher un aperçu
+        }
+    };
+
+    return (
+        <div style={{ textAlign: "center", margin: "20px" }}>
+            <h2 className={styles.upload_logo} >Uploadez un logo</h2>
+            <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+            />
+            {preview && (
+                <div style={{ marginTop: "20px" }}>
+                    <p>Aperçu de l'image :</p>
+                    <img
+                        src={preview}
+                        alt="Preview"
+                        style={{ maxWidth: "300px", maxHeight: "300px" }}
+                    />
+                </div>
+            )}
+        </div>
+    );
+};
+
 
 
 export default Profile

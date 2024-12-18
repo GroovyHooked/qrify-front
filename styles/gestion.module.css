@@ -1,7 +1,7 @@
 .container {
   width: 100vw;
   height: 100vh;
-  background-color: #f1f4fd;
+  background-color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,13 +12,14 @@
   flex-direction: column;
   width: 85vw;
   height: 60vh;
+
 }
 
 .containertitle {
   width: 100%;
   height: 60px;
   /* background-color: green; */
-  background-color: #d9d9d9;
+  background-color: #e6e7ea;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -56,7 +57,7 @@
 }
 
 .containercontent {
-  background-color: #e6e7ea;
+  background-color: #efefef;
   width: 100%;
   height: 90%;
   overflow: auto;
@@ -178,7 +179,7 @@
   .container {
     width: 100vw;
     height: 100vh;
-    background-color: #f1f4fd;
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -195,7 +196,7 @@
     width: 100%;
     height: 60px;
     /* background-color: green; */
-    background-color: #d9d9d9;
+    background-color: #e6e7ea;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -233,7 +234,7 @@
   }
 
   .containercontent {
-    background-color: #e6e7ea;
+    background-color: #efefef;
     width: 100%;
     height: 90%;
     overflow: auto;
@@ -261,7 +262,7 @@
   }
 
   .containertotal {
-    background-color: #d9d9d9;
+    background-color: #e6e7ea;
     width: 100%;
     height: 50px;
     font-size: 16px;
