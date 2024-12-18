@@ -136,13 +136,13 @@ function SendCard() {
 
   console.log("les infos du texte", dataFromStore.card.message);
 
-  const TruncatedText = ({ text, limit }) => {
-    // Tronque le texte si nécessaire
-    const truncatedText =
-      text.length > limit ? text.substring(0, limit) + "..." : text;
+  // const TruncatedText = ({ text, limit }) => {
+  //   // Tronque le texte si nécessaire
+  //   const truncatedText =
+  //     text.length > limit ? text.substring(0, limit) + "..." : text;
 
-    return <div className={styles.textinfosText}>{truncatedText}</div>;
-  };
+  //   return <div className={styles.textinfosText}>{truncatedText}</div>;
+  // };
 
   return (
     <>
@@ -202,7 +202,7 @@ function SendCard() {
               </div>
               <div className={styles.value}>
                 <p className={styles.textinfos}>
-                  Carte: {cardInfo && `${cardInfo.customer.firstname}`}
+                  Carte de: {cardInfo && `${cardInfo.customer.firstname}`}{" "}
                   {cardInfo && `${cardInfo.customer.lastname}`}
                 </p>
                 <p className={styles.textinfos}>
@@ -214,7 +214,9 @@ function SendCard() {
                 <p className={styles.textinfos}>
                   {cardInfo && `${cardInfo.cardData.totalValue}€`}
                 </p>
-                <TruncatedText text={dataFromStore.card.message} limit={50} />
+                <p className={styles.textinfosText}>
+                  {dataFromStore.card.message}
+                </p>
               </div>
             </div>
           </div>
