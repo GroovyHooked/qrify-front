@@ -2,6 +2,7 @@
   width: 100%;
   min-height: 950px;
   padding-top: 135px;
+  background-color: #545F71;
 }
 
 .containerGlobal {
@@ -96,7 +97,7 @@
   width: 80px;
   height: 80px;
   color: white;
-  background-color: #333e63;
+  background-color: #6a7caa;
   border-radius: 15px;
   border: none;
   display: flex;
@@ -127,10 +128,12 @@
 
 .fetch_response {
   height: 30px;
+  color: #333e63;
 }
 
 .modal_title {
   text-align: center;
+  color: #333e63;
 }
 
 .modal_content {
@@ -155,8 +158,9 @@
   width: 80px;
   height: 30px;
   color: white;
-  background-color: #333e63;
+  background-color: #6a7caa;
   border-radius: 15px;
+  border: none;
 }
 
 .value {
@@ -181,9 +185,9 @@
 }
 
 @media screen and (min-width: 768px) {
-  .container {
+  /* .container {
     margin-bottom: 100px;
-  }
+  } */
 
   .containerGlobal {
     width: 730px;

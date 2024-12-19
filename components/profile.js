@@ -27,7 +27,7 @@ export function Profile() {
             <div className={styles.profile_page}>
                 {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
                 <div className={styles.profile_info}>
-                    <Avatar width={100} height={100}/>
+                    <Avatar width={100} height={100} />
                     <h2>{user.firstname} {user.lastname}</h2>
                     <p>{user.email}</p>
                     <button
@@ -44,10 +44,16 @@ export function Profile() {
 const Modal = ({ isModalOpen, setIsModalOpen }) => {
     return (
         <div className={styles.modal_container}>
-            <FontAwesomeIcon
+            <button
                 onClick={() => setIsModalOpen(!isModalOpen)}
-                icon={faXmark}
-                className={styles.modal_icon} />
+                type='submit' className={styles.close_button}>
+                <FontAwesomeIcon
+                    onClick={() => setIsModalOpen(!isModalOpen)}
+                    icon={faXmark}
+                    size='lg'
+                    className={styles.modal_icon} />
+
+            </button>
             <p className={styles.modal_title}>Choisissez votre avatar</p>
             <div className={styles.select_avatar}>
                 <AvatarSelection />
@@ -55,11 +61,12 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
             <div className={styles.update_email}>
                 <p>Modifiez votre addresse email</p>
                 <input
-                    type='test'
+                    className={styles.mail_input}
+                    type='text'
                     placeholder='Modifiez votre email' />
                 <button
                     className={styles.modal_button}
-                    type='submit'>Modifier</button>
+                    type='submit'>Modifier l'email</button>
             </div>
         </div>
     )
@@ -98,7 +105,7 @@ const AvatarSelection = () => {
     }
 
     return (
-        <div className={styles.avatarSelection}>
+        <div className={styles.avatar_selection}>
             {avatars.map(avatar => (
                 <label key={avatar.id} htmlFor={avatar.id}>
                     <Image src={avatar.src} alt={avatar.alt} className={styles.avatarImage} width={50} height={50} />

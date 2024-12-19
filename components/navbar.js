@@ -130,10 +130,15 @@ const MenuElement = ({ title, icon, href, setIsMenuOpen, progressStatus }) => {
 
   return (
     <div className={styles.navbar_item}>
-      <Link href={href} onClick={modalCloseAndLogout}>
-        <FontAwesomeIcon icon={icon} width="30" height="30" color="#333e63" />
+      <Link href={href} onClick={modalCloseAndLogout} style={{
+        width: '100%',
+        display: 'flex',
+        gap: '6px',
+        alignItems: 'center'
+      }}>
+        <FontAwesomeIcon icon={icon} width="30" height="30" color="#6a7caa" />
         {title}
       </Link>
-    </div>
+    </div >
   );
 };

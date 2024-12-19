@@ -30,10 +30,9 @@ function SendCard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [emailServiceResponse, setEmailServiceResponse] = useState({
     isSucces: true,
-    message: "Service Email",
-  });
-  const [isModalMessageOpen, setIsModalMessageOpen] = useState(false);
-  const [phoneCustomer, setPhoneCustomer] = useState("");
+    message: "Envoyer un email"
+  })
+  // const [emailServiceResponse, setEmailServiceResponse] = useState("")
 
   // Sélection des données utilisateur et de la carte depuis le store Redux
   const user = useSelector((state) => state.user.value);
@@ -208,13 +207,8 @@ function SendCard() {
                 className={styles.modal_icon}
               />
               <div
-                style={
-                  !emailServiceResponse.isSucces
-                    ? { color: "red" }
-                    : { fontWeight: "bold", textDecoration: "underline" }
-                }
-                className={styles.fetch_response}
-              >
+                style={!emailServiceResponse.isSucces ? { color: 'red' } : { fontWeight: 'bold', fontSize: '20px' }}
+                className={styles.fetch_response}>
                 {emailServiceResponse.message && emailServiceResponse.message}
               </div>
               <p className={styles.modal_title}>

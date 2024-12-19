@@ -30,7 +30,7 @@ export default function Home() {
                     </div>
                     <div className={styles.cardContainer} >
                         <NavigationCard src="/images/scan.jpg" icon={faQrcode} title="Scanner une carte" description="Scannez une carte avec votre appareil photo" link="scan" />
-                        <NavigationCard src="/images/gestion.jpg" icon={faChartPie} title="Gestion des cartes" description="Historique et montants générés de vos cartes" link="" />
+                        <NavigationCard src="/images/gestion.jpg" icon={faChartPie} title="Gestion des cartes" description="Historique et montants générés de vos cartes" link="cardgestion" />
                     </div>
                 </div>
             </div>

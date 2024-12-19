@@ -2,12 +2,13 @@
   width: 100%;
   min-height: 950px;
   padding-top: 135px;
+  background-color: #545F71;
 }
 
 .containerGlobal {
   width: 350px;
   height: 550px;
-  background-color: #e6e7ea;
+  background-color: #E6E7EA;
   display: flex;
   justify-content: center;
   margin-top: 10px;
@@ -117,7 +118,7 @@
   width: 200px;
   height: 40px;
   color: white;
-  background-color: #333e63;
+  background-color: #6a7caa;
   border-radius: 50px;
   border: none;
   display: flex;
