@@ -2,6 +2,7 @@
   height: 100vh;
   border: 1px solid;
   padding-top: 135px;
+  background-color: #545F71;
 }
 
 .innercontainer {
@@ -26,7 +27,7 @@
 }
 
 .buttonreturn {
-  width: 100px;
+  width: 120px;
   height: 30px;
   color: white;
   background-color: #6a7caa;
@@ -36,6 +37,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+    padding: 18px 0;
 }
 
 .page_title {
@@ -44,7 +46,7 @@
 }
 
 .button {
-  width: 200px;
+  width: 140px;
   height: 30px;
   color: white;
   background-color: #6a7caa;
@@ -53,6 +55,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 18px 0;
   cursor: pointer;
 }
 
