@@ -78,7 +78,7 @@ export default function ListCustomers() {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({
-                    lastname: data.lastname,
+                    lastname: data.firstname,
                     token: user.token
                   })
                 })

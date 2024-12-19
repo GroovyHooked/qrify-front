@@ -32,6 +32,9 @@ function SendCard() {
     isSucces: true,
     message: "Envoyer un email"
   })
+  const [isModalMessageOpen, setIsModalMessageOpen] = useState(false)
+  const [phoneCustomer, setPhoneCustomer] = useState('')
+
   // const [emailServiceResponse, setEmailServiceResponse] = useState("")
 
   // Sélection des données utilisateur et de la carte depuis le store Redux
@@ -50,6 +53,7 @@ function SendCard() {
 
     var requestOptions = {
       method: "GET",
+      mode: "no-cors", // Ajout du mode no-cors
       redirect: "follow",
     };
     console.log("test", phoneCustomer);
@@ -87,9 +91,9 @@ function SendCard() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           to: recipientMail,
-          subject: `Carte cadeau ${dataFromStore.customer.lastname}`,
-          text: dataFromStore.card.message,
-          cardId: dataFromStore.card.cardId,
+          subject: `Carte cadeau ${dataFromStore?.customer.lastname}`,
+          text: dataFromStore?.card.message,
+          cardId: dataFromStore?.card.cardId,
         }),
       });
 
@@ -247,20 +251,20 @@ function SendCard() {
               <div className={styles.value}>
                 <p className={styles.textinfos}>
                   Carte de:{" "}
-                  {dataFromStore && `${dataFromStore.customer.firstname}`}{" "}
-                  {dataFromStore && `${dataFromStore.customer.lastname}`}
+                  {dataFromStore && `${dataFromStore?.customer.firstname || "Aucune carte créée"}`}{" "}
+                  {dataFromStore && `${dataFromStore?.customer.lastname || "Aucune carte créée"}`}
                 </p>
                 <p className={styles.textinfos}>
-                  {dataFromStore && `${dataFromStore.customer.email}`}
+                  {dataFromStore && `${dataFromStore?.customer.email || "Aucune carte créée"}`}
                 </p>
                 <p className={styles.textinfos}>
-                  Pour: {dataFromStore && `${dataFromStore.card.recipient}`}
+                  Pour: {dataFromStore && `${dataFromStore?.card.recipient || "Aucune carte créée"}`}
                 </p>
                 <p className={styles.textinfos}>
-                  {dataFromStore && `${dataFromStore.card.totalValue}€`}
+                  {dataFromStore && `${dataFromStore?.card.totalValue || "Aucune carte créée"}€`}
                 </p>
                 <p className={styles.textinfosText}>
-                  {dataFromStore.card.message}
+                  {dataFromStore?.card.message}
                 </p>
                 <p style={{ textAlign: "center" }}>
                   {cardValue && `${cardValue}€`}
