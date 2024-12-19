@@ -123,6 +123,15 @@
   justify-content: flex-end;
 }
 
+.containerBottomText > h6 {
+  font-weight: 300;
+}
+
+.connection_link {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 .button {
   width: 200px;
   height: 30px;

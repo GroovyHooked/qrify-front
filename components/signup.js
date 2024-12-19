@@ -153,7 +153,7 @@ function Signup() {
               </div>
               <div className={styles.containerBottomText}>
                 <h6>
-                  Déjà membre?<Link href="">Se connecter</Link>{" "}
+                  Déjà membre ?<Link href="/" className={styles.connection_link} > Se connecter</Link>{" "}
                 </h6>
               </div>
             </div>
