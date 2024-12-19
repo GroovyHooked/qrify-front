@@ -1,7 +1,7 @@
 .container {
   width: 100vw;
   height: 100vh;
-  background-color: #f4f4f9;
+  background-color: #545F71;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -19,9 +19,9 @@
 }
 
 .containertitle {
-  width: 350px;
+  width: 340px;
   height: 80px;
-  background-color: #b5becc;
+  background-color: #E6E7EA;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,6 +31,7 @@
 
 .containerImgForm {
   display: flex;
+  height: 548px;
 }
 
 .title {
@@ -46,17 +47,19 @@
   background-repeat: no-repeat;
   background-position-x: 50%;
   border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
   display: none;
 }
 
 .containerForm {
+  position: relative;
   width: 99%;
-  height: 60vh;
+  height: 548px;
   background-color: #e6e7ea;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-bottom-right-radius: 20px;
+  border-radius: 20px;
   align-items: center;
 }
 
@@ -64,6 +67,8 @@
   color: red;
   font-size: 16px;
   margin-bottom: 10px;
+  position: absolute;
+  top: 98px;
 }
 
 .registerSection {
@@ -80,12 +85,14 @@
   width: 200px;
   height: 30px;
   color: white;
-  background-color: #333e63;
+  background-color: #6a7caa;
   border-radius: 50px;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 15px;
+  padding: 20px;
 }
 
 .input {
@@ -104,6 +111,7 @@
 .inputgroup {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .text {
@@ -134,15 +142,15 @@
 @media screen and (min-width: 768px) {
 
   .container {
-      height: 105vh;
-    }
+    height: 105vh;
+  }
 
   .containerglobal {
     width: 730px;
   }
 
   .containertitle {
-    width: 730px;
+    width: 50%;
   }
 
   .containerImage {
@@ -151,6 +159,9 @@
 
   .containerForm {
     width: 50%;
-    height: 530px;
+    height: 548px;
+    padding: 15px 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
   }
 }

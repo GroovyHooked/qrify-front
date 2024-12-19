@@ -69,7 +69,7 @@ const ValidationCard = () => {
           </div>
           <div className={styles.validateButton}>
             <div className={styles.button} onClick={() => router.push("/cardgestion")}>
-              Retour à vers gestion
+              Retour à la page de gestion
             </div>
           </div>
         </div>

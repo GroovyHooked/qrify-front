@@ -1,5 +1,5 @@
 .footer {
-  background-color: #9ba5b7;
+  background-color: #E6E7EA;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
@@ -19,5 +19,5 @@
 
 .text {
   font-size: 15px;
-  color: #ffffff;
+  color: #333e63;
 }

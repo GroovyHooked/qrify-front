@@ -9,6 +9,7 @@
     margin: 0 auto;
     justify-content: space-between;
     height: 30px;
+    width: 330px;
 }
 
 .circle {
@@ -19,11 +20,10 @@
     height: 30px;
     width: 30px;
     border-radius: 50%;
-    border: 1px solid #333e63;
-    color: #333e63;
-    ;
+    border: 1px solid #ffffff;
+    color: #ffffff;
     z-index: 2;
-    background-color: white;
+    background-color: #545F71;
 }
 
 .bar1,
@@ -31,7 +31,7 @@
     position: absolute;
     width: 175px;
     height: 2px;
-    background-color: #333e63;
+    background-color: #ffffff;
     top: 15px;
     z-index: 0;
 }
@@ -46,6 +46,8 @@
     justify-content: space-between;
     align-items: center;
     height: 20px;
+    color: #ffffff;
+    width: 340px;
 }
 
 .text {
@@ -62,12 +64,16 @@
         width: 700px;
     }
 
+    .progressbar {
+        width: 700px;
+    }
+
     .bar1,
     .bar2 {
         position: absolute;
         width: 350px;
         height: 2px;
-        background-color: black;
+        background-color: #ffffff;
         top: 15px;
         z-index: 0;
     }
@@ -77,5 +83,5 @@
         margin-left: -5px;
     }
 
-    
+
 }

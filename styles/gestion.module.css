@@ -1,22 +1,23 @@
 .container {
   width: 100vw;
   height: 100vh;
-  background-color: #f1f4fd;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #545F71;
+  padding-top: 50px;
 }
 
 .containerglobal {
   display: flex;
   flex-direction: column;
-  width: 85vw;
-  height: 60vh;
+  width: 350px;
+  height: 650px;
 }
 
 .containertitle {
   width: 100%;
-  height: 60px;
+  height: 94px;
   /* background-color: green; */
   background-color: #d9d9d9;
   display: flex;
@@ -110,37 +111,39 @@
 .button {
   width: 90px;
   height: 23px;
-  color: #333e63;
+  color: #6a7caa;
   border-radius: 50px;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 13px;
-  border: 1px solid #333e63;
-  /* background-color: red; */
+  border: 1px solid #6a7caa;
+  background-color: #6a7caa;
 }
 
 .buttonEye {
   width: 50px;
   height: 23px;
-  color: #333e63;
+  color: #6a7caa;
   border-radius: 50px;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 13px;
-  border: 1px solid #333e63;
+  border: 1px solid #6a7caa;
   background-color: transparent;
 }
 
 .filter {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 80%;
-  width: 27%;
+  height: 100%;
+  width: 96px;
+  justify-content: center;
+  gap: 8px;
+  padding-right: 5px;
   /* background-color: yellow; */
 }
 
@@ -154,8 +157,8 @@
   justify-content: center;
   align-items: center;
   font-size: 13px;
-  border: 1px solid #333e63;
-  background-color: #333e63;
+  border: 1px solid #6a7caa;
+  background-color: #6a7caa;
 }
 
 /* .input {
@@ -178,7 +181,7 @@
   .container {
     width: 100vw;
     height: 100vh;
-    background-color: #f1f4fd;
+    background-color: #545F71;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -187,7 +190,7 @@
   .containerglobal {
     display: flex;
     flex-direction: column;
-    width: 85vw;
+    width: 730px;
     height: 60vh;
   }
 
@@ -286,7 +289,7 @@
 
   .button {
     width: 90px;
-    height: 23px;
+    height: 34px;
     color: #333e63;
     border-radius: 50px;
     border: none;
@@ -294,7 +297,7 @@
     justify-content: center;
     align-items: center;
     font-size: 13px;
-    border: 1px solid #333e63;
+    border: 1px solid #6a7caa;
     /* background-color: red; */
   }
 
@@ -308,7 +311,7 @@
     justify-content: center;
     align-items: center;
     font-size: 13px;
-    border: 1px solid #333e63;
+    border: 1px solid #6a7caa;
     background-color: transparent;
   }
 
@@ -318,9 +321,8 @@
     justify-content: space-between;
     align-items: center;
     height: 80%;
-    width: 27%;
+    width: 190px;
     /* background-color: yellow; */
-    margin-right: 2%;
   }
 
   .buttonhead {
@@ -333,7 +335,7 @@
     justify-content: center;
     align-items: center;
     font-size: 13px;
-    border: 1px solid #333e63;
-    background-color: #333e63;
+    border: 1px solid #6a7caa;
+    background-color: #6a7caa;
   }
 }

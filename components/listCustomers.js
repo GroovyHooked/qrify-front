@@ -7,7 +7,7 @@ import { faMagnifyingGlass, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { addCustomerToStore } from '../reducers/data'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UserProgress from '../components/userProgress'
 import { updateProgress } from "../reducers/user";
 
@@ -19,15 +19,17 @@ export default function ListCustomers() {
   const [listCustomers, setListCustomers] = useState([]);
   const [messageError, setMessageError] = useState("");
 
+  const user = useSelector((state) => state.user.value)
+  console.log({ user });
+
 
   const handleSearch = () => {
-    // console.log("test", searchName);
-
     fetch("http://localhost:3000/customers/onecustomer", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         lastname: searchName,
+        token: user.token
       }),
     })
       .then((response) => response.json())
@@ -42,7 +44,11 @@ export default function ListCustomers() {
 
   useEffect(() => {
     if (!searchName) {
-      fetch("http://localhost:3000/customers/list")
+      fetch("http://localhost:3000/customers/list", {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({ token: user.token })
+      })
         .then((response) => response.json())
         .then((data) => {
           console.log({ data });
@@ -67,14 +73,19 @@ export default function ListCustomers() {
               size={"30"}
               color="#333e63"
               onClick={async () => {
+
                 const res = await fetch('http://localhost:3000/customers/onecustomer', {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({
                     lastname: data.lastname,
+                    token: user.token
                   })
                 })
+
                 const dataFromBack = await res.json()
+                console.log({ dataFromBack });
+
                 dispatch(addCustomerToStore(dataFromBack.customers))
                 router.push("/newcard")
               }}

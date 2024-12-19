@@ -31,7 +31,7 @@ function SendCard() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [emailServiceResponse, setEmailServiceResponse] = useState({
     isSucces: true,
-    message: "Service Email"
+    message: "Envoyer un email"
   })
   // const [emailServiceResponse, setEmailServiceResponse] = useState("")
 
@@ -134,7 +134,7 @@ function SendCard() {
                 icon={faXmark}
                 className={styles.modal_icon} />
               <div
-                style={!emailServiceResponse.isSucces ? { color: 'red' } : { fontWeight: 'bold', textDecoration: 'underline' }}
+                style={!emailServiceResponse.isSucces ? { color: 'red' } : { fontWeight: 'bold', fontSize: '20px' }}
                 className={styles.fetch_response}>
                 {emailServiceResponse.message && emailServiceResponse.message}
               </div>

@@ -5,9 +5,12 @@ import { faSort, faCircle, faEye } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
 import NavBar from "../components/navbar";
 import Footer from "../components/footer";
+import { useSelector } from "react-redux";
 
 export default function CardGestion() {
   const router = useRouter();
+
+  const user = useSelector((state) => state.user.value)
 
   const [filteredData, setFilteredData] = useState([]);
   const [showUsed, setShowUsed] = useState(true);
@@ -34,22 +37,26 @@ export default function CardGestion() {
     console.log('test', { filteredData });
 
     const totalValue = filteredData.reduce(
-      (acc, cur) => acc + cur.remainingValue,
+      (acc, cur) => acc + cur.totalValue,
       0
     );
     setCardTotalValue(totalValue);
   }, [filteredData]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/card/allcards")
+    fetch("http://localhost:3000/card/allcards", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: user.token })
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log("DEBUG", { data });
 
         if (showUsed && !showUsing) {
-          data.cards = data.cards.filter((i) => i.totalValue > 0);
+          data.cards = data.cards.filter((i) => i.remainingValue > 0);
         } else if (!showUsed && showUsing) {
-          data.cards = data.cards.filter((i) => i.totalValue === 0);
+          data.cards = data.cards.filter((i) => i.remainingValue === 0);
         }
         // console.log("debug2", { debug2: data.cards });
 
@@ -104,8 +111,8 @@ export default function CardGestion() {
                 onClick={() => handleButtonClick("used")}
                 style={{
                   marginRight: "10px",
-                  backgroundColor: showUsed ? "#333e63" : "transparent",
-                  color: showUsed ? "white" : "#333e63",
+                  backgroundColor: showUsed ? "#6a7caa" : "transparent",
+                  color: showUsed ? "white" : "#6a7caa",
                   cursor: "pointer",
                 }}
                 className={styles.button}
@@ -115,8 +122,8 @@ export default function CardGestion() {
               <button
                 onClick={() => handleButtonClick("using")}
                 style={{
-                  backgroundColor: showUsing ? "#333e63" : "transparent",
-                  color: showUsing ? "white" : "#333e63",
+                  backgroundColor: showUsing ? "#6a7caa" : "transparent",
+                  color: showUsing ? "white" : "#6a7caa",
                   cursor: "pointer",
                 }}
                 className={styles.button}
