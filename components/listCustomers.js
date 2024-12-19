@@ -63,7 +63,7 @@ export default function ListCustomers() {
   const customers = listCustomers.map((data, i) => {
     return (
       <div key={i} className={styles.ligne}>
-        <div className={styles.text}>{data.firstname}</div>
+        <div className={styles.text}>{data.lastname}</div>
         <div className={styles.text}>{data.email}</div>
         <div className={styles.text}>{data.phoneNumber}</div>
         <div>
@@ -78,13 +78,12 @@ export default function ListCustomers() {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({
-                    lastname: data.firstname,
+                    lastname: data.lastname,
                     token: user.token
                   })
                 })
 
                 const dataFromBack = await res.json()
-                console.log({ dataFromBack });
 
                 dispatch(addCustomerToStore(dataFromBack.customers))
                 router.push("/newcard")
@@ -151,7 +150,7 @@ export default function ListCustomers() {
           <div className={styles.error}>{messageError && messageError}</div>
           <div className={styles.containertitle}>
             <div className={styles.contain}>
-              <div className={styles.title}>Name</div>
+              <div className={styles.title}>Nom</div>
               <div className={styles.title}>Email</div>
               <div className={styles.title}>Téléphone</div>
             </div>

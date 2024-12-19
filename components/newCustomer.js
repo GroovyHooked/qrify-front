@@ -78,8 +78,8 @@ function NewCustomer() {
                   type="text"
                   placeholder="Nom"
                   id="signUpFirstName"
-                  onChange={(e) => setSignUpFirstname(e.target.value)}
-                  value={signUpFirstname}
+                  onChange={(e) => setSignUpLastname(e.target.value)}
+                  value={signUpLastname}
                 />
               </div>
               <div>
@@ -89,8 +89,8 @@ function NewCustomer() {
                   type="text"
                   placeholder="Prénom"
                   id="signUpLastName"
-                  onChange={(e) => setSignUpLastname(e.target.value)}
-                  value={signUpLastname}
+                  onChange={(e) => setSignUpFirstname(e.target.value)}
+                  value={signUpFirstname}
                 />
               </div>
             </div>

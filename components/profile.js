@@ -6,13 +6,9 @@ import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import { Avatar } from '../components/navbar.js'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faMessage,
-    faPrint,
-    faEnvelope,
-    faXmark
-} from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Image from 'next/image'
+import { addUserToStore } from '../reducers/user.js'
 
 export function Profile() {
     const user = useSelector((state) => state.user.value)
@@ -42,6 +38,31 @@ export function Profile() {
 };
 
 const Modal = ({ isModalOpen, setIsModalOpen }) => {
+    const dispatch = useDispatch()
+    const user = useSelector((state) => state.user.value)
+    const [inputEmail, setInputEmail] = useState('')
+    const [updateMessage, setUpdateMessage] = useState('')
+
+    const updateUserEmailInDb = async () => {
+        if (!inputEmail) {
+            setUpdateMessage("Veuillez remplir le champ")
+            return
+        }
+        const res = await fetch(`http://localhost:3000/users/updateemail`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: inputEmail, token: user.token })
+        })
+        const updateResult = await res.json()
+        if (updateResult.result) {
+            dispatch(addUserToStore({ ...user, email: inputEmail }))
+            setUpdateMessage("L'email s'est bien mis à jour")
+
+        } else {
+            setUpdateMessage("Un problème est survenu lors de la mise à jour")
+        }
+    }
+
     return (
         <div className={styles.modal_container}>
             <button
@@ -60,11 +81,15 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
             </div>
             <div className={styles.update_email}>
                 <p>Modifiez votre addresse email</p>
+                <div style={{ color: '#333e63', fontSize: '14px' }}>{updateMessage && updateMessage}</div>
                 <input
+                    value={inputEmail}
+                    onChange={(e) => setInputEmail(e.target.value)}
                     className={styles.mail_input}
                     type='text'
                     placeholder='Modifiez votre email' />
                 <button
+                    onClick={updateUserEmailInDb}
                     className={styles.modal_button}
                     type='submit'>Modifier l'email</button>
             </div>
@@ -96,8 +121,6 @@ const AvatarSelection = () => {
             body: JSON.stringify({ avatarPath: path, token: user.token })
         })
         const updateResult = await res.json()
-        console.log({ updateResult });
-
 
         if (updateResult.result) {
             dispatch(changeAvatarPath(path));
