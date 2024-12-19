@@ -80,7 +80,7 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
                 <AvatarSelection />
             </div>
             <div className={styles.update_email}>
-                <p>Modifiez votre addresse email</p>
+                <p>Modifiez votre adresse email</p>
                 <div style={{ color: '#333e63', fontSize: '14px' }}>{updateMessage && updateMessage}</div>
                 <input
                     value={inputEmail}
