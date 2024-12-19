@@ -4,19 +4,25 @@ import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addUserToStore } from '../reducers/user'
-import { useRouter } from 'next/router'
-import { BASE_URL } from '../utils/utils';
+import { addUserToStore } from "../reducers/user";
+import { useRouter } from "next/router";
+import { BASE_URL } from "../utils/utils";
 
 function SignIn() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const { userCrendentials } = router.query;
-  const userCrendentialsObj = userCrendentials ? JSON.parse(userCrendentials) : null;
+  const userCrendentialsObj = userCrendentials
+    ? JSON.parse(userCrendentials)
+    : null;
 
-  const [signInMail, setSignInMail] = useState(userCrendentialsObj ? userCrendentialsObj.email : '');
-  const [signInPassword, setSignInPassword] = useState(userCrendentialsObj ? userCrendentialsObj.password : '');
+  const [signInMail, setSignInMail] = useState(
+    userCrendentialsObj ? userCrendentialsObj.email : ""
+  );
+  const [signInPassword, setSignInPassword] = useState(
+    userCrendentialsObj ? userCrendentialsObj.password : ""
+  );
 
   const handleSignIn = () => {
     fetch(`${BASE_URL}/auth/signin`, {
@@ -32,23 +38,27 @@ function SignIn() {
         console.log({ data });
 
         if (data.result) {
-          dispatch(addUserToStore({
-            email: data.email,
-            token: data.token,
-            firstname: data.firstname,
-            avatar: data.avatarPath ? data.avatarPath : '/avatars/avatar1.svg',
-            lastname: data.lastname
-          }))
+          dispatch(
+            addUserToStore({
+              email: data.email,
+              token: data.token,
+              firstname: data.firstname,
+              avatar: data.avatarPath
+                ? data.avatarPath
+                : "/avatars/avatar1.svg",
+              lastname: data.lastname,
+            })
+          );
           setSignInMail("");
           setSignInPassword("");
-          router.push('/home')
+          router.push("/home");
         }
       });
   };
 
   return (
     <>
-      <Navbar status='Inscription' href="/signup" />
+      <Navbar status="Inscription" href="/signup" />
       <div className={styles.container}>
         <div className={styles.containerglobal}>
           <div className={styles.containertitle}>
