@@ -40,13 +40,14 @@ function SendCard() {
   // Sélection des données utilisateur et de la carte depuis le store Redux
   const user = useSelector((state) => state.user.value);
   const dataFromStore = useSelector((state) => state.data.value);
+  console.log({ dataFromStore });
 
   // Fonction pour gérer l'ouverture/fermeture de la modal
   const handleModalMessage = () => {
     setIsModalMessageOpen(!isModalMessageOpen);
   };
 
-  const handleSendMessage = async (cardValue) => {
+  const handleSendMessage = async (cardValue, firstname, lastname) => {
     // setPhoneCustomer((current) => current.slice(1));
     let temp = phoneCustomer;
     temp = temp.slice(1);
@@ -58,7 +59,7 @@ function SendCard() {
     };
     console.log("test", phoneCustomer);
 
-    const message = `Voici votre carte cadeau d'une valeur de: ${cardValue} €`;
+    const message = `Voici votre carte cadeau de la part de ${firstname} ${lastname} d'une valeur de: ${cardValue} €`;
     const API_KEY_callmebot = "4749115";
 
     console.log(
@@ -192,7 +193,7 @@ function SendCard() {
                 />
                 <button
                   onClick={() => {
-                    handleSendMessage(cardValue);
+                    handleSendMessage(cardValue, dataFromStore.customer.firstname, dataFromStore.customer.lastname);
                   }}
                   type="submit"
                   className={styles.modal_button}
