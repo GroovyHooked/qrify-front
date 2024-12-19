@@ -92,7 +92,7 @@ const Menu = ({ setIsMenuOpen }) => {
     { title: "Scan", icon: faQrcode, href: "/scan" },
     { title: "Partager", icon: faShareFromSquare, href: "/sendcard" },
     { title: 'Gestion', icon: faChartPie, href: '/cardgestion' },
-    { title: "Profile", icon: faGear, href: "/profile" },
+    { title: "Profil", icon: faGear, href: "/profile" },
     { title: "Déconnexion", icon: faArrowRightFromBracket, href: "/" },
   ];
 
