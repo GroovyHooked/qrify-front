@@ -10,6 +10,7 @@ import { addCustomerToStore } from '../reducers/data'
 import { useDispatch, useSelector } from "react-redux";
 import UserProgress from '../components/userProgress'
 import { updateProgress } from "../reducers/user";
+import { BASE_URL } from '../utils/utils';
 
 export default function ListCustomers() {
   const dispatch = useDispatch()
@@ -24,7 +25,7 @@ export default function ListCustomers() {
 
 
   const handleSearch = () => {
-    fetch("http://localhost:3000/customers/onecustomer", {
+    fetch(`${BASE_URL}/customers/onecustomer`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -44,7 +45,7 @@ export default function ListCustomers() {
 
   useEffect(() => {
     if (!searchName) {
-      fetch("http://localhost:3000/customers/list", {
+      fetch(`${BASE_URL}/customers/list`, {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({ token: user.token })
@@ -74,7 +75,7 @@ export default function ListCustomers() {
               color="#333e63"
               onClick={async () => {
 
-                const res = await fetch('http://localhost:3000/customers/onecustomer', {
+                const res = await fetch(`${BASE_URL}/customers/onecustomer`, {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({

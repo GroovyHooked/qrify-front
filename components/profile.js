@@ -9,13 +9,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Image from 'next/image'
 import { addUserToStore } from '../reducers/user.js'
+import { BASE_URL } from '../utils/utils';
 
 export function Profile() {
     const user = useSelector((state) => state.user.value)
-    console.log({ user });
-
     const [isModalOpen, setIsModalOpen] = useState(false)
-    const [userData, setUserData] = useState({});
 
     return (
         <>
@@ -48,7 +46,7 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
             setUpdateMessage("Veuillez remplir le champ")
             return
         }
-        const res = await fetch(`http://localhost:3000/users/updateemail`, {
+        const res = await fetch(`${BASE_URL}/users/updateemail`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: inputEmail, token: user.token })
@@ -115,7 +113,7 @@ const AvatarSelection = () => {
     const changeAvatarPathInStore = async (path) => {
         console.log({ path });
 
-        const res = await fetch('http://localhost:3000/users/avatarupdate', {
+        const res = await fetch(`${BASE_URL}/users/avatarupdate`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ avatarPath: path, token: user.token })

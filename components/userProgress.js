@@ -1,7 +1,7 @@
 import styles from '../styles/userProgress.module.css'
 import { useSelector } from 'react-redux'
 
-export default function UserProgress({ progress = 1, action = '' }) {
+export default function UserProgress({ progress }) {
     const user = useSelector((state) => state.user.value)
 
     return (

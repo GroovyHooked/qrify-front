@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import NavBar from "../components/navbar";
 import Footer from "../components/footer";
 import Image from "next/image";
+import { BASE_URL } from '../utils/utils';
 
 const ValidationCard = () => {
   const [cardInfo, setCardInfo] = useState({});
@@ -16,7 +17,7 @@ const ValidationCard = () => {
   console.log({ cardId });
 
   useEffect(() => {
-    fetch(`http://localhost:3000/card/cardData/${cardId}`)
+    fetch(`${BASE_URL}/card/cardData/${cardId}`)
       .then((res) => res.json())
       .then((data) => {
         console.log("customer est égal a", data.customer);

@@ -51,12 +51,6 @@ function Signup() {
             pathname: '/',
             query: { userCrendentials: JSON.stringify({ email: signUpMail, password: signUpPassword }) }
           })
-          setSignUpFirstname("");
-          setSignUpLastname("");
-          setSignUpMail("");
-          setSignUpCompany("");
-          setSignUpPassword("");
-          setMessageError("");
         } else {
           setMessageError(data.error);
         }

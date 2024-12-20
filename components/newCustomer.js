@@ -46,11 +46,6 @@ function NewCustomer() {
           // Sauvegrade des données du client dans le store redux afin d'afficher nom et prenom sur la page de création de carte
           // et envoyer d'id du client au backend pour lier la carte et le client entre eux lors de la sauvegarde de la carte
           dispatch(addCustomerToStore(data.customer));
-          setSignUpFirstname("");
-          setSignUpLastname("");
-          setSignUpMail("");
-          setSignUpPhoneNumber("");
-          setMessageError("");
           router.push("/newcard");
         } else {
           setMessageError(data.error);

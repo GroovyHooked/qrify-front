@@ -46,8 +46,6 @@ function SignIn() {
             avatar: data.avatarPath ? data.avatarPath : '/avatars/avatar1.svg',
             lastname: data.lastname
           }))
-          setSignInMail("");
-          setSignInPassword("");
           router.push('/home')
         } else {
           setMessageError(data.error)

@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import NavBar from "../components/navbar";
 import Footer from "../components/footer";
 import { useSelector } from "react-redux";
+import { BASE_URL } from '../utils/utils';
 
 export default function CardGestion() {
   const router = useRouter();
@@ -15,7 +16,6 @@ export default function CardGestion() {
   const [filteredData, setFilteredData] = useState([]);
   const [showUsed, setShowUsed] = useState(true);
   const [showUsing, setShowUsing] = useState(true);
-  const [cardUser, setCardUser] = useState({});
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [cardTotalValue, setCardTotalValue] = useState(0);
 
@@ -34,8 +34,6 @@ export default function CardGestion() {
   }, []);
 
   useEffect(() => {
-    console.log('test', { filteredData });
-
     const totalValue = filteredData.reduce(
       (acc, cur) => acc + cur.totalValue,
       0
@@ -44,7 +42,7 @@ export default function CardGestion() {
   }, [filteredData]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/card/allcards", {
+    fetch(`${BASE_URL}/card/allcards`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token: user.token })
