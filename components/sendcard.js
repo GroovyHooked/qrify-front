@@ -22,10 +22,10 @@ function SendCard() {
   // Référence à la div contenant le code QR
   const qrCodeDivRef = useRef();
 
-  // source du code utilisé pour l'afficher
-  const [imageSrc, setImageSrc] = useState("");
-
-  const [cardValue, setCardValue] = useState("");
+  const [cardData, setCardData] = useState({
+    card: {},
+    customer: {}
+  });
   const [recipientMail, setRecipientMail] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [emailServiceResponse, setEmailServiceResponse] = useState({
@@ -35,7 +35,6 @@ function SendCard() {
   const [isModalMessageOpen, setIsModalMessageOpen] = useState(false)
   const [phoneCustomer, setPhoneCustomer] = useState('')
 
-  // const [emailServiceResponse, setEmailServiceResponse] = useState("")
 
   // Sélection des données utilisateur et de la carte depuis le store Redux
   const user = useSelector((state) => state.user.value);
@@ -48,7 +47,9 @@ function SendCard() {
   };
 
   const handleSendMessage = async (cardValue, firstname, lastname) => {
-    // setPhoneCustomer((current) => current.slice(1));
+    if (!phoneCustomer) {
+      return
+    }
     let temp = phoneCustomer;
     temp = temp.slice(1);
 
@@ -57,16 +58,11 @@ function SendCard() {
       mode: "no-cors", // Ajout du mode no-cors
       redirect: "follow",
     };
-    console.log("test", phoneCustomer);
 
-    const message = `Voici votre carte cadeau de la part de ${firstname} ${lastname} d'une valeur de: ${cardValue} €`;
+    const message = `Voici votre carte cadeau de la part de ${firstname} ${lastname} d\'une valeur de: ${cardValue} €`;
     const API_KEY_callmebot = "4749115";
 
-    console.log(
-      `https://api.callmebot.com/whatsapp.php?phone=+33${temp}&text=${message}&apikey=${API_KEY_callmebot}`
-    );
-
-    const response = fetch(
+    fetch(
       `https://api.callmebot.com/whatsapp.php?phone=+33${temp}&text=${message}&apikey=${API_KEY_callmebot}`,
       requestOptions
     )
@@ -87,14 +83,14 @@ function SendCard() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/email/sendmail", {
+      const response = await fetch(`${BASE_URL}/email/sendmail`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           to: recipientMail,
-          subject: `Carte cadeau ${dataFromStore?.customer.lastname}`,
-          text: dataFromStore?.card.message,
-          cardId: dataFromStore?.card.cardId,
+          subject: `Carte cadeau ${cardData?.customer.lastname}`,
+          text: cardData?.card.message,
+          cardId: cardData?.card.cardId,
         }),
       });
 
@@ -132,17 +128,11 @@ function SendCard() {
   const retrieveQrCodeFromBackend = async () => {
     try {
       if (dataFromStore && dataFromStore.card && dataFromStore.card.cardId) {
-        const res = await fetch(
-          `${BASE_URL}/card/download/${dataFromStore.card.cardId}`
-        );
         const cardDataResponse = await fetch(
           `${BASE_URL}/card/datacard/${dataFromStore.card.cardId}`
         );
-        const cardData = await res.json();
         const dataFromBack = await cardDataResponse.json();
-
-        setCardValue(dataFromBack.cardData.totalValue);
-        setImageSrc(cardData.cardPath);
+        setCardData((current) => ({ ...current, card: dataFromBack.cardData, customer: dataFromBack.customer }))
       } else {
         console.error("Invalid cardValue structure or missing cardId");
       }
@@ -165,77 +155,33 @@ function SendCard() {
     window.print();
     document.body.innerHTML = originalContent;
   };
-  console.log(cardValue);
+
   return (
     <>
       <Navbar status="avatar" />
       <div className={styles.container}>
         <UserProgress progress="3" />
         <div className={styles.containerGlobal}>
-          {isModalMessageOpen && (
-            <div className={styles.modal_container}>
-              <FontAwesomeIcon
-                icon={faXmark}
-                className={styles.modal_icon}
-                onClick={handleModalMessage}
-              />
-              <p className={styles.modal_title}>
-                Entrez le téléphone portable du destinataire
-              </p>
-              <div className={styles.modal_content}>
-                <input
-                  placeholder="Entrez le numéro de téléphone"
-                  type="tel"
-                  id="phone"
-                  className={styles.email_input}
-                  onChange={(e) => setPhoneCustomer(e.target.value)}
-                  value={phoneCustomer}
-                />
-                <button
-                  onClick={() => {
-                    handleSendMessage(cardValue, dataFromStore.customer.firstname, dataFromStore.customer.lastname);
-                  }}
-                  type="submit"
-                  className={styles.modal_button}
-                >
-                  Envoyer
-                </button>
-              </div>
-            </div>
-          )}
 
-          {isModalOpen && (
-            <div className={styles.modal_container}>
-              <FontAwesomeIcon
-                onClick={handleModal}
-                icon={faXmark}
-                className={styles.modal_icon}
-              />
-              <div
-                style={!emailServiceResponse.isSucces ? { color: 'red' } : { fontWeight: 'bold', fontSize: '20px' }}
-                className={styles.fetch_response}>
-                {emailServiceResponse.message && emailServiceResponse.message}
-              </div>
-              <p className={styles.modal_title}>
-                Entrez l'adresse mail du destinataire
-              </p>
-              <div className={styles.modal_content}>
-                <input
-                  value={recipientMail}
-                  onChange={(e) => setRecipientMail(e.target.value)}
-                  type="email"
-                  className={styles.email_input}
-                />
-                <button
-                  onClick={handleSendEmail}
-                  type="submit"
-                  className={styles.modal_button}
-                >
-                  Envoyer
-                </button>
-              </div>
-            </div>
-          )}
+          {isModalMessageOpen && <Modal
+            isMail={false}
+            cardData={cardData}
+            text="Entrez le téléphone portable du destinataire"
+            modalHandler={handleModalMessage}
+            messageSetter={setPhoneCustomer}
+            messageValue={phoneCustomer}
+            sendMessageFn={handleSendMessage}
+          />}
+
+          {isModalOpen && <Modal
+            isMail={true}
+            text="Entrez l'adresse mail du destinataire"
+            emailServiceResponse={emailServiceResponse}
+            modalHandler={handleModal}
+            messageSetter={setRecipientMail}
+            messageValue={recipientMail}
+            sendMessageFn={handleSendEmail}
+          />}
 
           <div className={styles.containerTitle}>
             <div className={styles.titleBar}>
@@ -245,32 +191,37 @@ function SendCard() {
           <div className={styles.containerCard}>
             <div className={styles.card} ref={qrCodeDivRef}>
               <div className={styles.qrcode}>
-                {imageSrc && (
-                  <Image alt="qrcode" width="150" height="150" src={imageSrc} />
+                {cardData.card.path && (
+                  <Image alt="qrcode" width="150" height="150" src={cardData.card.path} />
                 )}
               </div>
-              <div className={styles.value}>
-                <p className={styles.textinfos}>
-                  Carte de:{" "}
-                  {dataFromStore && `${dataFromStore?.customer.firstname || "Aucune carte créée"}`}{" "}
-                  {dataFromStore && `${dataFromStore?.customer.lastname || "Aucune carte créée"}`}
-                </p>
-                <p className={styles.textinfos}>
-                  {dataFromStore && `${dataFromStore?.customer.email || "Aucune carte créée"}`}
-                </p>
-                <p className={styles.textinfos}>
-                  Pour: {dataFromStore && `${dataFromStore?.card.recipient || "Aucune carte créée"}`}
-                </p>
-                <p className={styles.textinfos}>
-                  {dataFromStore && `${dataFromStore?.card.totalValue || "Aucune carte créée"}€`}
-                </p>
-                <p className={styles.textinfosText}>
-                  {dataFromStore?.card.message}
-                </p>
-                <p style={{ textAlign: "center" }}>
-                  {cardValue && `${cardValue}€`}
-                </p>
-              </div>
+
+              {cardData.customer.firstname && cardData.card.totalValue ?
+                (<div className={styles.value}>
+                  <p className={styles.textinfos}>
+                    Carte de:{" "}
+                    {cardData.customer.firstname}{" "}
+                    {cardData.customer.lastname}
+                  </p>
+                  <p className={styles.textinfos}>
+                    {cardData.customer.email}
+                  </p>
+                  <p className={styles.textinfos}>
+                    Pour: {cardData.card.recipient}
+                  </p>
+                  <p className={styles.textinfos}>
+                    {cardData.card.totalValue}€
+                  </p>
+                  <p className={styles.textinfosText}>
+                    {cardData.card.message}
+                  </p>
+                  <p style={{ textAlign: "center" }}>
+                    {cardData.card.remainingValue}
+                  </p>
+                </div>)
+                :
+                <div>Aucune carte à afficher</div>}
+
             </div>
           </div>
           <div className={styles.containerButton}>
@@ -318,4 +269,42 @@ function SendCard() {
     </>
   );
 }
+
+const Modal = ({ isMail, text, messageValue, messageSetter, sendMessageFn, emailServiceResponse, modalHandler, cardData }) => {
+
+  return (
+    <div className={styles.modal_container}>
+      <FontAwesomeIcon
+        onClick={modalHandler}
+        icon={faXmark}
+        className={styles.modal_icon}
+      />
+      {isMail && <div
+        style={!emailServiceResponse.isSucces ? { color: 'red' } : { fontWeight: 'bold', fontSize: '20px' }}
+        className={styles.fetch_response}>
+        {emailServiceResponse.message && emailServiceResponse.message}
+      </div>}
+      <p className={styles.modal_title}>
+        {text}
+      </p>
+      <div className={styles.modal_content}>
+        <input
+          value={messageValue}
+          onChange={(e) => messageSetter(e.target.value)}
+          type={isMail ? 'email' : 'tel'}
+          className={styles.email_input}
+        />
+        <button
+          onClick={isMail ? sendMessageFn : () => sendMessageFn(cardData.card.totalValue, cardData.customer.firstname, cardData.customer.lastname)}
+          type="submit"
+          className={styles.modal_button}
+        >
+          Envoyer
+        </button>
+      </div>
+    </div>
+  )
+}
+
 export default SendCard;
+
