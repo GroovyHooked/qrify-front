@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from '../styles/profile.module.css'
 import { useSelector, useDispatch } from 'react-redux';
-import { changeAvatarPath } from '../reducers/user.js'
+import { changeAvatarPath, updateBackgroundColor, updateMainColor } from '../reducers/user.js'
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import { Avatar } from '../components/navbar.js'
@@ -18,7 +18,7 @@ export function Profile() {
     return (
         <>
             <Navbar status="avatar" />
-            <div className={styles.profile_page}>
+            <div className={styles.profile_page} style={isModalOpen ? { paddingBottom: '450px' } : {}}>
                 {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
                 <div className={styles.profile_info}>
                     <Avatar width={100} height={100} />
@@ -38,12 +38,13 @@ export function Profile() {
 const Modal = ({ isModalOpen, setIsModalOpen }) => {
     const dispatch = useDispatch()
     const user = useSelector((state) => state.user.value)
+
     const [inputEmail, setInputEmail] = useState('')
-    const [updateMessage, setUpdateMessage] = useState('')
+    const [backendResponse, setBackendResponse] = useState('')
 
     const updateUserEmailInDb = async () => {
         if (!inputEmail) {
-            setUpdateMessage("Veuillez remplir le champ")
+            setBackendResponse("Veuillez remplir le champ")
             return
         }
         const res = await fetch(`${BASE_URL}/users/updateemail`, {
@@ -51,13 +52,29 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: inputEmail, token: user.token })
         })
+
         const updateResult = await res.json()
         if (updateResult.result) {
             dispatch(addUserToStore({ ...user, email: inputEmail }))
-            setUpdateMessage("L'email s'est bien mis à jour")
+            setBackendResponse("L'email s'est bien mis à jour")
 
         } else {
-            setUpdateMessage("Un problème est survenu lors de la mise à jour")
+            setBackendResponse("Un problème est survenu lors de la mise à jour")
+        }
+    }
+
+    const updateQrCodeColors = async ({ color, type, token }) => {
+        const response = await fetch(`${BASE_URL}/users/updatecolors`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ color, type, token })
+        })
+
+        if (response.ok) {
+            type === 'main' ? dispatch(updateMainColor(color)) : dispatch(updateBackgroundColor(color))
+        } else {
+            const data = response.json()
+            setBackendResponse(data.error)
         }
     }
 
@@ -73,13 +90,14 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
                     className={styles.modal_icon} />
 
             </button>
+            <div style={{ color: '#333e63', fontSize: '14px', position:'absolute', top: '22px' }}>{backendResponse && backendResponse}</div>
             <p className={styles.modal_title}>Choisissez votre avatar</p>
             <div className={styles.select_avatar}>
-                <AvatarSelection />
+                <AvatarSelection setBackendResponse={setBackendResponse} />
             </div>
             <div className={styles.update_email}>
                 <p>Modifiez votre adresse email</p>
-                <div style={{ color: '#333e63', fontSize: '14px' }}>{updateMessage && updateMessage}</div>
+                
                 <input
                     value={inputEmail}
                     onChange={(e) => setInputEmail(e.target.value)}
@@ -91,11 +109,38 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
                     className={styles.modal_button}
                     type='submit'>Modifier l'email</button>
             </div>
+            <div className={styles.qrcode_color_container}>
+                <p>Personnalisez les couleurs du code QR</p>
+                <div className={styles.qrcode_colors_display}>
+                    <div className={styles.qrcode_colors_display_wrapper}>
+                        <p>Couleur principale</p>
+                        <div className={styles.main_color} style={{ backgroundColor: `${user.qrCodeMainColor}` }}>
+                            <input
+                                value={user.qrCodeMainColor}
+                                onChange={(e) => updateQrCodeColors({ color: e.target.value, type: 'main', token: user.token })}
+                                className={styles.qrcode_color_input}
+                                type='color'
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.qrcode_colors_display_wrapper}>
+                        <p>Couleur de fond</p>
+                        <div className={styles.background_color} style={{ backgroundColor: `${user.qrCodeBackgroundColor}`, borderColor: user.qrCodeBackgroundColor }}>
+                            <input
+                                value={user.qrCodeBackgroundColor}
+                                onChange={(e) => updateQrCodeColors({ color: e.target.value, type: 'background', token: user.token })}
+                                className={styles.qrcode_color_input}
+                                type='color'
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
 
-const AvatarSelection = () => {
+const AvatarSelection = ({ setBackendResponse }) => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.value)
 
@@ -111,17 +156,17 @@ const AvatarSelection = () => {
     ];
 
     const changeAvatarPathInStore = async (path) => {
-        console.log({ path });
-
         const res = await fetch(`${BASE_URL}/users/avatarupdate`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ avatarPath: path, token: user.token })
         })
-        const updateResult = await res.json()
 
-        if (updateResult.result) {
+        if (res.ok) {
             dispatch(changeAvatarPath(path));
+        } else {
+            const data = res.json()
+            setBackendResponse(data.error)
         }
     }
 

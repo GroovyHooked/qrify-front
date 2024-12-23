@@ -35,8 +35,6 @@
 }
 
 .profile_info>p {
-    /* font-size: 24px;
-    font-weight: 400; */
     color: #333e63;
 }
 
@@ -64,8 +62,7 @@
 .modal_container {
     position: absolute;
     width: 330px;
-    height: 500px;
-    /* border: 1px solid; */
+    height: 660px;
     padding: 20px 24px;
     border-radius: 20px;
     background-color: #E6E7EA;
@@ -76,8 +73,8 @@
     top: 16%;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     gap: 25px;
-    /* border: 1px solid; */
 }
+
 
 .modal_container>p,
 .update_email>p {
@@ -91,11 +88,8 @@
     top: 22px;
     align-self: flex-end;
     border-radius: 50%;
-    /* background-color: #6a7caa; */
     color: white;
     border: none;
-    /* height: 26px; */
-    /* width: 26px; */
 }
 
 .modal_icon {
@@ -106,6 +100,7 @@
 
 .modal_title {
     text-align: center;
+    margin: 10px;
 }
 
 .modal_title>p {
@@ -136,11 +131,11 @@
     justify-content: space-around;
     align-items: center;
     width: 95%;
-    height: 200px;
+    height: 170px;
     font-size: 18px;
     padding-left: 8px;
-    border-radius: 10px;
-    /* border: 1px solid #333e63; */
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333e63;
 }
 
 .update_email>p {
@@ -187,57 +182,62 @@
     display: none;
 }
 
-/*  =================================  */
+/* ======= QR code colors management ========= */
 
-/* .container {
-    width: 100%;
-    min-height: 950px;
+.qrcode_color_container {
+    height: 150px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    padding-top: 100px;
 }
 
-.avatar_container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 330px;
-    height: 350px;
-    padding: 20px;
-}
-
-.avatar_details>p {
-    padding: 0;
-    margin: 5px 0;
-}
-
-.avatar_name {
-    font-size: 20px;
+.qrcode_color_container>p {
+    color: #333e63;
+    text-align: center;
     font-weight: 500;
+    height: 35px;
+    padding: 0;
+    margin: 0;
 }
 
-.avatar_email {}
+.qrcode_colors_display {
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 36px;
+    /* border: 1px solid #333e63; */
+}
 
+.qrcode_colors_display_wrapper {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100px;
+}
 
-.avatar_img {
+.qrcode_colors_display_wrapper>p {
+    font-size: 14px;
+    color: #333e63;
+    margin: 0;
+    padding: 0;
+}
+
+.main_color,
+.background_color {
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
+    z-index: 2;
+    overflow: hidden;
 }
 
-.button {
-    padding: 10px 20px;
-    border-radius: 20px;
-    color: white;
-    background-color: cadetblue;
-    border: none;
+.qrcode_color_input {
+    opacity: 0;
+    z-index: 1;
 }
 
-.modal {
-    position: absolute;
-    width: 330px;
-    height: 330px;
-    background-color: antiquewhite;
-    padding: 10px;
-} */
+/*  =================================  */

@@ -38,7 +38,9 @@ export default function NewCard() {
                 message,
                 totalValue: cardValue,
                 customerId: dataFromStore.customer._id,
-                merchantMail: user.email
+                merchantMail: user.email,
+                color: user.qrCodeMainColor,
+                backgroundColor: user.qrCodeBackgroundColor
             })
         })
         const data = await res.json()

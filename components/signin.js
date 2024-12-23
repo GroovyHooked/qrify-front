@@ -22,7 +22,7 @@ function SignIn() {
 
   const [signInMail, setSignInMail] = useState(userCrendentialsObj ? userCrendentialsObj.email : '');
   const [signInPassword, setSignInPassword] = useState(userCrendentialsObj ? userCrendentialsObj.password : '');
-  const [passwordInputState, setPasswordInputState] = useState({ type: 'password', icon: faEye })
+  const [passwordInputState, setPasswordInputState] = useState({ type: 'password', icon: faEye });
   const [messageError, setMessageError] = useState("");
 
   const handleSignIn = () => {
@@ -44,7 +44,9 @@ function SignIn() {
             token: data.token,
             firstname: data.firstname,
             avatar: data.avatarPath ? data.avatarPath : '/avatars/avatar1.svg',
-            lastname: data.lastname
+            lastname: data.lastname,
+            qrCodeMainColor: data.qrCodeMainColor,
+            qrCodeBackgroundColor: data.qrCodeBackgroundColor
           }))
           router.push('/home')
         } else {
@@ -53,12 +55,11 @@ function SignIn() {
       });
   };
 
-  const SwitchInputPasswordState = () => {
+  const switchInputPasswordState = () => {
     if (passwordInputState.type === 'password') {
       setPasswordInputState(current => ({ ...current, type: 'text', icon: faEyeSlash }))
     } else {
       setPasswordInputState(current => ({ ...current, type: 'password', icon: faEye }))
-
     }
   }
 
@@ -95,7 +96,7 @@ function SignIn() {
                     className={styles.input}
                   />
                   <FontAwesomeIcon
-                    onClick={SwitchInputPasswordState}
+                    onClick={switchInputPasswordState}
                     icon={passwordInputState.icon}
                     style={{
                       position: 'absolute',

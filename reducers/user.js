@@ -7,7 +7,9 @@ const initialState = {
         firstname: '',
         lastname: '',
         avatar: '',
-        progressString: 'Ajouter un client'
+        progressString: 'Ajouter un client',
+        qrCodeMainColor: '',
+        qrCodeBackgroundColor: ''
     },
 };
 
@@ -21,6 +23,8 @@ export const userSlice = createSlice({
             state.value.firstname = action.payload.firstname;
             state.value.avatar = action.payload.avatar;
             state.value.lastname = action.payload.lastname;
+            state.value.qrCodeMainColor = action.payload.qrCodeMainColor;
+            state.value.qrCodeBackgroundColor = action.payload.qrCodeBackgroundColor;
         },
         removeUserFromStore: (state) => {
             state.value.email = '';
@@ -28,15 +32,26 @@ export const userSlice = createSlice({
             state.value.firstname = '';
             state.value.avatar = '';
             state.value.lastname = '';
+            state.value.qrCodeMainColor = '';
+            state.value.qrCodeBackgroundColor = '';
         },
         changeAvatarPath: (state, action) => {
             state.value.avatar = action.payload;
         },
         updateProgress: (state, action) => {
             state.value.progressString = action.payload
+        },
+        updateBackgroundColor: (state, action) => {
+            console.log(action.payload);
+            state.value.qrCodeBackgroundColor = action.payload
+        },
+        updateMainColor: (state, action) => {
+            console.log(action.payload);
+
+            state.value.qrCodeMainColor = action.payload
         }
     },
 });
 
-export const { addUserToStore, removeUserFromStore, changeAvatarPath, updateProgress } = userSlice.actions;
+export const { addUserToStore, removeUserFromStore, changeAvatarPath, updateProgress, updateBackgroundColor, updateMainColor } = userSlice.actions;
 export default userSlice.reducer;
