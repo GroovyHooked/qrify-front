@@ -97,6 +97,20 @@
     transform: scale(2.5);
 }
 
+.avatar_container {
+    height: 185px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: 2px solid #6a7caa;
+    padding-bottom: 15px;
+}
+
+.avatar_container>p {
+    color: #333e63;
+    font-size: 18px;
+    font-weight: 500;
+}
 
 .modal_title {
     text-align: center;
@@ -114,8 +128,6 @@
     justify-content: space-around;
     width: 100%;
     align-items: center;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #333e63;
 }
 
 .avatar_selection {
@@ -128,14 +140,14 @@
 .update_email {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     width: 95%;
     height: 170px;
     font-size: 18px;
     padding-left: 8px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #333e63;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #6a7caa;
 }
 
 .update_email>p {
@@ -194,6 +206,8 @@
 
 .qrcode_color_container>p {
     color: #333e63;
+    font-size: 18px;
+    font-weight: 500;
     text-align: center;
     font-weight: 500;
     height: 35px;

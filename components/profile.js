@@ -90,14 +90,16 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
                     className={styles.modal_icon} />
 
             </button>
-            <div style={{ color: '#333e63', fontSize: '14px', position:'absolute', top: '22px' }}>{backendResponse && backendResponse}</div>
-            <p className={styles.modal_title}>Choisissez votre avatar</p>
-            <div className={styles.select_avatar}>
-                <AvatarSelection setBackendResponse={setBackendResponse} />
+            <div style={{ color: '#333e63', fontSize: '14px', position: 'absolute', top: '22px' }}>{backendResponse && backendResponse}</div>
+            <div className={styles.avatar_container}>
+                <p className={styles.modal_title}>Choisissez votre avatar</p>
+                <div className={styles.select_avatar}>
+                    <AvatarSelection setBackendResponse={setBackendResponse} />
+                </div>
             </div>
             <div className={styles.update_email}>
                 <p>Modifiez votre adresse email</p>
-                
+
                 <input
                     value={inputEmail}
                     onChange={(e) => setInputEmail(e.target.value)}
