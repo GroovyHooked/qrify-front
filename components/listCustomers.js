@@ -21,8 +21,6 @@ export default function ListCustomers() {
   const [messageError, setMessageError] = useState("");
 
   const user = useSelector((state) => state.user.value)
-  console.log({ user });
-
 
   const handleSearch = () => {
     fetch(`${BASE_URL}/customers/onecustomer`, {
@@ -52,8 +50,6 @@ export default function ListCustomers() {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log({ data });
-
           if (data.result) {
             setListCustomers(data.customers);
           }

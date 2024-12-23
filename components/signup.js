@@ -22,7 +22,7 @@ function Signup() {
   const [messageError, setMessageError] = useState("");
   const [passwordInputState, setPasswordInputState] = useState({ type: 'password', icon: faEye })
 
-  const SwitchInputPasswordState = () => {
+  const switchInputPasswordState = () => {
     if (passwordInputState.type === 'password') {
       setPasswordInputState(current => ({ ...current, type: 'text', icon: faEyeSlash }))
     } else {
@@ -45,7 +45,7 @@ function Signup() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log({ data });
         if (data.result) {
           router.push({
             pathname: '/',
@@ -128,7 +128,7 @@ function Signup() {
                       value={signUpPassword}
                     />
                     <FontAwesomeIcon
-                      onClick={SwitchInputPasswordState}
+                      onClick={switchInputPasswordState}
                       icon={passwordInputState.icon}
                       style={{
                         position: 'absolute',
