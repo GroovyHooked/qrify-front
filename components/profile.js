@@ -105,7 +105,7 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
                     onChange={(e) => setInputEmail(e.target.value)}
                     className={styles.mail_input}
                     type='text'
-                    placeholder='Modifiez votre email' />
+                    placeholder='local@domain.top' />
                 <button
                     onClick={updateUserEmailInDb}
                     className={styles.modal_button}
