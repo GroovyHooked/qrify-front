@@ -54,7 +54,8 @@ function SignIn() {
         }
       });
   };
-
+  
+  // Fonction pour alterner l'affichage de l'icône (œil/œil barré) et change le type du champ de mot de passe
   const switchInputPasswordState = () => {
     if (passwordInputState.type === 'password') {
       setPasswordInputState(current => ({ ...current, type: 'text', icon: faEyeSlash }))

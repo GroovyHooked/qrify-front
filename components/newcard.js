@@ -30,10 +30,11 @@ export default function NewCard() {
 
     // Envoi d'une requête en base de données afin de générer un code qr et de sauvegarder toutes les données liées à ce code qr en base de données
     const createCard = async () => {
+        // Si aucun client n'est enregistré dans le store, on sort de la fonction et on affiche un message
         if (!dataFromStore?.customer?._id) {
             return setError('Vous devez créer ou sélectionner un client pour créer une carte.')
         }
-
+        // Requête vers le backend avec toutes les informations necessaires à la création de la carte
         const res = await fetch(`${BASE_URL}/card/newcard`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -48,13 +49,14 @@ export default function NewCard() {
             })
         })
         const data = await res.json()
-
+        // Si la création de la carte s'est bien passée
         if (data.result) {
             // Enregistrement dans le store des données de la carte qui vient d'être créée 
             dispatch(addCardToStore(data.card))
             // Redirection vers la page d'affichage et de partage de la carte
             router.push('/sendcard')
         } else {
+            // Sinon on affiche l'erreur
             setError(data.error)
         }
     }

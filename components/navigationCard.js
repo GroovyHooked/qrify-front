@@ -9,6 +9,7 @@ import { updateProgress } from "../reducers/user";
 export default function NavigationCard({ src, title, description, icon, link, progressStatus }) {
     const dispatch = useDispatch();
 
+    // function de mise à jour du status de progression dans le store
     const updateProgressStatus = () => {
         progressStatus && dispatch(updateProgress(progressStatus))
     }

@@ -42,11 +42,14 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
     const [inputEmail, setInputEmail] = useState('')
     const [backendResponse, setBackendResponse] = useState('')
 
+    // Fonction de mise à jour de l'email
     const updateUserEmailInDb = async () => {
+        // Si la variable d'état qui sert à stocker le mail est vide, on sort de la fonction
         if (!inputEmail) {
             setBackendResponse("Veuillez remplir le champ")
             return
         }
+        // Requête vers le backend pour mettre à jour l'email
         const res = await fetch(`${BASE_URL}/users/updateemail`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -54,6 +57,7 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
         })
 
         const updateResult = await res.json()
+        // Si la mise à jour côté backend a bien eu lieu, on met à jour l'email dans le store
         if (updateResult.result) {
             dispatch(addUserToStore({ ...user, email: inputEmail }))
             setBackendResponse("L'email s'est bien mis à jour")
@@ -63,16 +67,19 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
         }
     }
 
+    // Fonction de mise à jour des couleurs du code QR 
     const updateQrCodeColors = async ({ color, type, token }) => {
+        // Requête vers le backend pour mettre à jour une couleur
         const response = await fetch(`${BASE_URL}/users/updatecolors`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ color, type, token })
         })
-
+        // Si la mise à jour côté backend a bien eu lieu, on met à jour la couleur dans le store
         if (response.ok) {
             type === 'main' ? dispatch(updateMainColor(color)) : dispatch(updateBackgroundColor(color))
         } else {
+            // Sinon on affiche l'erreur
             const data = response.json()
             setBackendResponse(data.error)
         }

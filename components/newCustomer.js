@@ -41,7 +41,6 @@ function NewCustomer() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log({ data });
         if (data.result) {
           // Sauvegrade des données du client dans le store redux afin d'afficher nom et prenom sur la page de création de carte
           // et envoyer d'id du client au backend pour lier la carte et le client entre eux lors de la sauvegarde de la carte

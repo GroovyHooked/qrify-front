@@ -141,6 +141,7 @@ function SendCard() {
     }
   };
 
+  // Execution de la fonction au chargement du composant
   useEffect(() => {
     (async () => {
       await retrieveQrCodeFromBackend();

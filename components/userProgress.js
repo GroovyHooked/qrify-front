@@ -6,6 +6,9 @@ export default function UserProgress({ progress }) {
     const router = useRouter()
     const user = useSelector((state) => state.user.value)
 
+    // Fonction de redirection conditionnel: si le status de progression stocké dans le store contient "Ajouter" on redirige (au clic) vers 
+    // la page d'ajout de client
+    // sinon on redirige vers la liste des clients
     const redirectByProgressStatus = () => {
         if (user.progressString.includes("Ajouter")) {
             router.push('/newcustomer')
