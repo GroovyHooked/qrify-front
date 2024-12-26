@@ -42,12 +42,9 @@ export const userSlice = createSlice({
             state.value.progressString = action.payload
         },
         updateBackgroundColor: (state, action) => {
-            console.log(action.payload);
             state.value.qrCodeBackgroundColor = action.payload
         },
         updateMainColor: (state, action) => {
-            console.log(action.payload);
-
             state.value.qrCodeMainColor = action.payload
         }
     },

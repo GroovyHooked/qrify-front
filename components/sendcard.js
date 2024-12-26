@@ -39,7 +39,6 @@ function SendCard() {
   // Sélection des données utilisateur et de la carte depuis le store Redux
   const user = useSelector((state) => state.user.value);
   const dataFromStore = useSelector((state) => state.data.value);
-  console.log({ dataFromStore });
 
   // Fonction pour gérer l'ouverture/fermeture de la modal
   const handleModalMessage = () => {
@@ -69,7 +68,6 @@ function SendCard() {
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
-    console.log("result");
     setPhoneCustomer("");
   };
 

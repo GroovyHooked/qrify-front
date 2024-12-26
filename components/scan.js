@@ -42,7 +42,6 @@ export default function Scan() {
     qrScannerRef.current = new QrScanner(
       videoNodeRef.current, // Élément vidéo où le flux de la caméra est affiché
       (result) => {
-        console.log("decoded qr code:", result);
         router.push(result.data); // Redirige l'utilisateur vers l'URL contenue dans le QR code
       },
       {

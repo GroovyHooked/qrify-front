@@ -30,7 +30,6 @@ const DisplayCard = () => {
         await retrieveQrCodeFromBackend();
         const res = await fetch(`${BASE_URL}/card/datacard/${cardId}`);
         const cardData = await res.json();
-        console.log({ cardData: typeof cardData.cardData.remainingValue });
         setCardData(cardData);
         setCardUpdateValue(cardData.cardData.remainingValue);
       })();
@@ -51,9 +50,8 @@ const DisplayCard = () => {
             method: "PUT",
           }
         );
-        console.log(response);
         const data = await response.json();
-        console.log("debug", { data });
+
         if (data.result) {
           setCardUpdateValue(0);
           setMessageValidated("La carte a bien été débitée");

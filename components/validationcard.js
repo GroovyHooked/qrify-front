@@ -14,22 +14,15 @@ const ValidationCard = () => {
   const router = useRouter();
 
   const { cardId } = router.query;
-  console.log({ cardId });
 
   useEffect(() => {
     fetch(`${BASE_URL}/card/cardData/${cardId}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("customer est égal a", data.customer);
-        console.log("card est égal a", data.dataCard);
         setCardInfo(data);
       })
       .catch((error) => console.error("Erreur lors du fetch : ", error));
   }, []);
-
-  useEffect(() => {
-    console.log({ cardInfo });
-  }, [cardInfo]);
 
   return (
     <>

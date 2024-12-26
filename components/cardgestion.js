@@ -49,14 +49,12 @@ export default function CardGestion() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("DEBUG", { data });
 
         if (showUsed && !showUsing) {
           data.cards = data.cards.filter((i) => i.remainingValue > 0);
         } else if (!showUsed && showUsing) {
           data.cards = data.cards.filter((i) => i.remainingValue === 0);
         }
-        // console.log("debug2", { debug2: data.cards });
 
         setFilteredData(data.cards);
       })

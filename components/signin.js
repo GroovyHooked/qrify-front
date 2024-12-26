@@ -36,7 +36,6 @@ function SignIn() {
     })
       .then((response) => response.json())
       .then(async (data) => {
-        console.log({ data });
 
         if (data.result) {
           dispatch(addUserToStore({
@@ -54,7 +53,7 @@ function SignIn() {
         }
       });
   };
-  
+
   // Fonction pour alterner l'affichage de l'icône (œil/œil barré) et change le type du champ de mot de passe
   const switchInputPasswordState = () => {
     if (passwordInputState.type === 'password') {
