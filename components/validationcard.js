@@ -61,7 +61,7 @@ const ValidationCard = () => {
               alt="qrcode"
               width={100}
               height={100}
-              src={cardInfo?.dataCard?.path} />
+              src={cardInfo?.dataCard?.path || '/images/gift.webp'} />
 
             <div className={styles.cardDetails}>
               <div>Valeur carte: {cardInfo?.dataCard?.totalValue} €</div>
