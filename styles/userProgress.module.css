@@ -24,6 +24,7 @@
     color: #ffffff;
     z-index: 2;
     background-color: #545F71;
+    cursor: pointer;
 }
 
 .bar1,
@@ -48,6 +49,7 @@
     height: 20px;
     color: #ffffff;
     width: 340px;
+    cursor: pointer;
 }
 
 .text {

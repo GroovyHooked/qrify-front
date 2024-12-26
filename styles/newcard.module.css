@@ -6,6 +6,7 @@
 }
 
 .innerContainer {
+    position: relative;
     width: 350px;
     height: 540px;
     margin: 60px auto;
