@@ -30,6 +30,10 @@ export default function NewCard() {
 
     // Envoi d'une requête en base de données afin de générer un code qr et de sauvegarder toutes les données liées à ce code qr en base de données
     const createCard = async () => {
+        if (!dataFromStore?.customer?._id) {
+            return setError('Vous devez créer ou sélectionner un client pour créer une carte.')
+        }
+
         const res = await fetch(`${BASE_URL}/card/newcard`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -65,7 +69,7 @@ export default function NewCard() {
                     <div className={styles.header}>
                         <h2 className={styles.title} >Carte cadeau de {dataFromStore.firstname} {dataFromStore.lastname}</h2>
                     </div>
-                    <div style={{ color: 'red', margin: '10px' }}>{error && error}</div>
+                    <div style={{ color: 'red', position: 'absolute', top: '80px', textAlign: 'center', padding: '0 6px' }}>{error && error}</div>
                     <div className={styles.formContainer}>
                         <img src='/image/gift.png' className={styles.image} />
                         <div className={styles.form}>
