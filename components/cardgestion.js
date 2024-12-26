@@ -90,7 +90,7 @@ export default function CardGestion() {
           <div className={styles.containertitle}>
             <div className={styles.contain}>
               <div className={styles.title}>
-                Name <br />
+                Nom <br />
               </div>
               {windowWidth > 768 && (
                 <div className={styles.title}>
