@@ -116,7 +116,7 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
                 <button
                     onClick={updateUserEmailInDb}
                     className={styles.modal_button}
-                    type='submit'>Modifier l'email</button>
+                    type='submit'>Modifier l&apos;email</button>
             </div>
             <div className={styles.qrcode_color_container}>
                 <p>Personnalisez les couleurs du code QR</p>

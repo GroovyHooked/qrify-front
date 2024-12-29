@@ -105,7 +105,7 @@ const DisplayCard = () => {
           )}
           <div className={styles.card_data}>
             {cardData.cardData && <p>Carte de {cardData.cardData.recipient}</p>}
-            {cardData.cardData && <p>D'une valeur de {cardUpdateValue}€</p>}
+            {cardData.cardData && <p>D&apos;une valeur de {cardUpdateValue}€</p>}
             {cardData.customer && (
               <p>
                 Offerte par {cardData.customer.lastname}{" "}
