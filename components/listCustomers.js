@@ -105,7 +105,7 @@ export default function ListCustomers() {
         <div className={styles.containerglobal}>
           <div className={styles.containerDescription}>
             <div className={styles.containerClientDesc}>
-              <div className={styles.titleClient}>Client</div>
+              <div className={styles.titleClient}>Clients</div>
               <div className={styles.textTitle}>
                 Sélectionner un client
                 <span className={styles.span}>
