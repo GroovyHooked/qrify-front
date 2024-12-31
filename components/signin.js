@@ -14,11 +14,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function SignIn() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const { userCrendentials } = router.query;
-  const userCrendentialsObj = userCrendentials ? JSON.parse(userCrendentials) : null;
+  const userCrendentialsObj = userCrendentials
+    ? JSON.parse(userCrendentials)
+    : null;
 
   const [signInMail, setSignInMail] = useState(userCrendentialsObj ? userCrendentialsObj.email : '');
   const [signInPassword, setSignInPassword] = useState(userCrendentialsObj ? userCrendentialsObj.password : '');
@@ -65,7 +67,7 @@ function SignIn() {
 
   return (
     <>
-      <Navbar status='Inscription' href="/signup" />
+      <Navbar status="Inscription" href="/signup" />
       <div className={styles.container}>
         <div className={styles.containerglobal}>
           <div className={styles.containerImgForm}>
