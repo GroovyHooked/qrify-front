@@ -63,7 +63,7 @@ export default function Navbar({ status, href }) {
   );
 }
 
-export const Avatar = ({ width = 40, height = 40 }) => {
+export const Avatar = ({ width = 40, height = 40, canOpenModal = true }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const user = useSelector((state) => state.user.value)
 
@@ -75,7 +75,7 @@ export const Avatar = ({ width = 40, height = 40 }) => {
         height={height}
         src={user?.avatar || '/avatars/avatar1.png'}
         className={styles.avatar}
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        onClick={() => canOpenModal && setIsMenuOpen(!isMenuOpen)}
       />
       {isMenuOpen && <Menu setIsMenuOpen={setIsMenuOpen} />}
     </>

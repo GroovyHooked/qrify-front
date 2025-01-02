@@ -21,7 +21,7 @@ export function Profile() {
             <div className={styles.profile_page} style={isModalOpen ? { paddingBottom: '450px' } : {}}>
                 {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
                 <div className={styles.profile_info}>
-                    <Avatar width={100} height={100} />
+                    <Avatar width={100} height={100} canOpenModal={false} />
                     <h2>{user.firstname} {user.lastname}</h2>
                     <p>{user.email}</p>
                     <button
