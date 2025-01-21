@@ -6,12 +6,16 @@ import { useRouter } from "next/router";
 import NavBar from "../components/navbar";
 import Footer from "../components/footer";
 import { useSelector } from "react-redux";
-import { BASE_URL } from '../utils/utils';
+import { BASE_URL, redirectUserIfNotConnected } from '../utils/utils';
 
 export default function CardGestion() {
   const router = useRouter();
-
   const user = useSelector((state) => state.user.value)
+
+  // Redirection vers la page de connexion si l'utilisateur n'est pas connecté
+  useEffect(() => {
+    redirectUserIfNotConnected(user, router)
+  }, [])
 
   const [filteredData, setFilteredData] = useState([]);
   const [showUsed, setShowUsed] = useState(true);
@@ -131,6 +135,7 @@ export default function CardGestion() {
 
           <div className={styles.containercontent}>
             {filteredData.map((data, index) => (
+              data.customerId &&
               <div key={index} className={styles.ligne}>
                 <div className={styles.contain}>
                   <div className={styles.undercontain}>
